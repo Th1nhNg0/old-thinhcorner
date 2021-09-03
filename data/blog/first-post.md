@@ -1,0 +1,12 @@
+---
+title: 'Bài viết đầu tiên'
+date: '2020-04-11'
+tags: ['linh tinh']
+draft: false
+images: []
+layout: PostLayout
+---
+
+Xin chào, cảm ơn bạn đã ghé qua blog của mình. Mình vẫn chưa biết viết gì ở blog này nhưng mà mình nghĩ sẽ có nhiều thứ hay ho lắm. Các bạn cùng đón chờ nhé \<3
+
+![cat](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
