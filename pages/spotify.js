@@ -7,7 +7,6 @@ export default function spotify() {
   return (
     <SWRConfig
       value={{
-        refreshInterval: 3000,
         fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()),
       }}
     >
@@ -27,7 +26,7 @@ export default function spotify() {
 }
 
 function CurrentPlaying() {
-  const { data: currentTrack } = useSWR("/api/spotify/current-playing");
+  const { data: currentTrack } = useSWR("/api/spotify/current-playing", { refreshInterval: 3000 });
   if (currentTrack)
     return (
       <div>
