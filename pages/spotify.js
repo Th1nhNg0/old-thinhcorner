@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PageSEO } from "@/components/SEO";
 import siteMetadata from "@/data/siteMetadata";
 import useSWR, { SWRConfig } from "swr";
@@ -12,8 +12,11 @@ export default function spotify() {
       }}
     >
       <PageSEO title={`Projects - ${siteMetadata.author}`} description={siteMetadata.description} />
-      <div className="flex flex-col items-center gap-5 md:flex-row">
-        <UserProfile />
+      <div className="flex flex-col items-center gap-5 md:items-start md:flex-row">
+        <div className="md:w-60">
+          <UserProfile />
+          <TopTag />
+        </div>
         <CurrentPlaying />
       </div>
     </SWRConfig>
@@ -78,6 +81,18 @@ function CurrentPlayingFeatures({ id }) {
     return (
       <div className="flex flex-wrap items-center justify-between gap-2 mt-3">
         <span
+          title="valence"
+          className="flex items-center justify-center gap-1 px-4 py-1 text-white bg-purple-500 rounded-full"
+        >
+          {getValence(currentTrackFeatures.valence)}
+        </span>
+        <span
+          title="tempo"
+          className="flex items-center justify-center gap-1 px-4 py-1 text-white bg-blue-500 rounded-full"
+        >
+          {Math.round(currentTrackFeatures.tempo)} BPM
+        </span>
+        <span
           title="danceability"
           className="flex items-center justify-center gap-1 px-4 py-1 text-white bg-green-500 rounded-full"
         >
@@ -99,12 +114,6 @@ function CurrentPlayingFeatures({ id }) {
           {Math.round(currentTrackFeatures.danceability * 100)}%
         </span>
         <span
-          title="tempo"
-          className="flex items-center justify-center gap-1 px-4 py-1 text-white bg-blue-500 rounded-full"
-        >
-          {Math.round(currentTrackFeatures.tempo)} BPM
-        </span>
-        <span
           title="energy"
           className="flex items-center justify-center gap-1 px-4 py-1 text-white bg-yellow-500 rounded-full"
         >
@@ -120,20 +129,14 @@ function CurrentPlayingFeatures({ id }) {
           {Math.round(currentTrackFeatures.loudness)} dB
         </span>
         <span
-          title="valence"
-          className="flex items-center justify-center gap-1 px-4 py-1 text-white bg-purple-500 rounded-full"
+          title="pitch"
+          className="flex items-center justify-center gap-1 px-4 py-1 text-white bg-pink-500 rounded-full"
         >
-          {getValence(currentTrackFeatures.valence)}
-        </span>
-        <span
-          title="speechiness"
-          className="flex items-center justify-center gap-1 px-4 py-1 text-white bg-purple-500 rounded-full"
-        >
-          <svg className="w-5 h-5 fill-current" viewBox="0 0 435.2 435.2">
-            <path d="M356.864 224.768c0-8.704-6.656-15.36-15.36-15.36s-15.36 6.656-15.36 15.36c0 59.904-48.64 108.544-108.544 108.544-59.904 0-108.544-48.64-108.544-108.544 0-8.704-6.656-15.36-15.36-15.36s-15.36 6.656-15.36 15.36c0 71.168 53.248 131.072 123.904 138.752v40.96h-55.808c-8.704 0-15.36 6.656-15.36 15.36s6.656 15.36 15.36 15.36h142.336c8.704 0 15.36-6.656 15.36-15.36s-6.656-15.36-15.36-15.36H232.96v-40.96c70.656-7.68 123.904-67.584 123.904-138.752z"></path>
-            <path d="M217.6 0c-47.104 0-85.504 38.4-85.504 85.504v138.752c0 47.616 38.4 85.504 85.504 86.016 47.104 0 85.504-38.4 85.504-85.504V85.504C303.104 38.4 264.704 0 217.6 0z"></path>
-          </svg>
-          {Math.round(currentTrackFeatures.speechiness * 100)}%
+          {
+            ["C", "C♯, D♭", "D", "D♯, E♭", "E", "F", "F♯, G♭", "G", "G♯, A♭", "A", "A♯, B♭", "B"][
+              currentTrackFeatures.key
+            ]
+          }
         </span>
       </div>
     );
@@ -144,7 +147,7 @@ function UserProfile() {
   const { data } = useSWR("/api/spotify/me");
   if (data)
     return (
-      <div className="w-60">
+      <div>
         <div className="flex flex-col items-center justify-center">
           <a target="_blank" href={data.external_urls.spotify}>
             <img className="w-32 rounded-full" src={data.images[0].url} alt="avatar" />
@@ -154,4 +157,40 @@ function UserProfile() {
       </div>
     );
   return "loading";
+}
+function TopTag() {
+  const { data } = useSWR("/api/spotify/top?type=artists&time_range=long_term");
+  const [genres, setgenres] = useState([]);
+  useEffect(() => {
+    if (data) {
+      let obj = {};
+      for (let e of data.items) {
+        for (let g of e.genres) {
+          if (!obj[g]) obj[g] = 1;
+          else obj[g] += 1;
+        }
+      }
+      let myList = [];
+      myList = Object.entries(obj).map((e) => ({ name: e[0], count: e[1] }));
+      myList.sort((a, b) => b.count - a.count);
+      setgenres(myList);
+    }
+  }, [data]);
+  if (data)
+    return (
+      <div className="mt-5">
+        <p className="text-lg font-semibold">Top Genres</p>
+        <div className="flex flex-wrap items-center justify-center gap-2 mt-3 text-sm">
+          {genres
+            .slice(0, 10)
+            .sort((a, b) => a.name.length - b.name.length)
+            .map((e) => (
+              <div className="px-4 py-1 bg-gray-100 rounded-full dark:bg-gray-800" key={e}>
+                {e.name}
+              </div>
+            ))}
+        </div>
+      </div>
+    );
+  return null;
 }
