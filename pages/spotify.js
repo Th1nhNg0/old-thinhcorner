@@ -11,7 +11,10 @@ export default function spotify() {
         fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()),
       }}
     >
-      <PageSEO title={`Projects - ${siteMetadata.author}`} description={siteMetadata.description} />
+      <PageSEO
+        title={`My Spotify - ${siteMetadata.author}`}
+        description={siteMetadata.description}
+      />
       <div className="flex flex-col items-center gap-5 md:items-start md:flex-row">
         <div className="md:w-60">
           <UserProfile />
