@@ -9,12 +9,16 @@ const siteMetadata = {
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
   socialBanner: '/static/images/socialbg.jpg',
+
   email: 'ngophuthinh2001@gmail.com',
   github: 'https://github.com/th1nhng0',
   // twitter: 'https://twitter.com/Twitter',
   facebook: 'https://facebook.com/th1nhng0',
   // youtube: 'https://youtube.com',
   // linkedin: 'https://www.linkedin.com',
+  spotify: 'https://open.spotify.com/user/21acs5sngq2xkehugtvqkwmuy',
+  steam: 'https://steamcommunity.com/id/th1nhng0/',
+
   locale: 'en-US',
   analytics: {
     // supports plausible, simpleAnalytics or googleAnalytics
