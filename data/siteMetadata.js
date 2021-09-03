@@ -8,7 +8,7 @@ const siteMetadata = {
   siteRepo: 'https://github.com/th1nhng0/th1nhng0.github.io',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
-  socialBanner: '/static/images/twitter-card.png',
+  socialBanner: '/static/images/socialbg.jpg',
   email: 'ngophuthinh2001@gmail.com',
   github: 'https://github.com/th1nhng0',
   // twitter: 'https://twitter.com/Twitter',
