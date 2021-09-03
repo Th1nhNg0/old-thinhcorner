@@ -4,7 +4,7 @@ const siteMetadata = {
   headerTitle: "Thịnh's Blog",
   description: 'Góc nhỏ của Thịnh.',
   language: 'en-us',
-  siteUrl: 'th1nhng0.vercel.app',
+  siteUrl: 'https://th1nhng0.vercel.app',
   siteRepo: 'https://github.com/th1nhng0/th1nhng0.github.io',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
