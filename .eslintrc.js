@@ -1,31 +1,24 @@
 module.exports = {
-  root: true,
   env: {
     browser: true,
-    amd: true,
+    es2021: true,
     node: true,
-    es6: true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:prettier/recommended',
-    'next',
-    'next/core-web-vitals',
-  ],
+  extends: ['airbnb', 'airbnb/hooks', 'prettier'],
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 12,
+    sourceType: 'module',
+  },
+  plugins: ['react', 'react-hooks'],
   rules: {
-    'prettier/prettier': 'error',
+    // NextJs specific fix: suppress errors for missing 'import React' in files for nextjs
     'react/react-in-jsx-scope': 'off',
-    'jsx-a11y/anchor-is-valid': [
-      'error',
-      {
-        components: ['Link'],
-        specialLink: ['hrefLeft', 'hrefRight'],
-        aspects: ['invalidHref', 'preferButton'],
-      },
-    ],
-    'react/prop-types': 0,
-    'no-unused-vars': 0,
-    'react/no-unescaped-entities': 0,
+    // NextJs specific fix: allow jsx syntax in js files
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/display-name': 1,
+    'jsx-a11y/anchor-is-valid': 'off',
   },
-}
+};
