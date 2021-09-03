@@ -1,19 +1,17 @@
 const projectsData = [
   {
-    title: 'A Search Engine',
-    description: `What if you could look up any information in the world? Webpages, images, videos
-    and more. Google has many features to help you find exactly what you're looking
-    for.`,
-    imgSrc: '/static/images/google.png',
-    href: 'https://www.google.com',
+    title: 'AthenaEdu',
+    description:
+      "The project our team makes in SPKT HACKATHON 2020. Make with vuejs, firebase and socket.io. It's not finished 100% but look good for us 😊.",
+    imgSrc: '/static/images/projects/athenaedu.png',
+    href: 'https://github.com/Th1nhNg0/athena-edu',
   },
   {
-    title: 'The Time Machine',
-    description: `Imagine being able to travel back in time or to the future. Simple turn the knob
-    to the desired date and press "Go". No more worrying about lost keys or
-    forgotten handphones with this simple yet affordable solution.`,
-    imgSrc: '/static/images/time-machine.jpg',
-    href: '/blog/the-time-machine',
+    title: 'Tictacmul',
+    description:
+      'A tic tac toe game realtime with multiplayer, up to 5 player a game. This project was made when I was finished a web coding course. Make by vue.js and socket.io.',
+    imgSrc: '/static/images/projects/tictacmul.png',
+    href: 'https://github.com/Th1nhNg0/tic-tac-toe-multiplayer',
   },
 ]
 

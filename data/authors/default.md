@@ -21,4 +21,4 @@ occupation: Student at HCMUS
 
 ## Cách mình tạo ra blog này
 
-Blog này được viết bằng react.js, tailwindcss chạy trên next.js. Post được viết từ markdown language. Source code gốc được lấy từ [timlrx/tailwind-nextjs-starter-blog](https://github.com/timlrx/tailwind-nextjs-starter-blog). Mình có custom lại một vài chỗ cho phù hợp với mục đích sử dụng của mình 😉
+Blog này được viết bằng next.js, tailwindcss chạy trên [vercel](https://vercel.com/). Post được viết từ markdown language. Source code gốc được lấy từ [timlrx/tailwind-nextjs-starter-blog](https://github.com/timlrx/tailwind-nextjs-starter-blog). Mình có custom lại một vài chỗ cho phù hợp với mục đích sử dụng của mình 😉
