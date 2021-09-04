@@ -22,7 +22,7 @@ export default function spotify() {
           <FellingNow />
           <TopTag />
         </div>
-        <div className="space-y-5">
+        <div className="flex-1 space-y-5">
           <CurrentPlaying />
           <RecentlyTrack />
         </div>
@@ -41,8 +41,9 @@ function getValence(value) {
 }
 
 function FellingNow() {
+  const { data: currentTrack } = useSWR("/api/spotify/current-playing", { refreshInterval: 5000 });
   const { data } = useSWR("/api/spotify/my-feeling");
-  if (data)
+  if (data && currentTrack)
     return (
       <p className="text-center text-gray-700 dark:text-gray-300">
         I'm feeling{" "}
@@ -68,7 +69,7 @@ function RecentlyTrack() {
       return `${minutes}:${seconds}`;
     }
     return (
-      <div className="flex items-center gap-2 py-2 ">
+      <div className="flex items-center gap-2 py-2">
         <div className="relative w-16" onClick={() => toggle()}>
           <img src={track.album.images[2].url} alt="track-image" />
           <div
@@ -100,7 +101,7 @@ function RecentlyTrack() {
           >
             {track.name}
           </a>
-          <div className="flex text-sm text-gray-700 dark:text-gray-300 md:text-base ">
+          <p className="flex text-sm text-gray-700 dark:text-gray-300 md:text-base ">
             {track.artists.map((e2, i) => (
               <span key={i}>
                 {i != 0 && ", "}
@@ -109,7 +110,7 @@ function RecentlyTrack() {
                 </a>
               </span>
             ))}
-          </div>
+          </p>
           <p className="text-xs text-gray-500">{moment(played_at).fromNow()}</p>
         </div>
         <span title="duration" className="hidden text-sm md:text-base md:block">
@@ -160,7 +161,9 @@ function RecentlyTrack() {
 function CurrentPlaying() {
   const { data: currentTrack } = useSWR("/api/spotify/current-playing", { refreshInterval: 5000 });
   const { mutate } = useSWRConfig();
-  const [playingReview, toggle] = useAudio(currentTrack?.item.preview_url);
+  const [playingReview, toggle] = useAudio(
+    currentTrack?.item.preview_url || currentTrack?.item.audio_preview_url
+  );
   useEffect(() => {
     mutate("/api/spotify/recently-track?limit=10");
     mutate("/api/spotify/my-feeling");
@@ -174,7 +177,7 @@ function CurrentPlaying() {
           <div className="relative" onClick={() => toggle()}>
             <img
               className="object-cover w-full md:w-32 md:h-32"
-              src={currentTrack.item.album.images[1].url}
+              src={currentTrack.item.album?.images[1].url || currentTrack.item?.images[1].url}
               alt="listen-track-cover"
             />
             <div
@@ -207,12 +210,20 @@ function CurrentPlaying() {
               {currentTrack.item.name}
             </a>
             <div className="flex text-gray-700 dark:text-gray-300">
-              {currentTrack.item.artists.map((e, i) => (
-                <a target="_blank" href={e.external_urls.spotify} key={i}>
-                  {i != 0 && ", "}
-                  {e.name}
-                </a>
-              ))}
+              {currentTrack.item?.artists ? (
+                currentTrack.item.artists.map((e, i) => (
+                  <a target="_blank" href={e.external_urls.spotify} key={i}>
+                    {i != 0 && ", "}
+                    {e.name}
+                  </a>
+                ))
+              ) : (
+                <div>
+                  <a target="_blank" href={currentTrack.item.show.external_urls.spotify}>
+                    {currentTrack.item.show.name} • {currentTrack.item.show.publisher}
+                  </a>
+                </div>
+              )}
             </div>
             <div className="flex items-end flex-1">
               <CurrentPlayingFeatures id={currentTrack.item.id} />
