@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { PageSEO } from "@/components/SEO";
 import siteMetadata from "@/data/siteMetadata";
-import useSWR, { SWRConfig } from "swr";
+import useSWR, { SWRConfig, useSWRConfig } from "swr";
+import moment from "moment";
+import useAudio from "@/lib/useAudio";
 
 export default function spotify() {
   return (
@@ -14,29 +16,186 @@ export default function spotify() {
         title={`My Spotify - ${siteMetadata.author}`}
         description={siteMetadata.description}
       />
-      <div className="flex flex-col items-center gap-5 md:items-start md:flex-row">
+      <div className="flex flex-col items-center w-full gap-5 md:items-start md:flex-row">
         <div className="md:w-60">
           <UserProfile />
+          <FellingNow />
           <TopTag />
         </div>
-        <CurrentPlaying />
+        <div className="space-y-5">
+          <CurrentPlaying />
+          <RecentlyTrack />
+        </div>
       </div>
     </SWRConfig>
   );
 }
 
+function getValence(value) {
+  if (value <= 1 / 6) return ["Angry", "red-500"];
+  if (value <= 2 / 6) return ["Depressed", "blue-700"];
+  if (value <= 3 / 6) return ["Sad", "blue-400"];
+  if (value <= 4 / 6) return ["Happy", "green-500"];
+  if (value <= 5 / 6) return ["Cheerful", "yellow-500"];
+  return ["euphoric", "pink-500"];
+}
+
+function FellingNow() {
+  const { data } = useSWR("/api/spotify/my-feeling");
+  if (data)
+    return (
+      <p className="text-center">
+        I'm feeling{" "}
+        <span className={`font-bold text-${getValence(data.feeling)[1]}`}>
+          {getValence(data.feeling)[0]}
+        </span>{" "}
+        rightnow
+      </p>
+    );
+  return null;
+}
+
+function RecentlyTrack() {
+  const { data } = useSWR("/api/spotify/recently-track?limit=10");
+  const [showMore, setshowMore] = useState(false);
+
+  const TrackItem = ({ track, played_at }) => {
+    const [playingReview, toggle] = useAudio(track.preview_url);
+    function getTime() {
+      let minutes = moment.duration(track.duration_ms).minutes();
+      let seconds = "0" + moment.duration(track.duration_ms).seconds();
+      seconds = seconds.substr(seconds.length - 2);
+      return `${minutes}:${seconds}`;
+    }
+    return (
+      <div className="flex items-center gap-2 py-2">
+        <div className="relative w-16" onClick={() => toggle()}>
+          <img src={track.album.images[2].url} alt="track-image" />
+          <div
+            title="Preview track"
+            className="absolute top-0 left-0 flex items-center justify-center w-full h-full"
+          >
+            <svg className="cursor-pointer w-7 h-7 opacity-80" viewBox="0 0 20 20" fill="white">
+              {!playingReview ? (
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                  clipRule="evenodd"
+                />
+              ) : (
+                <path
+                  fillRule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z"
+                  clipRule="evenodd"
+                />
+              )}
+            </svg>
+          </div>
+        </div>
+        <div className="flex-1 truncate">
+          <a
+            target="_blank"
+            href={track.external_urls.spotify}
+            className="font-semibold md:text-lg"
+          >
+            {track.name}
+          </a>
+          <div className="flex text-sm md:text-base">
+            {track.artists.map((e2, i) => (
+              <a target="_blank" href={e2.external_urls.spotify} key={i}>
+                {i != 0 && ", "}
+                {e2.name}
+              </a>
+            ))}
+          </div>
+          <p className="text-xs">{moment(played_at).fromNow()}</p>
+        </div>
+        <span title="duration" className="text-sm text-right md:text-base">
+          {getTime()}
+        </span>
+      </div>
+    );
+  };
+
+  if (data)
+    return (
+      <div>
+        <p className="mb-2 text-xl font-bold">Recently played track</p>
+        <div className="relative px-5 py-3 bg-gray-100 dark:bg-gray-800">
+          <div className="mb-5 divide-y-2 dark:divide-gray-700">
+            {data.items.slice(0, showMore ? 10 : 5).map((e, i) => (
+              <TrackItem key={i} {...e} />
+            ))}
+          </div>
+          <button className="absolute left-0 w-full -bottom-5">
+            <svg
+              onClick={() => setshowMore(!showMore)}
+              className="w-10 h-10 p-2 mx-auto bg-green-500 rounded-full"
+              viewBox="0 0 20 20"
+              fill="white"
+            >
+              {showMore ? (
+                <path
+                  fillRule="evenodd"
+                  d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+                  clipRule="evenodd"
+                />
+              ) : (
+                <path
+                  fillRule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              )}
+            </svg>
+          </button>
+        </div>
+      </div>
+    );
+  return null;
+}
+
 function CurrentPlaying() {
-  const { data: currentTrack } = useSWR("/api/spotify/current-playing", { refreshInterval: 3000 });
-  if (currentTrack)
+  const { data: currentTrack } = useSWR("/api/spotify/current-playing", { refreshInterval: 5000 });
+  const { mutate } = useSWRConfig();
+  const [playingReview, toggle] = useAudio(currentTrack?.item.preview_url);
+  useEffect(() => {
+    mutate("/api/spotify/recently-track?limit=10");
+    mutate("/api/spotify/my-feeling");
+  }, [currentTrack?.item.name]);
+
+  if (currentTrack?.item)
     return (
       <div>
         <p className="mb-2 text-xl font-bold">Currently listening to</p>
         <div className="flex flex-col flex-1 w-full gap-3 p-5 bg-gray-100 shadow-md dark:bg-gray-800 md:flex-row">
-          <img
-            className="object-cover w-full md:w-32 md:h-32"
-            src={currentTrack.item.album.images[1].url}
-            alt="listen-track-cover"
-          />
+          <div className="relative" onClick={() => toggle()}>
+            <img
+              className="object-cover w-full md:w-32 md:h-32"
+              src={currentTrack.item.album.images[1].url}
+              alt="listen-track-cover"
+            />
+            <div
+              title="Preview track"
+              className="absolute top-0 left-0 flex items-center justify-center w-full h-full"
+            >
+              <svg className="w-10 h-10 cursor-pointer opacity-80" viewBox="0 0 20 20" fill="white">
+                {!playingReview ? (
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                    clipRule="evenodd"
+                  />
+                ) : (
+                  <path
+                    fillRule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z"
+                    clipRule="evenodd"
+                  />
+                )}
+              </svg>
+            </div>
+          </div>
           <div className="flex flex-col">
             <a
               target="_blank"
@@ -47,13 +206,15 @@ function CurrentPlaying() {
             </a>
             <div className="flex">
               {currentTrack.item.artists.map((e, i) => (
-                <a href={e.external_urls.spotify} key={e.id}>
+                <a target="_blank" href={e.external_urls.spotify} key={i}>
                   {i != 0 && ", "}
                   {e.name}
                 </a>
               ))}
             </div>
-            <CurrentPlayingFeatures id={currentTrack.item.id} />
+            <div className="flex items-end flex-1">
+              <CurrentPlayingFeatures id={currentTrack.item.id} />
+            </div>
           </div>
         </div>
         <div className="w-full h-2 bg-gray-500 shadow-md">
@@ -68,25 +229,19 @@ function CurrentPlaying() {
     );
   return null;
 }
-
 function CurrentPlayingFeatures({ id }) {
   const { data: currentTrackFeatures } = useSWR("/api/spotify/track-features?id=" + id);
-  function getValence(value) {
-    if (value <= 1 / 6) return "Angry";
-    if (value <= 2 / 6) return "Depressed";
-    if (value <= 3 / 6) return "Sad";
-    if (value <= 4 / 6) return "Happy";
-    if (value <= 5 / 6) return "Cheerful";
-    return "euphoric";
-  }
+
   if (currentTrackFeatures)
     return (
       <div className="flex flex-wrap items-center justify-between gap-2 mt-3">
         <span
           title="valence"
-          className="flex items-center justify-center gap-1 px-4 py-1 text-white bg-purple-500 rounded-full"
+          className={`flex items-center justify-center gap-1 px-4 py-1 text-white bg-${
+            getValence(currentTrackFeatures.valence)[1]
+          } rounded-full`}
         >
-          {getValence(currentTrackFeatures.valence)}
+          {getValence(currentTrackFeatures.valence)[0]}
         </span>
         <span
           title="tempo"
@@ -144,18 +299,19 @@ function CurrentPlayingFeatures({ id }) {
     );
   return null;
 }
-
 function UserProfile() {
   const { data } = useSWR("/api/spotify/me");
   if (data)
     return (
       <div>
-        <div className="flex flex-col items-center justify-center">
-          <a target="_blank" href={data.external_urls.spotify}>
-            <img className="w-32 rounded-full" src={data.images[0].url} alt="avatar" />
-          </a>
+        <a
+          className="flex flex-col items-center justify-center"
+          target="_blank"
+          href={data.external_urls.spotify}
+        >
+          <img className="w-32 rounded-full" src={data.images[0].url} alt="avatar" />
           <p className="mt-3 text-xl font-bold">{data.display_name}</p>
-        </div>
+        </a>
       </div>
     );
   return "loading";
@@ -186,8 +342,8 @@ function TopTag() {
           {genres
             .slice(0, 10)
             .sort((a, b) => a.name.length - b.name.length)
-            .map((e) => (
-              <div className="px-4 py-1 bg-gray-100 rounded-full dark:bg-gray-800" key={e}>
+            .map((e, i) => (
+              <div className="px-4 py-1 bg-gray-100 rounded-full dark:bg-gray-800" key={i}>
                 {e.name}
               </div>
             ))}
