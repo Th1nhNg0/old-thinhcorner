@@ -16,8 +16,8 @@ export default function spotify() {
         title={`My Spotify - ${siteMetadata.author}`}
         description={siteMetadata.description}
       />
-      <div className="flex flex-col items-center w-full gap-5 md:items-start md:flex-row">
-        <div className="md:w-60">
+      <div className="relative flex flex-col items-center w-full gap-5 md:items-start md:flex-row">
+        <div className="md:sticky md:top-5 md:w-60">
           <UserProfile />
           <FellingNow />
           <TopTag />
@@ -68,7 +68,7 @@ function RecentlyTrack() {
       return `${minutes}:${seconds}`;
     }
     return (
-      <div className="flex items-center gap-2 py-2">
+      <div className="flex items-center gap-2 py-2 ">
         <div className="relative w-16" onClick={() => toggle()}>
           <img src={track.album.images[2].url} alt="track-image" />
           <div
@@ -92,7 +92,7 @@ function RecentlyTrack() {
             </svg>
           </div>
         </div>
-        <div className="flex-1 truncate">
+        <div className="flex-1">
           <a
             target="_blank"
             href={track.external_urls.spotify}
@@ -100,17 +100,19 @@ function RecentlyTrack() {
           >
             {track.name}
           </a>
-          <div className="flex text-sm md:text-base">
+          <div className="flex text-sm text-gray-500 md:text-base ">
             {track.artists.map((e2, i) => (
-              <a target="_blank" href={e2.external_urls.spotify} key={i}>
+              <span key={i}>
                 {i != 0 && ", "}
-                {e2.name}
-              </a>
+                <a target="_blank" href={e2.external_urls.spotify}>
+                  {e2.name}
+                </a>
+              </span>
             ))}
           </div>
-          <p className="text-xs">{moment(played_at).fromNow()}</p>
+          <p className="text-xs text-gray-500">{moment(played_at).fromNow()}</p>
         </div>
-        <span title="duration" className="text-sm text-right md:text-base">
+        <span title="duration" className="hidden text-sm md:text-base md:block">
           {getTime()}
         </span>
       </div>
