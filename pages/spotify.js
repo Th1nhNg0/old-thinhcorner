@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { PageSEO } from "@/components/SEO";
 import siteMetadata from "@/data/siteMetadata";
 import useSWR, { SWRConfig, useSWRConfig } from "swr";
@@ -25,6 +25,8 @@ export default function spotify() {
         <div className="flex-1 space-y-5">
           <CurrentPlaying />
           <RecentlyTrack />
+          <TopArtists />
+          <TopTracks />
         </div>
       </div>
     </SWRConfig>
@@ -364,4 +366,238 @@ function TopTag() {
       </div>
     );
   return null;
+}
+
+function TopArtists() {
+  const [time_range, settime_range] = useState("long_term");
+  const [showMore, setshowMore] = useState(false);
+  const ifImageHover = useRef(true);
+  const { data } = useSWR(`/api/spotify/top?type=artists&time_range=${time_range}`);
+  const [artistsHighlight, setartistsHighlight] = useState([]);
+  useEffect(() => {
+    if (data) {
+      setartistsHighlight(data.items.filter((e) => e.images.length).slice(0, 9));
+      const interval = setInterval(() => {
+        if (!ifImageHover.current)
+          setartistsHighlight(
+            data.items
+              .filter((e) => e.images.length)
+              .sort(() => 0.5 - Math.random())
+              .slice(0, 9)
+          );
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [data]);
+  function abbreviateNumber(value) {
+    let newValue = value;
+    const suffixes = ["", "K", "M", "B", "T"];
+    let suffixNum = 0;
+    while (newValue >= 1000) {
+      newValue /= 1000;
+      suffixNum++;
+    }
+
+    newValue = newValue.toPrecision(3);
+
+    newValue += suffixes[suffixNum];
+    return newValue;
+  }
+  return (
+    <div className="pt-5">
+      <div className="flex flex-col justify-between gap-2 mb-3 md:gap-5 md:flex-row">
+        <p className="text-2xl font-bold">Top Artists</p>
+        <div className="flex gap-5 text-sm">
+          <button
+            onClick={() => settime_range("short_term")}
+            className={`font-semibold  uppercase dark:hover:text-white hover:text-black ${
+              time_range == "short_term" ? "border-b-4 border-green-500" : "text-gray-500"
+            }`}
+          >
+            4 week
+          </button>
+          <button
+            onClick={() => settime_range("medium_term")}
+            className={`font-semibold  uppercase dark:hover:text-white hover:text-black ${
+              time_range == "medium_term" ? "border-b-4 border-green-500" : "text-gray-500"
+            }`}
+          >
+            6 months
+          </button>
+          <button
+            onClick={() => settime_range("long_term")}
+            className={`font-semibold  uppercase dark:hover:text-white hover:text-black ${
+              time_range == "long_term" ? "border-b-4 border-green-500" : "text-gray-500"
+            }`}
+          >
+            all time
+          </button>
+        </div>
+      </div>
+      <div className="relative flex flex-col-reverse gap-5 md:justify-between md:flex-row">
+        <table>
+          <tbody>
+            {data &&
+              data.items.slice(0, showMore ? 50 : 10).map((e, i) => (
+                <tr key={i} className="text-lg">
+                  <td className="py-1 font-bold text-center text-gray-500">{i + 1}</td>
+                  <td className="py-1 pl-3 font-semibold">
+                    <a href={e.external_urls.spotify} target="_blank">
+                      {e.name}
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            <tr>
+              <td></td>
+              <td className="pl-3">
+                <button
+                  className="text-lg text-green-500 underline"
+                  onClick={() => setshowMore(!showMore)}
+                >
+                  {!showMore ? "Show more ▼" : "Show less ▲"}
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <div className="sticky grid grid-cols-3 gap-4 mx-auto top-5 md:w-96">
+            {data &&
+              artistsHighlight.map((e, i) => (
+                <a
+                  className="overflow-hidden rounded-full aspect-w-1 aspect-h-1 hover:z-50 group hover:scale-110"
+                  target="_blank"
+                  href={e.external_urls.spotify}
+                  key={i}
+                  onMouseEnter={() => (ifImageHover.current = true)}
+                  onMouseLeave={() => (ifImageHover.current = false)}
+                  style={{
+                    backgroundImage: `url(${e.images[0]?.url})`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                    transition: "all 0.3s ease-in-out",
+                  }}
+                >
+                  <div className="flex flex-col items-center justify-center font-semibold text-center text-transparent transition-all duration-300 group-hover:text-white group-hover:bg-opacity-40 group-hover:bg-black">
+                    <p className="text-sm ">{e.name}</p>
+                    <p className="text-xs ">{abbreviateNumber(e.followers.total)} followers</p>
+                  </div>
+                </a>
+              ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TopTracks() {
+  const [time_range, settime_range] = useState("long_term");
+  const [showMore, setshowMore] = useState(false);
+  const ifImageHover = useRef(true);
+  const { data } = useSWR(`/api/spotify/top?type=tracks&time_range=${time_range}`);
+  const [artistsHighlight, setartistsHighlight] = useState([]);
+  useEffect(() => {
+    if (data) {
+      setartistsHighlight(data.items.filter((e) => e.album.images.length).slice(0, 9));
+      const interval = setInterval(() => {
+        if (!ifImageHover.current)
+          setartistsHighlight(
+            data.items
+              .filter((e) => e.album.images.length)
+              .sort(() => 0.5 - Math.random())
+              .slice(0, 9)
+          );
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [data]);
+
+  return (
+    <div className="pt-5">
+      <div className="flex flex-col justify-between gap-2 mb-3 md:gap-5 md:flex-row">
+        <p className="text-2xl font-bold">Top Tracks</p>
+        <div className="flex gap-5 text-sm">
+          <button
+            onClick={() => settime_range("short_term")}
+            className={`font-semibold  uppercase dark:hover:text-white hover:text-black ${
+              time_range == "short_term" ? "border-b-4 border-green-500" : "text-gray-500"
+            }`}
+          >
+            4 week
+          </button>
+          <button
+            onClick={() => settime_range("medium_term")}
+            className={`font-semibold  uppercase dark:hover:text-white hover:text-black ${
+              time_range == "medium_term" ? "border-b-4 border-green-500" : "text-gray-500"
+            }`}
+          >
+            6 months
+          </button>
+          <button
+            onClick={() => settime_range("long_term")}
+            className={`font-semibold  uppercase dark:hover:text-white hover:text-black ${
+              time_range == "long_term" ? "border-b-4 border-green-500" : "text-gray-500"
+            }`}
+          >
+            all time
+          </button>
+        </div>
+      </div>
+      <div className="relative flex flex-col-reverse gap-5 md:justify-between md:flex-row">
+        <div>
+          <div className="sticky grid grid-cols-3 gap-2 mx-auto top-5 md:w-96">
+            {data &&
+              artistsHighlight.map((e, i) => (
+                <a
+                  className="overflow-hidden aspect-w-1 aspect-h-1 hover:z-50 group hover:scale-110"
+                  target="_blank"
+                  href={e.external_urls.spotify}
+                  key={i}
+                  onMouseEnter={() => (ifImageHover.current = true)}
+                  onMouseLeave={() => (ifImageHover.current = false)}
+                  style={{
+                    backgroundImage: `url(${e.album.images[0]?.url})`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                    transition: "all 0.3s ease-in-out",
+                  }}
+                >
+                  <div className="flex flex-col items-center justify-center font-semibold text-center text-transparent transition-all duration-300 group-hover:text-white group-hover:bg-opacity-40 group-hover:bg-black">
+                    <p className="text-sm ">{e.name}</p>
+                  </div>
+                </a>
+              ))}
+          </div>
+        </div>
+        <table>
+          <tbody>
+            {data &&
+              data.items.slice(0, showMore ? 50 : 10).map((e, i) => (
+                <tr key={i} className="text-lg">
+                  <td className="flex py-1 font-bold text-center text-gray-500">{i + 1}</td>
+                  <td className="py-1 pl-3 font-semibold">
+                    <a href={e.external_urls.spotify} target="_blank">
+                      {e.name}
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            <tr>
+              <td></td>
+              <td className="pl-3">
+                <button
+                  className="text-lg text-green-500 underline"
+                  onClick={() => setshowMore(!showMore)}
+                >
+                  {!showMore ? "Show more ▼" : "Show less ▲"}
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
