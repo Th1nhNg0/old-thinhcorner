@@ -40,13 +40,14 @@ module.exports = {
         primary: colors.teal,
         gray: colors.trueGray,
         code: {
-          green: "#b5f4a5",
+          green: "#1DB954",
           yellow: "#ffe484",
           purple: "#d9a9ff",
           red: "#ff8383",
           blue: "#93ddfd",
           white: "#fff",
         },
+        spotify: "#1db954",
       },
       typography: (theme) => ({
         DEFAULT: {
