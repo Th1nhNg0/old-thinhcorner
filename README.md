@@ -7,5 +7,5 @@ Feel free to use this repo as a reference to make your own blog :D
 # To do:
 
 - [x] Spotify page
-- [] Optimize spotify page
-- [] Write more blog post
+- [x] Optimize spotify page
+- [ ] Write more blog post

@@ -1,27 +1,27 @@
-import Link from '@/components/Link'
-import PageTitle from '@/components/PageTitle'
-import ScrollTop from '@/components/ScrollTop'
-import SectionContainer from '@/components/SectionContainer'
-import { BlogSEO } from '@/components/SEO'
-import Image from '@/components/Image'
-import Tag from '@/components/Tag'
-import siteMetadata from '@/data/siteMetadata'
-import Comments from '@/components/comments'
-import { useEffect, useRef, useState } from 'react'
+import Link from "@/components/Link";
+import PageTitle from "@/components/PageTitle";
+import ScrollTop from "@/components/ScrollTop";
+import SectionContainer from "@/components/SectionContainer";
+import { BlogSEO } from "@/components/SEO";
+import Image from "@/components/Image";
+import Tag from "@/components/Tag";
+import siteMetadata from "@/data/siteMetadata";
+import Comments from "@/components/comments";
+import { useEffect, useRef, useState } from "react";
 
 const twitterShare = (slug) =>
   `https://twitter.com/intent/tweet?url=${encodeURIComponent(
     `${siteMetadata.siteUrl}/blog/${slug}`
-  )}`
+  )}`;
 const facebookShare = (slug) =>
   `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
     `${siteMetadata.siteUrl}/blog/${slug}`
-  )}`
+  )}`;
 
-const postDateTemplate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+const postDateTemplate = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
 
 export default function PostLayout({ frontMatter, authorDetails, next, prev, children, toc }) {
-  const { slug, fileName, date, title, tags, readingTime } = frontMatter
+  const { slug, fileName, date, title, tags, readingTime } = frontMatter;
   return (
     <SectionContainer>
       <BlogSEO
@@ -87,7 +87,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
           </header>
           <div
             className="pb-8 divide-y divide-gray-200 xl:divide-y-0 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6"
-            style={{ gridTemplateRows: 'auto 1fr' }}
+            style={{ gridTemplateRows: "auto 1fr" }}
           >
             <dl className="pt-6 pb-10 xl:pt-11 xl:border-b xl:border-gray-200 xl:dark:border-gray-700">
               <dt className="sr-only">Authors</dt>
@@ -114,7 +114,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
                               href={author.twitter}
                               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                             >
-                              {author.twitter.replace('https://twitter.com/', '@')}
+                              {author.twitter.replace("https://twitter.com/", "@")}
                             </Link>
                           )}
                         </dd>
@@ -240,39 +240,39 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
         </div>
       </article>
     </SectionContainer>
-  )
+  );
 }
 
 function TocComponent({ toc }) {
-  const [activeId, setActiveId] = useState()
-  useIntersectionObserver(setActiveId)
-  const [TOC, setTOC] = useState([])
+  const [activeId, setActiveId] = useState();
+  useIntersectionObserver(setActiveId);
+  const [TOC, setTOC] = useState([]);
   useEffect(() => {
-    let etoc = toc.map((e) => ({ ...e, children: [] }))
+    let etoc = toc.map((e) => ({ ...e, children: [] }));
     for (let i = etoc.length - 1; i >= 0; i--) {
-      if (etoc[i].depth == 1) continue
+      if (etoc[i].depth == 1) continue;
       for (let j = i; j >= 0; j--) {
         if (etoc[i].depth - etoc[j].depth == 1) {
-          etoc[j].children.unshift(etoc[i])
-          break
+          etoc[j].children.unshift(etoc[i]);
+          break;
         }
       }
     }
-    setTOC(etoc.filter((e) => e.depth == 1))
-  }, [toc])
+    setTOC(etoc.filter((e) => e.depth == 1));
+  }, [toc]);
 
   let RenderToc = ({ item, activeId }) => {
     const isActive = (e) => {
-      if ('#' + activeId === e.url) return true
-      for (let i of e.children) if (isActive(i)) return true
-      return false
-    }
+      if ("#" + activeId === e.url) return true;
+      for (let i of e.children) if (isActive(i)) return true;
+      return false;
+    };
     return item.map((e, i) => (
       <div key={i}>
         <Link href={e.url}>
           <p
             className={`pl-2 border-l-[3px] ${
-              isActive(e) && 'border-primary-500 text-primary-600'
+              isActive(e) && "border-primary-500 text-primary-600"
             }`}
           >
             {e.value}
@@ -284,52 +284,52 @@ function TocComponent({ toc }) {
           </div>
         )}
       </div>
-    ))
-  }
+    ));
+  };
 
   return (
     <div className="mt-5 space-y-1 text-sm">
       <p className="text-lg font-bold">Table of content</p>
       <RenderToc item={TOC} activeId={activeId} />
     </div>
-  )
+  );
 }
 
 const useIntersectionObserver = (setActiveId) => {
-  const headingElementsRef = useRef({})
+  const headingElementsRef = useRef({});
   useEffect(() => {
     const callback = (headings) => {
       headingElementsRef.current = headings.reduce((map, headingElement) => {
-        map[headingElement.target.id] = headingElement
-        return map
-      }, headingElementsRef.current)
+        map[headingElement.target.id] = headingElement;
+        return map;
+      }, headingElementsRef.current);
 
-      const visibleHeadings = []
+      const visibleHeadings = [];
       Object.keys(headingElementsRef.current).forEach((key) => {
-        const headingElement = headingElementsRef.current[key]
-        if (headingElement.isIntersecting) visibleHeadings.push(headingElement)
-      })
+        const headingElement = headingElementsRef.current[key];
+        if (headingElement.isIntersecting) visibleHeadings.push(headingElement);
+      });
 
-      const getIndexFromId = (id) => headingElements.findIndex((heading) => heading.id === id)
+      const getIndexFromId = (id) => headingElements.findIndex((heading) => heading.id === id);
 
       if (visibleHeadings.length === 1) {
-        setActiveId(visibleHeadings[0].target.id)
+        setActiveId(visibleHeadings[0].target.id);
       } else if (visibleHeadings.length > 1) {
         const sortedVisibleHeadings = visibleHeadings.sort(
           (a, b) => getIndexFromId(a.target.id) > getIndexFromId(b.target.id)
-        )
-        setActiveId(sortedVisibleHeadings[0].target.id)
+        );
+        setActiveId(sortedVisibleHeadings[0].target.id);
       }
-    }
+    };
 
     const observer = new IntersectionObserver(callback, {
-      rootMargin: '0px 0px -40% 0px',
-    })
+      rootMargin: "0px 0px -40% 0px",
+    });
 
-    const headingElements = Array.from(document.querySelectorAll('h1, h2, h3'))
+    const headingElements = Array.from(document.querySelectorAll("h1, h2, h3"));
 
-    headingElements.forEach((element) => observer.observe(element))
+    headingElements.forEach((element) => observer.observe(element));
 
-    return () => observer.disconnect()
-  }, [setActiveId])
-}
+    return () => observer.disconnect();
+  }, [setActiveId]);
+};

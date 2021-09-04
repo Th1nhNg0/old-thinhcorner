@@ -1,23 +1,23 @@
-import { useEffect, useState } from 'react'
-import smoothscroll from 'smoothscroll-polyfill'
+import { useEffect, useState } from "react";
+import smoothscroll from "smoothscroll-polyfill";
 
 const ScrollTop = () => {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    smoothscroll.polyfill()
+    smoothscroll.polyfill();
     const handleWindowScroll = () => {
-      if (window.scrollY > 200) setShow(true)
-      else setShow(false)
-    }
+      if (window.scrollY > 200) setShow(true);
+      else setShow(false);
+    };
 
-    window.addEventListener('scroll', handleWindowScroll)
-    return () => window.removeEventListener('scroll', handleWindowScroll)
-  }, [])
+    window.addEventListener("scroll", handleWindowScroll);
+    return () => window.removeEventListener("scroll", handleWindowScroll);
+  }, []);
 
   const handleClick = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <button
@@ -42,7 +42,7 @@ const ScrollTop = () => {
         />
       </svg>
     </button>
-  )
-}
+  );
+};
 
-export default ScrollTop
+export default ScrollTop;

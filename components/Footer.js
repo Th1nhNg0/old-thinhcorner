@@ -1,6 +1,6 @@
-import Link from './Link'
-import siteMetadata from '@/data/siteMetadata'
-import SocialIcon from '@/components/social-icons'
+import Link from "./Link";
+import siteMetadata from "@/data/siteMetadata";
+import SocialIcon from "@/components/social-icons";
 
 export default function Footer() {
   return (
@@ -25,5 +25,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

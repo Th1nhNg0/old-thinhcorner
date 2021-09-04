@@ -1,9 +1,9 @@
-import GA from './GoogleAnalytics'
-import Plausible from './Plausible'
-import SimpleAnalytics from './SimpleAnalytics'
-import siteMetadata from '@/data/siteMetadata'
+import GA from "./GoogleAnalytics";
+import Plausible from "./Plausible";
+import SimpleAnalytics from "./SimpleAnalytics";
+import siteMetadata from "@/data/siteMetadata";
 
-const isProduction = process.env.NODE_ENV === 'production'
+const isProduction = process.env.NODE_ENV === "production";
 
 const Analytics = () => {
   return (
@@ -12,7 +12,7 @@ const Analytics = () => {
       {isProduction && siteMetadata.analytics.simpleAnalytics && <SimpleAnalytics />}
       {isProduction && siteMetadata.analytics.googleAnalyticsId && <GA />}
     </>
-  )
-}
+  );
+};
 
-export default Analytics
+export default Analytics;
