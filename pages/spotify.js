@@ -473,7 +473,7 @@ function TopArtists() {
                   onMouseEnter={() => (ifImageHover.current = true)}
                   onMouseLeave={() => (ifImageHover.current = false)}
                   style={{
-                    backgroundImage: `url(${e.images[0]?.url})`,
+                    backgroundImage: `url(${e.images[2]?.url})`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     transition: "all 0.3s ease-in-out",
@@ -558,7 +558,7 @@ function TopTracks() {
                   onMouseEnter={() => (ifImageHover.current = true)}
                   onMouseLeave={() => (ifImageHover.current = false)}
                   style={{
-                    backgroundImage: `url(${e.album.images[0]?.url})`,
+                    backgroundImage: `url(${e.album.images[2]?.url})`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     transition: "all 0.3s ease-in-out",
