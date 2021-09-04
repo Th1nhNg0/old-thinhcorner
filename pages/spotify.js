@@ -19,7 +19,7 @@ export default function spotify() {
       <div className="relative flex flex-col items-center w-full gap-5 md:items-start md:flex-row">
         <div className="md:sticky md:top-5 md:w-60">
           <UserProfile />
-          <FellingNow />
+          <FeelingNow />
           <TopTag />
         </div>
         <div className="flex-1 space-y-5">
@@ -42,7 +42,7 @@ function getValence(value) {
   return ["euphoric", "pink-500"];
 }
 
-function FellingNow() {
+function FeelingNow() {
   const { data: currentTrack } = useSWR("/api/spotify/current-playing", { refreshInterval: 5000 });
   const { data } = useSWR("/api/spotify/my-feeling");
   if (data && currentTrack)
@@ -73,7 +73,7 @@ function RecentlyTrack() {
     return (
       <div className="flex items-center gap-2 py-2">
         <div className="relative w-16" onClick={() => toggle()}>
-          <img src={track.album.images[2].url} alt="track-image" />
+          <img src={track.album.images[2].url} width="64" height="64" alt="track-image" />
           <div
             title="Preview track"
             className="absolute top-0 left-0 flex items-center justify-center w-full h-full"
@@ -179,6 +179,8 @@ function CurrentPlaying() {
           <div className="relative" onClick={() => toggle()}>
             <img
               className="object-cover w-full md:w-32 md:h-32"
+              width="128"
+              height="128"
               src={currentTrack.item.album?.images[1].url || currentTrack.item?.images[1].url}
               alt="listen-track-cover"
             />
@@ -558,7 +560,7 @@ function TopTracks() {
                   onMouseEnter={() => (ifImageHover.current = true)}
                   onMouseLeave={() => (ifImageHover.current = false)}
                   style={{
-                    backgroundImage: `url(${e.album.images[2]?.url})`,
+                    backgroundImage: `url(${e.album.images[1]?.url})`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     transition: "all 0.3s ease-in-out",
