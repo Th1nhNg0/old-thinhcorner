@@ -44,7 +44,7 @@ function FellingNow() {
   const { data } = useSWR("/api/spotify/my-feeling");
   if (data)
     return (
-      <p className="text-center">
+      <p className="text-center text-gray-700 dark:text-gray-300">
         I'm feeling{" "}
         <span className={`font-bold text-${getValence(data.feeling)[1]}`}>
           {getValence(data.feeling)[0]}
@@ -100,7 +100,7 @@ function RecentlyTrack() {
           >
             {track.name}
           </a>
-          <div className="flex text-sm text-gray-500 md:text-base ">
+          <div className="flex text-sm text-gray-700 dark:text-gray-300 md:text-base ">
             {track.artists.map((e2, i) => (
               <span key={i}>
                 {i != 0 && ", "}
@@ -206,7 +206,7 @@ function CurrentPlaying() {
             >
               {currentTrack.item.name}
             </a>
-            <div className="flex">
+            <div className="flex text-gray-700 dark:text-gray-300">
               {currentTrack.item.artists.map((e, i) => (
                 <a target="_blank" href={e.external_urls.spotify} key={i}>
                   {i != 0 && ", "}
