@@ -371,7 +371,7 @@ function TopTag() {
 function TopArtists() {
   const [time_range, settime_range] = useState("long_term");
   const [showMore, setshowMore] = useState(false);
-  const ifImageHover = useRef(true);
+  const ifImageHover = useRef(false);
   const { data } = useSWR(`/api/spotify/top?type=artists&time_range=${time_range}`);
   const [artistsHighlight, setartistsHighlight] = useState([]);
   useEffect(() => {
@@ -495,7 +495,7 @@ function TopArtists() {
 function TopTracks() {
   const [time_range, settime_range] = useState("long_term");
   const [showMore, setshowMore] = useState(false);
-  const ifImageHover = useRef(true);
+  const ifImageHover = useRef(false);
   const { data } = useSWR(`/api/spotify/top?type=tracks&time_range=${time_range}`);
   const [artistsHighlight, setartistsHighlight] = useState([]);
   useEffect(() => {
