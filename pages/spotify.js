@@ -573,7 +573,7 @@ function TopTracks({ top_tracks }) {
           </button>
         </div>
       </div>
-      <div className="relative flex flex-col-reverse gap-5 md:justify-between md:flex-row">
+      <div className="relative flex flex-col gap-5 md:justify-between md:flex-row">
         <div>
           <div className="sticky grid grid-cols-3 gap-2 mx-auto top-5 md:w-96">
             {artistsHighlight.map((e, i) => (
