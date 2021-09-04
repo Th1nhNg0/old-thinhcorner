@@ -357,7 +357,13 @@ function UserProfile({ profile }) {
         href={profile.external_urls.spotify}
         rel="noreferrer"
       >
-        <img className="w-32 rounded-full" src={profile.images[0].url} alt="avatar" />
+        <img
+          className="w-32 rounded-full"
+          width="128px"
+          height="128px"
+          src={profile.images[0].url}
+          alt="avatar"
+        />
         <p className="mt-3 text-xl font-bold">{profile.display_name}</p>
       </a>
     </div>
