@@ -458,7 +458,7 @@ function TopTag({ top_artists }) {
         {genres.slice(0, 5).map((e, i) => (
           <div
             title={e.name}
-            className="relative flex items-center justify-between h-10 gap-5 px-4 overflow-hidden font-semibold capitalize bg-gray-300 rounded dark:bg-gray-800"
+            className="relative flex items-center justify-between h-10 gap-5 px-4 overflow-hidden font-semibold capitalize bg-gray-200 rounded dark:bg-gray-800"
             key={i}
           >
             <span className="z-10 flex-1 truncate ">{e.name}</span>
