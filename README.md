@@ -8,4 +8,6 @@ Feel free to use this repo as a reference to make your own blog :D
 
 - [x] Spotify page
 - [x] Optimize spotify page
+- [ ] Spotify -> Spider radar (dance, speechiness, valence, loudness, energy, tempo)
+- [ ] Spotify -> Friend taste match
 - [ ] Write more blog post

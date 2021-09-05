@@ -7,7 +7,13 @@ import useAudio from "@/lib/useAudio";
 
 import * as SpotifyApi from "@/lib/spotify-api";
 
-export default function spotify({ profile, top_artists, top_tracks, last_refresh_date }) {
+export default function spotify({
+  profile,
+  top_artists,
+  top_tracks,
+  last_refresh_date,
+  top_artists_by_tracks,
+}) {
   return (
     <SWRConfig
       value={{
@@ -19,10 +25,10 @@ export default function spotify({ profile, top_artists, top_tracks, last_refresh
         description={siteMetadata.description}
       />
       <div className="relative flex flex-col items-center w-full gap-5 md:items-start md:flex-row">
-        <div className="md:sticky md:top-5 md:w-60">
+        <div className="w-full md:sticky md:top-5 md:w-60 ">
           <UserProfile profile={profile} />
           <FeelingNow />
-          <TopTag top_artists={top_artists.long_term} />
+          <TopTag top_artists={top_artists_by_tracks} />
         </div>
         <div className="flex-1 space-y-5">
           <CurrentPlaying />
@@ -412,7 +418,7 @@ function TopTag({ top_artists }) {
   useEffect(() => {
     const obj = {};
     // eslint-disable-next-line no-restricted-syntax
-    for (const e of top_artists.items) {
+    for (const e of top_artists) {
       // eslint-disable-next-line no-restricted-syntax
       for (const g of e.genres) {
         if (!obj[g]) obj[g] = 1;
@@ -420,23 +426,49 @@ function TopTag({ top_artists }) {
       }
     }
     let myList = [];
-    myList = Object.entries(obj).map((e) => ({ name: e[0], count: e[1] }));
+    let total = 0;
+    for (let [name, count] of Object.entries(obj)) {
+      myList.push({ name, count });
+      total += count;
+    }
+    myList = myList.map((e) => ({ ...e, percent: (e.count / total) * 100 }));
     myList.sort((a, b) => b.count - a.count);
     setgenres(myList);
-  }, [top_artists.items]);
-
+  }, [top_artists]);
+  function getBg(index) {
+    switch (index) {
+      case 0:
+        return "linear-gradient(127.09deg, rgb(228, 63, 63) 0%, rgb(228, 108, 63) 100%)";
+      case 1:
+        return "linear-gradient(134.4deg, rgb(32, 172, 154) 0%, rgb(29, 185, 84) 52%, rgb(145, 192, 64) 100%)";
+      case 2:
+        return "linear-gradient(134.4deg, rgb(32, 172, 154) 0%, rgb(29, 185, 84) 52%, rgb(145, 192, 64) 100%)";
+      case 3:
+        return "linear-gradient(268.81deg, rgb(63, 134, 228) 0%, rgb(27, 82, 223) 100%)";
+      case 4:
+        return "linear-gradient(268.81deg, rgb(63, 134, 228) 0%, rgb(27, 82, 223) 100%)";
+      default:
+        return "#1db954";
+    }
+  }
   return (
     <div className="mt-5">
       <p className="text-lg font-semibold">Top Genres</p>
-      <div className="flex flex-wrap items-center justify-center gap-2 mt-3 text-sm">
-        {genres
-          .slice(0, 10)
-          .sort((a, b) => a.name.length - b.name.length)
-          .map((e, i) => (
-            <div className="px-4 py-1 bg-gray-100 rounded-full dark:bg-gray-800" key={i}>
-              {e.name}
-            </div>
-          ))}
+      <div className="mt-3 space-y-3 text-sm">
+        {genres.slice(0, 5).map((e, i) => (
+          <div
+            title={e.name}
+            className="relative flex items-center justify-between h-10 gap-5 px-4 overflow-hidden font-semibold capitalize bg-gray-300 rounded dark:bg-gray-800"
+            key={i}
+          >
+            <span className="z-10 flex-1 truncate ">{e.name}</span>
+            <span className="z-10 text-gray-700 dark:text-gray-400">{Math.round(e.percent)}%</span>
+            <div
+              className="absolute top-0 left-0 z-0 h-full"
+              style={{ width: e.percent + "%", background: getBg(i) }}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -688,9 +720,19 @@ export async function getStaticProps() {
     SpotifyApi.getTop("tracks", "long_term"),
   ]);
   const top_tracks = { long_term, short_term, medium_term };
+
+  //get by 4 months
+  const artistsList = medium_term.items.map((e) => e.artists.map((e) => e.id)).flat();
+
+  const top_artists_by_tracks = [];
+  for (let i = 0; i < artistsList.length; i += 50) {
+    let temp = await SpotifyApi.getArtists(artistsList.slice(i, i + 50));
+    top_artists_by_tracks.push(...temp);
+  }
+
   const last_refresh_date = Date.now();
   return {
-    props: { profile, top_artists, top_tracks, last_refresh_date },
+    props: { profile, top_artists, top_tracks, last_refresh_date, top_artists_by_tracks },
     revalidate: 60 * 60 * 24,
   };
 }
