@@ -307,9 +307,9 @@ function CurrentPlaying() {
               </div>
             </div>
           </div>
-          <div className="w-full h-2 bg-gray-500">
+          <div className="w-full h-2 bg-gray-600">
             <div
-              className="h-2 bg-green-800"
+              className="h-2 bg-gray-200"
               style={{
                 width: `${(currentTrack.progress_ms / currentTrack.item.duration_ms) * 100}%`,
               }}
@@ -458,7 +458,7 @@ function TopTag({ top_artists }) {
         {genres.slice(0, 5).map((e, i) => (
           <div
             title={e.name}
-            className="relative flex items-center justify-between h-10 gap-5 px-4 overflow-hidden font-semibold capitalize bg-gray-200 rounded dark:bg-gray-800"
+            className="relative flex items-center justify-between h-10 gap-5 px-4 overflow-hidden font-semibold text-gray-800 capitalize bg-gray-200 rounded dark:text-white dark:bg-gray-800"
             key={i}
           >
             <span className="z-10 flex-1 truncate ">{e.name}</span>
