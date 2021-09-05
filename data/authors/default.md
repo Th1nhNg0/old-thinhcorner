@@ -1,5 +1,5 @@
 ---
-name: Thịnh Ngô
+name: Ngô Phú Thịnh
 avatar: /static/images/avatar.png
 occupation: Student at HCMUS
 # company: Stanford University

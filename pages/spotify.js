@@ -3,7 +3,6 @@ import useSWR, { SWRConfig, useSWRConfig } from "swr";
 import moment from "moment";
 import { PageSEO } from "@/components/SEO";
 import siteMetadata from "@/data/siteMetadata";
-import useAudio from "@/lib/useAudio";
 
 import * as SpotifyApi from "@/lib/spotify-api";
 
@@ -13,6 +12,7 @@ export default function spotify({
   top_tracks,
   last_refresh_date,
   top_artists_by_tracks,
+  stats_analysis,
 }) {
   return (
     <SWRConfig
@@ -28,7 +28,10 @@ export default function spotify({
         <div className="w-full md:sticky md:top-5 md:w-60 ">
           <UserProfile profile={profile} />
           <FeelingNow />
-          <TopTag top_artists={top_artists_by_tracks} />
+          <TagAndAnalysis
+            top_artists_by_tracks={top_artists_by_tracks}
+            stats_analysis={stats_analysis}
+          />
         </div>
         <div className="flex-1 space-y-5">
           <CurrentPlaying />
@@ -74,7 +77,6 @@ function RecentlyTrack() {
   const [showMore, setshowMore] = useState(false);
 
   const TrackItem = ({ track, played_at }) => {
-    const [playingReview, toggle] = useAudio(track.preview_url);
     function getTime() {
       const minutes = moment.duration(track.duration_ms).minutes();
       let seconds = `0${moment.duration(track.duration_ms).seconds()}`;
@@ -83,28 +85,10 @@ function RecentlyTrack() {
     }
     return (
       <div className="flex items-center gap-2 py-2">
-        <div aria-hidden="true" className="relative w-16" onClick={() => toggle()}>
-          <img src={track.album.images[2].url} width="64" height="64" alt="track" />
-          <div
-            title="Preview track"
-            className="absolute top-0 left-0 flex items-center justify-center w-full h-full"
-          >
-            <svg className="cursor-pointer w-7 h-7 opacity-80" viewBox="0 0 20 20" fill="white">
-              {!playingReview ? (
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                  clipRule="evenodd"
-                />
-              ) : (
-                <path
-                  fillRule="evenodd"
-                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z"
-                  clipRule="evenodd"
-                />
-              )}
-            </svg>
-          </div>
+        <div aria-hidden="true" className="relative w-16">
+          <a target="_blank" href={track.external_urls.spotify} rel="noreferrer">
+            <img src={track.album.images[2].url} width="64" height="64" alt="track" />
+          </a>
         </div>
         <div className="flex-1">
           <a
@@ -193,13 +177,10 @@ function RecentlyTrack() {
 function CurrentPlaying() {
   const { data: currentTrack } = useSWR("/api/spotify/current-playing", { refreshInterval: 1000 });
   const { mutate } = useSWRConfig();
-  const [playingReview, toggle] = useAudio(
-    currentTrack?.item.preview_url || currentTrack?.item.audio_preview_url
-  );
   useEffect(() => {
     mutate("/api/spotify/recently-track?limit=10");
     mutate("/api/spotify/my-feeling");
-  }, [currentTrack?.item.name, mutate]);
+  }, [currentTrack?.item.name]);
 
   if (currentTrack?.item)
     return (
@@ -207,38 +188,16 @@ function CurrentPlaying() {
         <p className="mb-2 text-xl font-bold">Currently listening to</p>
         <div className="overflow-hidden rounded-lg bg-spotify">
           <div className="flex flex-col flex-1 w-full gap-3 p-5 text-white md:flex-row">
-            <div className="relative" onClick={() => toggle()} aria-hidden="true">
-              <img
-                className="object-cover w-full md:w-32 md:h-32"
-                width="128"
-                height="128"
-                src={currentTrack.item.album?.images[1].url || currentTrack.item?.images[1].url}
-                alt="listen-track-cover"
-              />
-              <div
-                title="Preview track"
-                className="absolute top-0 left-0 flex items-center justify-center w-full h-full"
-              >
-                <svg
-                  className="w-10 h-10 cursor-pointer opacity-80"
-                  viewBox="0 0 20 20"
-                  fill="white"
-                >
-                  {!playingReview ? (
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                      clipRule="evenodd"
-                    />
-                  ) : (
-                    <path
-                      fillRule="evenodd"
-                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z"
-                      clipRule="evenodd"
-                    />
-                  )}
-                </svg>
-              </div>
+            <div className="relative" aria-hidden="true">
+              <a target="_blank" href={currentTrack.item.external_urls.spotify} rel="noreferrer">
+                <img
+                  className="object-cover w-full md:w-32 md:h-32"
+                  width="128"
+                  height="128"
+                  src={currentTrack.item.album?.images[1].url || currentTrack.item?.images[1].url}
+                  alt="listen-track-cover"
+                />
+              </a>
             </div>
             <div className="flex flex-col">
               <a
@@ -413,6 +372,7 @@ function UserProfile({ profile }) {
     </div>
   );
 }
+
 function TopTag({ top_artists }) {
   const [genres, setgenres] = useState([]);
   useEffect(() => {
@@ -452,9 +412,8 @@ function TopTag({ top_artists }) {
     }
   }
   return (
-    <div className="mt-5">
-      <p className="text-lg font-semibold">Top Genres</p>
-      <div className="mt-3 space-y-3 text-sm">
+    <div>
+      <div className="space-y-3 text-sm">
         {genres.slice(0, 5).map((e, i) => (
           <div
             title={e.name}
@@ -470,6 +429,56 @@ function TopTag({ top_artists }) {
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+function Analysis({ stats_analysis }) {
+  return (
+    <table className="w-full table-auto">
+      <thead>
+        <tr>
+          <th className="text-left">Attribute</th>
+          <th className="text-right">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        {Object.entries(stats_analysis).map((e, i) => (
+          <tr key={i}>
+            <td> {e[0]}</td>
+            <td className="text-right">{e[1]}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+function TagAndAnalysis({ top_artists_by_tracks, stats_analysis }) {
+  const [tab, settab] = useState(0);
+  return (
+    <div className="mt-4 space-y-3">
+      <div className="flex justify-between gap-5 text-sm">
+        <button
+          type="button"
+          onClick={() => settab(0)}
+          className={`font-semibold duration-300 uppercase rounded-none ${
+            tab == 0 ? "text-spotify" : "text-gray-500 dark:hover:text-white hover:text-black"
+          }`}
+        >
+          Top Genres
+        </button>
+        <button
+          type="button"
+          onClick={() => settab(1)}
+          className={`font-semibold duration-300 uppercase rounded-none ${
+            tab == 1 ? "text-spotify" : "text-gray-500 dark:hover:text-white hover:text-black"
+          }`}
+        >
+          Analysis
+        </button>
+      </div>
+      {tab == 0 && <TopTag top_artists={top_artists_by_tracks} />}
+      {tab == 1 && <Analysis stats_analysis={stats_analysis} />}
     </div>
   );
 }
@@ -514,7 +523,7 @@ function TopArtists({ top_artists }) {
           <button
             type="button"
             onClick={() => settime_range("short_term")}
-            className={`font-semibold  uppercase dark:hover:text-white hover:text-black rounded-none ${
+            className={`font-semibold duration-300 uppercase dark:hover:text-white hover:text-black rounded-none ${
               time_range == "short_term" ? "border-b-4 border-spotify" : "text-gray-500"
             }`}
           >
@@ -523,7 +532,7 @@ function TopArtists({ top_artists }) {
           <button
             type="button"
             onClick={() => settime_range("medium_term")}
-            className={`font-semibold  uppercase dark:hover:text-white hover:text-black rounded-none ${
+            className={`font-semibold duration-300 uppercase dark:hover:text-white hover:text-black rounded-none ${
               time_range == "medium_term" ? "border-b-4 border-spotify" : "text-gray-500"
             }`}
           >
@@ -532,7 +541,7 @@ function TopArtists({ top_artists }) {
           <button
             type="button"
             onClick={() => settime_range("long_term")}
-            className={`font-semibold  uppercase dark:hover:text-white hover:text-black rounded-none ${
+            className={`font-semibold duration-300 uppercase dark:hover:text-white hover:text-black rounded-none ${
               time_range == "long_term" ? "border-b-4 border-spotify" : "text-gray-500"
             }`}
           >
@@ -566,7 +575,7 @@ function TopArtists({ top_artists }) {
             </tr>
           </tbody>
         </table>
-        <div>
+        <div className="hidden md:block">
           <div className="sticky grid grid-cols-3 gap-4 mx-auto top-5 md:w-96">
             {artistsHighlight.map((e, i) => (
               <a
@@ -625,7 +634,7 @@ function TopTracks({ top_tracks }) {
         <div className="flex gap-5 text-sm">
           <button
             onClick={() => settime_range("short_term")}
-            className={`font-semibold  uppercase dark:hover:text-white hover:text-black rounded-none ${
+            className={`font-semibold duration-300 uppercase dark:hover:text-white hover:text-black rounded-none ${
               time_range == "short_term" ? "border-b-4 border-spotify" : "text-gray-500"
             }`}
           >
@@ -633,7 +642,7 @@ function TopTracks({ top_tracks }) {
           </button>
           <button
             onClick={() => settime_range("medium_term")}
-            className={`font-semibold  uppercase dark:hover:text-white hover:text-black rounded-none ${
+            className={`font-semibold duration-300 uppercase dark:hover:text-white hover:text-black rounded-none ${
               time_range == "medium_term" ? "border-b-4 border-spotify" : "text-gray-500"
             }`}
           >
@@ -641,7 +650,7 @@ function TopTracks({ top_tracks }) {
           </button>
           <button
             onClick={() => settime_range("long_term")}
-            className={`font-semibold  uppercase dark:hover:text-white hover:text-black rounded-none ${
+            className={`font-semibold duration-300 uppercase dark:hover:text-white hover:text-black rounded-none ${
               time_range == "long_term" ? "border-b-4 border-spotify" : "text-gray-500"
             }`}
           >
@@ -650,8 +659,8 @@ function TopTracks({ top_tracks }) {
         </div>
       </div>
       <div className="relative flex flex-col gap-5 md:justify-between md:flex-row">
-        <div>
-          <div className="sticky grid grid-cols-3 gap-2 mx-auto top-5 md:w-96">
+        <div className="hidden md:block">
+          <div className="sticky grid grid-cols-3 gap-2 mx-auto top-5 w-96">
             {artistsHighlight.map((e, i) => (
               <a
                 className="overflow-hidden aspect-w-1 aspect-h-1 hover:z-50 group hover:scale-110"
@@ -706,6 +715,7 @@ function TopTracks({ top_tracks }) {
 }
 
 export async function getStaticProps() {
+  const last_refresh_date = Date.now();
   const profile = await SpotifyApi.getMe();
   let [short_term, medium_term, long_term] = await Promise.all([
     SpotifyApi.getTop("artists", "short_term"),
@@ -730,9 +740,33 @@ export async function getStaticProps() {
     top_artists_by_tracks.push(...temp);
   }
 
-  const last_refresh_date = Date.now();
+  let stats_analysis = await SpotifyApi.getAudioFeatures(
+    top_tracks.medium_term.items.map((e) => e.id)
+  );
+  stats_analysis = stats_analysis.reduce((previousV, currentV) => ({
+    danceability: previousV.danceability + currentV.danceability,
+    energy: previousV.energy + currentV.energy,
+    valence: previousV.valence + currentV.valence,
+    tempo: previousV.tempo + currentV.tempo,
+    loudness: previousV.loudness + currentV.loudness,
+    speechiness: previousV.speechiness + currentV.speechiness,
+  }));
+  stats_analysis.danceability = (stats_analysis.danceability * 2).toFixed(1);
+  stats_analysis.energy = (stats_analysis.energy * 2).toFixed(1);
+  stats_analysis.valence = (stats_analysis.valence * 2).toFixed(1);
+  stats_analysis.tempo = Math.round(stats_analysis.tempo / 50);
+  stats_analysis.loudness = (stats_analysis.loudness / 50).toFixed(1);
+  stats_analysis.speechiness = (stats_analysis.speechiness * 2).toFixed(1);
+
   return {
-    props: { profile, top_artists, top_tracks, last_refresh_date, top_artists_by_tracks },
+    props: {
+      profile,
+      top_artists,
+      top_tracks,
+      last_refresh_date,
+      top_artists_by_tracks,
+      stats_analysis,
+    },
     revalidate: 60 * 60 * 24,
   };
 }
