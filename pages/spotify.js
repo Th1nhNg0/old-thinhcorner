@@ -11,7 +11,7 @@ export default function spotify({
   top_artists,
   top_tracks,
   last_refresh_date,
-  top_artists_by_tracks,
+  top_genres,
   stats_analysis,
 }) {
   return (
@@ -28,10 +28,7 @@ export default function spotify({
         <div className="w-full md:sticky md:top-5 md:w-60 ">
           <UserProfile profile={profile} />
           <FeelingNow />
-          <TagAndAnalysis
-            top_artists_by_tracks={top_artists_by_tracks}
-            stats_analysis={stats_analysis}
-          />
+          <TagAndAnalysis top_genres={top_genres} stats_analysis={stats_analysis} />
         </div>
         <div className="flex-1 space-y-5">
           <CurrentPlaying />
@@ -373,28 +370,7 @@ function UserProfile({ profile }) {
   );
 }
 
-function TopTag({ top_artists }) {
-  const [genres, setgenres] = useState([]);
-  useEffect(() => {
-    const obj = {};
-    // eslint-disable-next-line no-restricted-syntax
-    for (const e of top_artists) {
-      // eslint-disable-next-line no-restricted-syntax
-      for (const g of e.genres) {
-        if (!obj[g]) obj[g] = 1;
-        else obj[g] += 1;
-      }
-    }
-    let myList = [];
-    let total = 0;
-    for (let [name, count] of Object.entries(obj)) {
-      myList.push({ name, count });
-      total += count;
-    }
-    myList = myList.map((e) => ({ ...e, percent: (e.count / total) * 100 }));
-    myList.sort((a, b) => b.count - a.count);
-    setgenres(myList);
-  }, [top_artists]);
+function TopTag({ top_genres }) {
   function getBg(index) {
     switch (index) {
       case 0:
@@ -414,7 +390,7 @@ function TopTag({ top_artists }) {
   return (
     <div>
       <div className="space-y-3 text-sm">
-        {genres.slice(0, 5).map((e, i) => (
+        {top_genres.slice(0, 5).map((e, i) => (
           <div
             title={e.name}
             className="relative flex items-center justify-between h-10 gap-5 px-4 overflow-hidden font-semibold text-gray-800 capitalize bg-gray-200 rounded dark:text-white dark:bg-gray-800"
@@ -453,7 +429,7 @@ function Analysis({ stats_analysis }) {
     </table>
   );
 }
-function TagAndAnalysis({ top_artists_by_tracks, stats_analysis }) {
+function TagAndAnalysis({ top_genres, stats_analysis }) {
   const [tab, settab] = useState(0);
   return (
     <div className="mt-4 space-y-3">
@@ -477,7 +453,7 @@ function TagAndAnalysis({ top_artists_by_tracks, stats_analysis }) {
           Analysis
         </button>
       </div>
-      {tab == 0 && <TopTag top_artists={top_artists_by_tracks} />}
+      {tab == 0 && <TopTag top_genres={top_genres} />}
       {tab == 1 && <Analysis stats_analysis={stats_analysis} />}
     </div>
   );
@@ -740,6 +716,22 @@ export async function getStaticProps() {
     top_artists_by_tracks.push(...temp);
   }
 
+  const obj = {};
+  for (const e of top_artists_by_tracks) {
+    for (const g of e.genres) {
+      if (!obj[g]) obj[g] = 1;
+      else obj[g] += 1;
+    }
+  }
+  let top_genres = [];
+  let total = 0;
+  for (let [name, count] of Object.entries(obj)) {
+    top_genres.push({ name, count });
+    total += count;
+  }
+  top_genres = top_genres.map((e) => ({ ...e, percent: (e.count / total) * 100 }));
+  top_genres.sort((a, b) => b.count - a.count);
+
   let stats_analysis = await SpotifyApi.getAudioFeatures(
     top_tracks.medium_term.items.map((e) => e.id)
   );
@@ -766,6 +758,7 @@ export async function getStaticProps() {
       last_refresh_date,
       top_artists_by_tracks,
       stats_analysis,
+      top_genres,
     },
     revalidate: 60 * 60 * 24,
   };
