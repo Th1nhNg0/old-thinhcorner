@@ -56,10 +56,10 @@ function getValence(value) {
 function FeelingNow() {
   const { data: currentTrack } = useSWR("/api/spotify/current-playing", { refreshInterval: 5000 });
   const { data: currentTrackFeatures } = useSWR(
-    `/api/spotify/track-features?id=${currentTrack?.item?.id}`
+    currentTrack?.item?.id ? `/api/spotify/track-features?id=${currentTrack.item.id}` : null
   );
   const { data } = useSWR("/api/spotify/my-feeling");
-  if (data?.feeling && currentTrack.item)
+  if (data?.feeling && currentTrack.item && currentTrackFeatures)
     return (
       <p className="text-center text-gray-700 dark:text-gray-300">
         I'm feeling{" "}
