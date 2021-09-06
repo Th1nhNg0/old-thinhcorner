@@ -361,9 +361,9 @@ function UserProfile({ profile }) {
         rel="noreferrer"
       >
         <img
-          className="w-32 rounded-full"
-          width="128px"
-          height="128px"
+          className="rounded-full"
+          width="128"
+          height="128"
           src={profile.images[0].url}
           alt="avatar"
         />
