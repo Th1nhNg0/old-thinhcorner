@@ -178,8 +178,13 @@ function CurrentPlaying() {
     mutate("/api/spotify/recently-track?limit=10");
     mutate("/api/spotify/my-feeling");
   }, [currentTrack?.item?.name]);
-
-  if (currentTrack?.item)
+  useEffect(() => {
+    console.log(currentTrack?.item?.name);
+  }, [currentTrack?.item?.name]);
+  useEffect(() => {
+    console.log({ currentTrack });
+  }, [currentTrack]);
+  if (currentTrack && currentTrack.item)
     return (
       <div>
         <p className="mb-2 text-xl font-bold">Currently listening to</p>
