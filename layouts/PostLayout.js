@@ -254,11 +254,12 @@ function TocComponent({ toc }) {
       for (let j = i; j >= 0; j--) {
         if (etoc[i].depth - etoc[j].depth == 1) {
           etoc[j].children.unshift(etoc[i]);
+          etoc[i].remove = true;
           break;
         }
       }
     }
-    setTOC(etoc.filter((e) => e.depth == 1));
+    setTOC(etoc.filter((e) => !e.remove));
   }, [toc]);
 
   let RenderToc = ({ item, activeId }) => {
