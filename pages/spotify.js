@@ -55,13 +55,21 @@ function getValence(value) {
 
 function FeelingNow() {
   const { data: currentTrack } = useSWR("/api/spotify/current-playing", { refreshInterval: 5000 });
+  const { data: currentTrackFeatures } = useSWR(
+    `/api/spotify/track-features?id=${currentTrack?.item?.id}`
+  );
   const { data } = useSWR("/api/spotify/my-feeling");
-  if (data && currentTrack.item)
+  if (data?.feeling && currentTrack.item)
     return (
       <p className="text-center text-gray-700 dark:text-gray-300">
         I'm feeling{" "}
         <span className={`font-bold text-${getValence(data.feeling)[1]}`}>
-          {getValence(data.feeling)[0]}
+          {
+            getValence(
+              data.feeling.reduce((a, b) => a + b, currentTrackFeatures.valence) /
+                (data.feeling.length + 1)
+            )[0]
+          }
         </span>{" "}
         rightnow
       </p>
