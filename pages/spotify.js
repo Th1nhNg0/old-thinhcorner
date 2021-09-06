@@ -63,7 +63,14 @@ function FeelingNow() {
     return (
       <p className="text-center text-gray-700 dark:text-gray-300">
         I'm feeling{" "}
-        <span className={`font-bold text-${getValence(data.feeling)[1]}`}>
+        <span
+          className={`font-bold text-${
+            getValence(
+              data.feeling.reduce((a, b) => a + b, currentTrackFeatures.valence) /
+                (data.feeling.length + 1)
+            )[1]
+          }`}
+        >
           {
             getValence(
               data.feeling.reduce((a, b) => a + b, currentTrackFeatures.valence) /
