@@ -33,6 +33,10 @@ class MyDocument extends Document {
             integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc"
             crossOrigin="anonymous"
           />
+          <meta
+            name="google-site-verification"
+            content="UXbXGaC3iZq9Dde5Cs6PkTis4sH3noldubFgiWHYLCE"
+          />
         </Head>
         <body className="antialiased text-black bg-white dark:bg-gray-900 dark:text-white">
           <Main />

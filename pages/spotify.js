@@ -202,7 +202,7 @@ function CurrentPlaying() {
             <div className="relative" aria-hidden="true">
               <a target="_blank" href={currentTrack.item.external_urls.spotify} rel="noreferrer">
                 <img
-                  className="object-cover w-full md:w-32 md:h-32"
+                  className="object-cover w-full rounded-lg md:w-32 md:h-32"
                   width="128"
                   height="128"
                   src={currentTrack.item.album?.images[1].url || currentTrack.item?.images[1].url}
