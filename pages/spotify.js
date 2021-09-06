@@ -186,12 +186,6 @@ function CurrentPlaying() {
     mutate("/api/spotify/recently-track?limit=10");
     mutate("/api/spotify/my-feeling");
   }, [currentTrack?.item?.name, mutate]);
-  useEffect(() => {
-    console.log(currentTrack?.item?.name);
-  }, [currentTrack?.item?.name]);
-  useEffect(() => {
-    console.log({ currentTrack });
-  }, [currentTrack]);
   if (currentTrack && currentTrack.item)
     return (
       <div>
