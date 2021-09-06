@@ -16,7 +16,7 @@
     "@tailwindcss/forms": "^0.3.2",
     "@tailwindcss/typography": "^0.4.0",
     "autoprefixer": "^10.3.4",
-    "axios": "^0.21.1",
+    "axios": "^0.21.3",
     "esbuild": "^0.12.25",
     "github-slugger": "^1.4.0",
     "gray-matter": "^4.0.2",
@@ -59,7 +59,7 @@
     "inquirer": "^8.1.1",
     "lint-staged": "^11.0.0",
     "next-remote-watch": "^1.0.0",
-    "prettier": "^2.2.1"
+    "prettier": "^2.3.2"
   },
   "lint-staged": {
     "*.+(js|jsx|ts|tsx)": [
