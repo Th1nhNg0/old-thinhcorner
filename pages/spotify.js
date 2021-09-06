@@ -56,7 +56,7 @@ function getValence(value) {
 function FeelingNow() {
   const { data: currentTrack } = useSWR("/api/spotify/current-playing", { refreshInterval: 5000 });
   const { data } = useSWR("/api/spotify/my-feeling");
-  if (data && currentTrack)
+  if (data && currentTrack.item)
     return (
       <p className="text-center text-gray-700 dark:text-gray-300">
         I'm feeling{" "}
