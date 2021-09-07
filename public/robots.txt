@@ -1,0 +1,6 @@
+Sitemap: https://thinhcorner.com/
+
+User-agent: *
+Allow: /*
+
+Disallow: /api/*
