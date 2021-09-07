@@ -1,4 +1,4 @@
-Sitemap: https://thinhcorner.com/
+Sitemap: https://thinhcorner.com/sitemap.xml
 
 User-agent: *
 Allow: /*
