@@ -1,7 +1,7 @@
 const siteMetadata = {
-  title: "Thịnh's Blog",
+  title: "Thịnh's Corner",
   author: "Thịnh Ngô",
-  headerTitle: "Thịnh's Blog",
+  headerTitle: "Thịnh's Corner",
   description: "Góc nhỏ của Thịnh.",
   language: "en-us",
   siteUrl: "https://thinhcorner.com/",
