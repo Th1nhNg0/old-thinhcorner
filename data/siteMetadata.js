@@ -8,7 +8,7 @@ const siteMetadata = {
   siteRepo: "https://github.com/Th1nhNg0/th1nhng0.vercel.app",
   siteLogo: "/static/images/logo.png",
   image: "/static/images/avatar.png",
-  socialBanner: "/static/images/socialbg.jpg",
+  socialBanner: "/static/images/socialbg.png",
 
   email: "ngophuthinh2001@gmail.com",
   github: "https://github.com/th1nhng0",
