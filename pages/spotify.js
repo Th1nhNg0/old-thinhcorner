@@ -206,7 +206,7 @@ function CurrentPlaying() {
                   className="object-cover w-full rounded-lg md:w-32 md:h-32"
                   width="128"
                   height="128"
-                  src={currentTrack.item.album?.images[1].url || currentTrack.item?.images[1].url}
+                  src={currentTrack.item.album?.images[0].url || currentTrack.item?.images[0].url}
                   alt="listen-track-cover"
                 />
               </a>
