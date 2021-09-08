@@ -538,9 +538,9 @@ function Analysis({ stats_analysis }) {
       case "loudness":
         return "Loudness describes the subjective perception of sound pressure in a track.";
       case "energy":
-        return "Loudness describes the subjective perception of sound pressure in a track.";
+        return "Energy describes how intense, upbeat, or chill a track is.";
       case "tempo":
-        return "Loudness describes the subjective perception of sound pressure in a track.";
+        return "Tempo is the speed, pace or beat of any track.";
       default:
         return null;
     }
