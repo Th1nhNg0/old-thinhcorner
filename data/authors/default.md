@@ -11,7 +11,7 @@ occupation: Student at HCMUS
 
 ## Đôi lời giới thiệu
 
-- Mình tên là **Ngô Phú Thịnh**, 19 tuổi. Mình đến từ **Cà Mau**, nơi cuối bản đồ Việt Nam :>
+- Mình tên là **Ngô Phú Thịnh**, 20 tuổi. Mình đến từ **Cà Mau**, nơi cuối bản đồ Việt Nam :>
 - Sinh viên năm 3 khoa **_toán tin_** trường _Đại học Khoa học Tự Nhiên ĐHQG TP.HCM_
 - Mình thích lập trình, toán và guitar
 

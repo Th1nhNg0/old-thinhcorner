@@ -14,6 +14,8 @@ Với sự phát triển ngày càng mạnh mẽ, vai trò của ngành công ng
 
 # Công nghệ thông tin là gì?
 
+![Lập trình viên](/static/images/2021/it.jpg)
+
 Công nghệ thông tin, viết tắt CNTT, (tiếng Anh: Information technology hay là IT) là một nhánh ngành kỹ thuật sử dụng máy tính và phần mềm máy tính để chuyển đổi, lưu trữ, bảo vệ, xử lý, truyền tải và thu thập thông tin[^wiki_it].
 
 Ở Việt Nam, khái niệm Công nghệ thông tin được hiểu và định nghĩa trong Nghị quyết Chính phủ 49/CP[^nghiquyet_49cp] ký ngày 4/8/1993:
@@ -30,11 +32,49 @@ Lập trình viên (tiếng Anh: Programmer) nhiều khi còn được gọi là
 
 # Làm IT là làm gì?
 
-Một số lĩnh vực tiêu biểu trong ngành Công nghệ thông tin.
-
 ## Lập trình viên hệ thống và ứng dụng
 
-## Lập trình viên máy tính lớn, phần mềm nhúng và phần mềm hệ thống
+### Lập trình viên hệ thống
+
+**Lập trình hệ thống** là công việc viết những phần mềm cho hệ thống (máy tính). Lập trình hệ thống nhằm xây dựng những phần mềm phục vụ cho phần cứng (hệ thống) máy tính (ví dụ chương trình chống phân mảnh đĩa cứng). Đòi hỏi phải có những hiểu biết chuyên sâu về phần cứng máy tính.
+
+**Nơi làm việc:**
+
+- Phòng công nghệ thông tin của các công ty.
+- Các công ty phần mềm lớn như Microsoft, Oracle, Amazon và Dell.
+- Các công ty dịch vụ nhỏ chuyên thiết kế web, game và ứng dụng kinh doanh.
+- Các công ty tư vấn cho nhiều khách hàng.
+- Các tổ chức như bệnh viện, trường học và đại học, công ty bảo hiểm, sân bay, cửa hàng bán lẻ, công ty sản xuất và chính phủ.
+- Bất cứ đâu sản xuất một sản phẩm có chứa vi xử lý.
+
+**Kiến trúc sư hoặc nhà thiết kế hệ thống máy tính**
+
+Vị trí này làm việc chặt chẽ với khách hàng để tìm ra những gì họ cần nhằm điều hành công ty. Mong muốn của họ là có các mạng lưới hệ thống máy tính và ứng dụng tổng thể để đảm bảo khả năng làm việc hòa hợp, trôi chảy và an toàn. Để đảm nhận vị trí này cần thành thạo nhiều ngôn ngữ lập trình và hệ điều hành. Một số công ty tuyển dụng người thiết kế hệ thống song phần lớn họ thuê bên ngoài làm. Khi công việc hoàn tất, phía nhà thầu thường hỗ trợ kỹ thuật thêm từ xa. Không thể trở thành kiến trúc sư hoặc người thiết kế hệ thống ngay từ đầu, mà phải đi lên từ vị trí lập trình viên.
+
+**Lập trình viên hệ thống máy tính**
+
+Vị trí công việc này tạo ra và duy trì hệ điều hành (Linux, Windows, Android,...). Hệ điều hành hoạt động như bộ não của máy tính, hệ điều hành kiểm soát cách máy tính hoạt động. Trong mã của hệ điều hành là các hướng dẫn để máy tính điều khiển ứng dụng phần mềm, lưu trữ dữ liệu, xử lý các mệnh lệnh trong bộ nhớ và tương tác với các máy móc khác nhau như máy in, máy scan hoặc camera. Lập trình viên hệ thống máy tính viết code bằng các ngôn ngữ lập trình cấp thấp - gọi là _mã máy_ hoặc _hợp ngữ_.
+
+**Tên gọi cho vị trí thiết kế hệ thống máy tính:**
+
+- Kỹ sư thiết kế hệ thống máy tính.
+- Kỹ sư hệ thống máy tính.
+- Kỹ sư phần mềm máy tính.
+- Chuyên gia phân tích hệ thống.
+
+**Công việc của Kiến trúc sư và nhà thiết kế hệ thống máy tính là gì?**
+
+- Gặp gỡ khách hàng để tìm ra nhu cầu của công ty.
+- Chọn hệ thống phù hợp nhất với từng khách hàng.
+- Viết code để hệ thống mới có thể làm việc với bất kỳ phần mềm hiện hữu nào.
+- Sắp xếp các đợt năng cấp để hệ thống mới được cải thiện mà vẫn hoạt động với càng ít gián đoạn càng tốt.
+- Viết các document thân thiện với người dùng.
+- Kiểm tra hệ thống nhiều lần để đảm bảo tính hiệu quả của nó.
+- Viết code mới để chỉnh sửa các vấn đề hoặc mở rộng phần mềm đang sử dụng.
+
+### Lập trình viên ứng dụng
+
+## Lập trình máy tính lớn, phần mềm nhúng và phần mềm hệ thống
 
 ## Video game và đồ họa
 
@@ -63,3 +103,5 @@ Một thống kê của TopDev về thị trường IT Việt Nam tính đến q
 [^topdev]: [Topdev](https://topdev.vn/), trang tuyển dụng IT
 [^wiki_it]: [Wikipedia](https://vi.wikipedia.org/wiki/C%C3%B4ng_ngh%E1%BB%87_th%C3%B4ng_tin) - Công nghệ thông tin
 [^nghiquyet_49cp]: [Nghị quyết số 49/CP](https://thuvienphapluat.vn/van-ban/Cong-nghe-thong-tin/Nghi-quyet-49-CP-phat-trien-cong-nghe-thong-tin-o-nuoc-ta-trong-nhung-nam-90-38659.aspx) về phát triển công nghệ thông tin ở nước ta trong những năm 90 do chính phủ ban hành
+
+# Con đường sự nghiệp
