@@ -3,6 +3,7 @@ import useSWR, { SWRConfig, useSWRConfig } from "swr";
 import moment from "moment";
 import { PageSEO } from "@/components/SEO";
 import siteMetadata from "@/data/siteMetadata";
+import Modal from "react-modal";
 
 import * as SpotifyApi from "@/lib/spotify-api";
 
@@ -315,20 +316,8 @@ function CurrentPlayingFeatures({ id }) {
           title="danceability"
           className="flex items-center justify-center gap-1 px-4 py-1 text-gray-700 bg-white rounded-full"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-5 h-5 fill-current"
-            viewBox="0 0 511.528 511.528"
-          >
-            <ellipse
-              cx="239.55"
-              cy="84.155"
-              rx="41.49"
-              ry="41.49"
-              transform="matrix(1 -.026 .026 1 -2.13 6.327)"
-            />
-            <path d="M386.522 181.885l49.394-62.906c6.83-8.695 5.31-21.282-3.382-28.108-8.698-6.834-21.314-5.272-28.107 3.381l-.001.001-42.766 54.464-60.147-9.138a133.196 133.196 0 00-19.997-1.51h-60.957L156.888 93.04l-22.363-78.081c-2.99-10.436-13.65-17-24.185-14.383-11.061 2.746-17.55 14.083-14.439 24.945l24.434 85.311a20.022 20.022 0 007.686 10.832l58.867 41.632c-.091.921-.14 1.855-.14 2.8v134.542l-28.308 72.418a24.018 24.018 0 00-1.49 5.994l-12.188 105.698c-1.52 13.18 7.932 25.097 21.113 26.616 13.181 1.518 25.096-7.932 26.616-21.113l11.832-102.604 30.392-77.75h10.797l47.724 183.645c3.342 12.861 16.471 20.541 29.292 17.208 12.841-3.337 20.546-16.452 17.209-29.293l-46.952-180.674V179.446l76.408 10.032c6.518.517 12.831-2.064 17.329-7.593z" />
-            <path d="M330.514 88.459c6.453 0 14.603-3.314 13.442-9.004V36.62l32.18-11.263v34.521c-6.4-.514-15.391 2.146-15.391 7.949 0 4.436 6.067 8.032 13.551 8.032s13.551-3.596 13.551-8.032h.206v-49.79c0-4.632-4.573-7.876-8.945-6.346l-42.291 14.802a7.135 7.135 0 00-4.778 6.734v39.222c-6.27-.419-15.076 2.25-15.076 7.978.001 4.436 6.067 8.032 13.551 8.032zM462.462 169.905l-28.571 10v44.284c-6.269-.418-15.076 2.25-15.076 7.978 0 4.436 6.067 8.032 13.551 8.032 6.453 0 14.603-3.313 13.442-9.004V188.36l9.344-3.27c6.211-2.175 9.484-8.974 7.31-15.185zM69.871 95.111l-28.571 10v44.283c-6.27-.415-15.076 2.25-15.076 7.978 0 4.436 6.067 8.032 13.551 8.032 6.453 0 14.602-3.313 13.442-9.004v-42.835l9.343-3.27c6.211-2.174 9.485-8.972 7.311-15.184zM437.333 36.821a21.513 21.513 0 018.59 8.59c.766 1.405 2.796 1.405 3.562 0a21.519 21.519 0 018.59-8.59c1.405-.766 1.405-2.796 0-3.562a21.506 21.506 0 01-8.59-8.59c-.766-1.405-2.796-1.405-3.562 0a21.525 21.525 0 01-8.59 8.59c-1.405.765-1.405 2.795 0 3.562zM28.987 93.041a21.519 21.519 0 018.59-8.59c1.405-.766 1.405-2.796 0-3.562a21.506 21.506 0 01-8.59-8.59c-.766-1.405-2.796-1.405-3.562 0a21.519 21.519 0 01-8.59 8.59c-1.405.766-1.405 2.796 0 3.562a21.506 21.506 0 018.59 8.59c.766 1.406 2.796 1.406 3.562 0zM481.692 80.468a16.847 16.847 0 01-6.727-6.727c-.6-1.1-2.19-1.1-2.789 0a16.841 16.841 0 01-6.727 6.727c-1.1.6-1.1 2.19 0 2.79a16.847 16.847 0 016.727 6.727c.6 1.1 2.19 1.1 2.789 0a16.854 16.854 0 016.727-6.727c1.1-.6 1.1-2.19 0-2.79zM82.498 55.995a16.841 16.841 0 01-6.727-6.727c-.6-1.1-2.19-1.1-2.789 0a16.847 16.847 0 01-6.727 6.727c-1.1.6-1.1 2.19 0 2.79a16.854 16.854 0 016.727 6.727c.6 1.1 2.19 1.1 2.789 0a16.854 16.854 0 016.727-6.727c1.1-.601 1.1-2.191 0-2.79zM495.16 41.623a11.998 11.998 0 01-4.792-4.792 1.133 1.133 0 00-1.987 0 12.004 12.004 0 01-4.792 4.792 1.133 1.133 0 000 1.987 11.998 11.998 0 014.792 4.792c.427.784 1.56.784 1.987 0a12.004 12.004 0 014.792-4.792 1.134 1.134 0 000-1.987zM28.331 42.452a11.998 11.998 0 014.792 4.792c.427.784 1.56.784 1.987 0a12.004 12.004 0 014.792-4.792 1.133 1.133 0 000-1.987 11.998 11.998 0 01-4.792-4.792 1.133 1.133 0 00-1.987 0 12.004 12.004 0 01-4.792 4.792 1.134 1.134 0 000 1.987z" />
+          <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
           </svg>
           {Math.round(currentTrackFeatures.danceability * 100)}
         </span>
@@ -407,15 +396,17 @@ function TopTag({ top_genres }) {
         {top_genres.slice(0, 5).map((e, i) => (
           <div
             title={e.name}
-            className="relative flex items-center justify-between h-10 gap-5 px-4 overflow-hidden font-semibold text-gray-800 capitalize bg-gray-200 rounded dark:text-white dark:bg-gray-800"
+            className="relative flex items-center justify-between h-10 gap-5 px-4 overflow-hidden font-semibold text-gray-800 capitalize bg-gray-200 rounded-md dark:text-white dark:bg-gray-800"
             key={i}
           >
-            <span className="z-10 flex-1 truncate ">{e.name}</span>
-            <span className="z-10 text-gray-700 dark:text-gray-400">{Math.round(e.percent)}%</span>
             <div
-              className="absolute top-0 left-0 z-0 h-full"
+              className="absolute top-0 left-0 z-0 h-full rounded-md"
               style={{ width: e.percent + "%", background: getBg(i) }}
             />
+            <span className="relative flex-1 truncate ">{e.name}</span>
+            <span className="relative text-gray-700 dark:text-gray-400">
+              {Math.round(e.percent)}%
+            </span>
           </div>
         ))}
       </div>
@@ -424,23 +415,202 @@ function TopTag({ top_genres }) {
 }
 
 function Analysis({ stats_analysis }) {
+  function Icon({ name }) {
+    switch (name) {
+      case "danceability":
+        return (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-full"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
+          </svg>
+        );
+      case "speechiness":
+        return (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-full"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
+            <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
+          </svg>
+        );
+      case "valence":
+        return (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-full"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z"
+              clipRule="evenodd"
+            />
+          </svg>
+        );
+      case "loudness":
+        return (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-full"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z"
+              clipRule="evenodd"
+            />
+          </svg>
+        );
+      case "energy":
+        return (
+          <svg className="w-full h-full fill-current" viewBox="0 0 511.999 511.999">
+            <path d="M389.053 7.603A14.995 14.995 0 00376.001 0h-180a14.995 14.995 0 00-14.546 11.367l-60 241a14.951 14.951 0 002.725 12.861 14.986 14.986 0 0011.821 5.771h68.35l-82.397 220.727c-2.637 7.031.337 14.927 6.943 18.486 6.636 3.556 14.846 1.653 19.233-4.395l240-331c3.325-4.556 3.794-10.591 1.245-15.63a15.018 15.018 0 00-13.374-8.188H312.5l76.362-128.28a14.999 14.999 0 00.191-15.116z" />
+          </svg>
+        );
+      case "tempo":
+        return (
+          <svg className="w-full h-full fill-current" viewBox="0 0 512 512">
+            <path d="M468.363 399.132l-6.171-22.452C454.8 349.785 430.156 331 402.263 331H109.495c-27.894 0-52.537 18.785-59.93 45.681l-5.9 21.468c-7.505 27.308-1.963 55.887 15.205 78.41S102.127 512 130.447 512h251.884c28.076 0 53.939-12.806 70.959-35.135s22.514-50.661 15.073-77.733zm-46.886 53.485C412.089 464.935 397.82 472 382.331 472H130.447c-15.733 0-30.228-7.176-39.765-19.689-9.538-12.513-12.617-28.39-8.447-43.561l5.9-21.468C90.77 377.695 99.554 371 109.495 371h292.768c9.941 0 18.725 6.695 21.359 16.281l6.171 22.452c4.105 14.935 1.074 30.566-8.316 42.884zM105.753 248.715c10.65 2.927 16.911 13.935 13.984 24.585l-5.497 20c-2.44 8.877-10.493 14.705-19.273 14.705-1.755 0-3.538-.232-5.313-.72-10.65-2.927-16.911-13.935-13.984-24.585l5.497-20c2.929-10.652 13.932-16.913 24.586-13.985zm37.961-199.964C161.658 18.681 194.564 0 229.592 0h52.574c44.88 0 84.531 30.224 96.425 73.499L436.088 282.7c2.927 10.651-3.334 21.658-13.984 24.585-1.773.487-3.558.72-5.313.72-8.781 0-16.833-5.827-19.273-14.705L340.02 84.099C332.885 58.134 309.094 40 282.166 40h-52.574c-21.019 0-40.763 11.208-51.528 29.249-5.66 9.486-17.938 12.586-27.423 6.926-9.486-5.66-12.587-17.938-6.927-27.424zm-87.629 78.166l16.907 15.099A59.658 59.658 0 0068.407 165c0 33.084 26.916 60 60 60a59.616 59.616 0 0029.068-7.536l85.609 76.453a19.994 19.994 0 0021.494 3.337A20 20 0 00276.406 279v-33h20c11.046 0 20-8.954 20-20s-8.954-20-20-20h-20v-40h20c11.046 0 20-8.954 20-20s-8.954-20-20-20h-20v-26c0-11.046-8.954-20-20-20s-20 8.954-20 20v134.325l-52.404-46.799a59.645 59.645 0 004.404-22.525c0-33.084-26.916-60-60-60a59.628 59.628 0 00-28.646 7.293l-17.032-15.21c-8.239-7.356-20.882-6.644-28.239 1.596-7.356 8.237-6.642 20.88 1.596 28.237zM148.407 165c0 11.028-8.972 20-20 20s-20-8.972-20-20 8.972-20 20-20 20 8.972 20 20z"></path>
+          </svg>
+        );
+      default:
+        return null;
+    }
+  }
+  function getBg(index) {
+    switch (index) {
+      case 0:
+        return "linear-gradient(127.09deg, rgb(228, 63, 63) 0%, rgb(228, 108, 63) 100%)";
+      case 1:
+        return "linear-gradient(127.09deg, rgb(228, 63, 63) 0%, rgb(228, 108, 63) 100%)";
+      case 2:
+        return "linear-gradient(134.4deg, rgb(32, 172, 154) 0%, rgb(29, 185, 84) 52%, rgb(145, 192, 64) 100%)";
+      case 3:
+        return "linear-gradient(134.4deg, rgb(32, 172, 154) 0%, rgb(29, 185, 84) 52%, rgb(145, 192, 64) 100%)";
+      case 4:
+        return "linear-gradient(268.81deg, rgb(63, 134, 228) 0%, rgb(27, 82, 223) 100%)";
+      case 5:
+        return "linear-gradient(268.81deg, rgb(63, 134, 228) 0%, rgb(27, 82, 223) 100%)";
+      default:
+        return "#1db954";
+    }
+  }
+  function getUnit(name) {
+    switch (name) {
+      case "loudness":
+        return " dB";
+      case "tempo":
+        return " BPM";
+      default:
+        return "%";
+    }
+  }
+  function mapValue(value, in_min, in_max, out_min, out_max) {
+    return ((value - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
+  }
+  function getPercent([name, value]) {
+    switch (name) {
+      case "loudness":
+        return Math.round(mapValue(value, -20, 0, 0, 100));
+      case "tempo":
+        return Math.round(mapValue(value, 60, 170, 0, 100));
+      default:
+        return Math.round(value);
+    }
+  }
+  function getData(name) {
+    switch (name) {
+      case "danceability":
+        return "Danceability describes how danceable a track is, based on its beat and rhythm.";
+      case "speechiness":
+        return "Speechiness defines how many spoken words exist on a track.";
+      case "valence":
+        return "Valence defines the musical positiveness conveyed by a track.";
+      case "loudness":
+        return "Loudness describes the subjective perception of sound pressure in a track.";
+      case "energy":
+        return "Loudness describes the subjective perception of sound pressure in a track.";
+      case "tempo":
+        return "Loudness describes the subjective perception of sound pressure in a track.";
+      default:
+        return null;
+    }
+  }
+  const [showInfo, setShowInfo] = useState(false);
   return (
-    <table className="w-full table-auto">
-      <thead>
-        <tr>
-          <th className="text-left">Attribute</th>
-          <th className="text-right">Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        {Object.entries(stats_analysis).map((e, i) => (
-          <tr key={i}>
-            <td> {e[0]}</td>
-            <td className="text-right">{e[1]}</td>
-          </tr>
+    <div className="w-full space-y-3">
+      <Modal
+        isOpen={showInfo !== false}
+        onRequestClose={() => setShowInfo(false)}
+        className="absolute w-auto h-auto duration-300 -translate-x-1/2 -translate-y-1/2 outline-none left-1/2 top-1/2"
+        overlayClassName="bg-black duration-300 bg-opacity-50 fixed left-0 top-0 right-0 bottom-0"
+      >
+        <div className="flex items-center justify-center w-full h-full">
+          <div className="flex flex-col items-center justify-center w-[calc(100vw-30px)] p-5 text-center bg-white rounded-lg dark:bg-gray-800 md:w-96">
+            <button className="absolute -top-3 -right-3" onClick={() => setShowInfo(false)}>
+              <svg
+                className="w-10 h-10 p-2 text-white rounded-full bg-spotify"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+            <div className="w-16 h-16 p-4 mb-5 text-white rounded-full bg-spotify">
+              <Icon name={showInfo} />
+            </div>
+            <h3 className="mb-2 text-xl font-semibold capitalize">{showInfo}</h3>
+            <p>{getData(showInfo)}</p>
+          </div>
+        </div>
+      </Modal>
+      {Object.entries(stats_analysis)
+        .sort((a, b) => getPercent(b) - getPercent(a))
+        .map((e, i) => (
+          <div
+            className="relative flex items-center justify-between h-10 gap-5 px-4 overflow-hidden text-sm font-semibold text-gray-800 capitalize bg-gray-200 rounded-md dark:text-white dark:bg-gray-800"
+            key={i}
+          >
+            <div
+              className="absolute top-0 left-0 z-0 h-full rounded-md"
+              style={{ width: getPercent(e) + "%", background: getBg(i) }}
+            />
+            <div className="relative flex items-center flex-1 gap-2 truncate">
+              <span>{e[0]}</span>
+              <svg
+                onClick={() => setShowInfo(e[0])}
+                xmlns="http://www.w3.org/2000/svg"
+                className="inline-block w-5 h-5 cursor-pointer"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
+            <span className="relative text-gray-700 dark:text-gray-400">
+              {Math.round(e[1])}
+              {getUnit(e[0])}
+            </span>
+          </div>
         ))}
-      </tbody>
-    </table>
+    </div>
   );
 }
 function TagAndAnalysis({ top_genres, stats_analysis }) {
