@@ -31,7 +31,7 @@ export default function spotify({
           <FeelingNow />
           <TagAndAnalysis top_genres={top_genres} stats_analysis={stats_analysis} />
         </div>
-        <div className="flex-1 space-y-5">
+        <div className="flex-1 w-full space-y-5">
           <CurrentPlaying />
           <RecentlyTrack />
           <TopArtists top_artists={top_artists} />
