@@ -1,10 +1,10 @@
 ---
 title: "Giải ngố IT - Kỳ 1: Làm IT là làm gì? Lập trình viên là ai? Tại sao ai cũng muốn trở thành lập trình viên?"
-date: "2021-09-07"
+date: "2021-09-09"
 tags: ["IT", "giải ngố it"]
-draft: true
-summary: "Ngành IT (information technology) hiện nay được coi là ngành hot nhất trong các ngành. Người người học IT, nhà nhà học IT. Vậy ngành này có cái gì mà nhiều người thích đến vậy? Cùng mình vào bài tìm hiểu nhé 😙..."
-images: []
+draft: false
+summary: "Ngành IT (information technology) hiện nay được coi là ngành hot nhất trong các ngành. Người người học IT, nhà nhà học IT. Vậy ngành này có cái gì mà nhiều người thích đến vậy? Cùng mình tìm hiểu nhé 😙..."
+images: ["/static/images/2021/giai-ngo-it-1.png"]
 layout: PostLayout
 ---
 
@@ -37,6 +37,8 @@ Nội dung của phần này được tham khảo từ sách [So, You Want to Be
 ## Lập trình viên hệ thống và ứng dụng
 
 ### Lập trình viên hệ thống
+
+![Lập trình viên hệ thống](/static/images/2021/system_engineer.jpg)
 
 **Lập trình hệ thống** là công việc viết những phần mềm cho hệ thống (máy tính). Lập trình hệ thống nhằm xây dựng những phần mềm phục vụ cho phần cứng (hệ thống) máy tính (ví dụ chương trình chống phân mảnh đĩa cứng). Đòi hỏi phải có những hiểu biết chuyên sâu về phần cứng máy tính.
 
@@ -75,6 +77,8 @@ Vị trí công việc này tạo ra và duy trì hệ điều hành (Linux, Win
 - Viết mã mới để chỉnh sửa các vấn đề hoặc mở rộng phần mềm đang sử dụng.
 
 ### Lập trình viên ứng dụng
+
+![Lập trình viên ứng dụng](/static/images/2021/application.jpg)
 
 Cũng như lập trình hệ thống, **lập trình ứng dụng** xây dựng những phần mềm phục vụ cho người dùng máy tính. Ví dụ: word, excel, power point... Số lượng lập trình viên ứng dụng đang nhiều hơn so với lập trình viên hệ thống.
 
@@ -124,6 +128,8 @@ Công việc chính của lập trình viên là viết mã. Lập trình viên 
 
 ### Lập trình máy tính lớn
 
+![Lập trình máy tính lớn](/static/images/2021/Mainframe.jpg)
+
 Máy tính lớn (tiếng Anh: Mainframe) là một loại máy tính thường được sử dụng bởi các công ty, tập đoàn cũng như những tổ chức chính phủ nhằm phục vụ cho các công việc cần xử lí lượng lớn dữ liệu, chẳng hạn như thống kê dữ liệu, lên kế hoạch sử dụng tài nguyên, xử lí giao dịch… Thuở ban đầu, chữ mainframe được người ta dùng để chỉ những thùng máy lớn chứa bộ xử lí và bộ nhớ của những máy tính cỡ lớn. Thế nhưng sau này, khi nhắc tới mainframe, người ta nghĩ đến một cỗ máy to lớn và mạnh mẽ hơn những máy tính cá nhân. Ngoài ra, mainframe còn có tên gọi khác là "Big Iron".
 
 Mainframe có khả năng lấy vào một lượng dữ liệu khổng lồ, tính toán, xử lí và xuất ra kết quả cũng khổng lồ không kém. Mainframe đòi hỏi phải có một sự tương thích ngược chặt chẽ với các phần mềm cũ bởi những công ty, tổ chức lớn sử dụng những phần mềm có tính chuyên biệt cao nên và rất tốn kém nếu phải viết lại. Ngoài ra, mainframe được thiết kế để có thể chạy liên tục (uninterrupt) trong một thời gian rất dài. Đây cũng chính là yếu tố quan trọng nhất của mainframe bởi nó vốn được dùng cho những mục đích mà chỉ cần vài phút hệ thống bị sập là một "thảm họa" sẽ xảy ra, hoặc nếu hệ thống ngừng chạy dù chỉ trong thời gian ngắn thì chi phí để khôi phục hoạt động là cực kì đắt đỏ.
@@ -133,6 +139,8 @@ Mainframe có khả năng lấy vào một lượng dữ liệu khổng lồ, t�
 Mainframe có hai loại lập trình viên khác nhau. Lập trình viên ứng dụng sử dụng COBOL, C++ và Java để làm việc với cơ sở dữ liệu và báo cáo. Lập trình viên hệ thống có nhiệm vụ duy trì hệ điều hành và giám sát phần cứng.
 
 ### Lập trình nhúng và phần mềm hệ thống
+
+![Arduino and Raspberry pi](/static/images/2021/raspberry_arduino.jpg)
 
 Internet kết nối vạn vật (IoT: Internet of Things) [^wiki_iot] sẽ không thể hoạt động nếu thiếu các lập trình viên viết mã cho từng thiết bị. Mọi "vật" trong IoT đều có phần mềm được viết riêng. Mã này gọi là phần mềm hệ thống, được tải vào bộ nhớ chỉ đọc (hay bộ nhớ flash) và trở thành một phần của thiết bị. Sau khi được viết, tải vào thiết bị, phầm mềm hệ thống trở thành một phần của hệ thống nhúng. Các hệ thống nhúng được sử dụng mỗi khi có nhiệm vụ nào đó lặp đi lặp lại, các nhiệm vụ này có thể đơn giản hoặc phức tạp.
 
@@ -162,6 +170,8 @@ Kỹ năng mà các công ty mong muốn:
 - Có khả năng làm việc nhóm.
 
 ## Video game
+
+![Video game](/static/images/2021/video_game.jpg)
 
 ### Phát triển videogame
 
@@ -222,13 +232,86 @@ Nhân viên âm thanh có nhiệm vụ phát triển, ghi âm và xử lý tất
 
 ## Lập trình web
 
+![website](/static/images/2021/website.jpg)
+
+Website là một tập hợp các trang thông tin có chứa nội dung dạng văn bản, chữ số, âm thanh, hình ảnh, video, v.v... được lưu trữ trên máy chủ (web server) và có thể truy cập từ xa thông qua mạng Internet.
+
+Ở Việt Nam, website thường được gọi với tên là "trang thông tin điện tử", được định nghĩa trong Nghị định Chính phủ 72/2013/NĐ-CP ngày 15/07/2013[^nghidinh_2]:
+
+> Trang thông tin điện tử (website) là hệ thống thông tin dùng để thiết lập một hoặc nhiều trang thông tin được trình bày dưới dạng ký hiệu, số, chữ viết, hình ảnh, âm thanh và các dạng thông tin khác phục vụ cho việc cung cấp và sử dụng thông tin trên Internet.
+
+Với sự phát triển chóng mặt của công nghệ, hiện nay đã có nhiều công cụ giúp cho người dùng có thể tạo nên một trang web mà không cần đụng đến một dòng code nào. Từ blog, website giới thiệu, thương mại điện tử... đều có thể tạo ra bằng vài cú click. Một số công cụ nổi tiếng: wordpress, shopify, wix.
+
+**Những vị trí lập trình web:**
+
+- **Lập trình viên Front-End**: Lập trình viên Front-End chịu trách nhiệm cho giao diện của một trang web và trải nghiệm sử dụng của người dùng. Thường sử dụng 3 ngôn ngữ lập trình chính là HTML, CSS và JavaScript.
+- **Lập trình viên Back-End**: Lập trình viên Back-End làm việc với máy chủ, ứng dụng và cơ sở dữ liệu. Thường là các phần mà người dùng không nhìn thấy được, nhưng luôn chạy trên web, cung cấp chức năng và trải nghiệp đến tất cả người dùng.
+- **Lập trình viên Full-Stack**: Làm việc ở cả front-end và back-end. Yêu cầu trình độ hiểu biết sâu và rộng, lập trình viên ở mảng này có số lượng cực kỳ ít.
+
 ## Trí tuệ nhân tạo và robot
 
+### Trí tuệ nhân tạo
+
+![Ai](/static/images/2021/ai.jpg)
+
+Trí tuệ nhân tạo hay trí thông minh nhân tạo (Artificial intelligence - viết tắt là AI) là một ngành thuộc lĩnh vực khoa học máy tính (Computer science). Công nghệ AI là công nghệ mô phỏng các quá trình suy nghĩ và học tập của con người cho máy móc, đặc biệt là các hệ thống máy tính. Các quá trình này bao gồm việc học tập (thu thập thông tin và các quy tắc sử dụng thông tin), lập luận (sử dụng các quy tắc để đạt được kết luận gần đúng hoặc xác định) và tự sửa lỗi.
+
+**Lập trình viên _AI_ làm những công việc sau:**
+
+- Viết phần mềm nhận biết giọng nói, nhận biết chữ viết, nhận biết hình ảnh, đối tượng...
+- Dạy máy suy nghĩ như người.
+- Làm việc với robot, tức máy móc đủ thông minh để di chuyển xung quanh, thực hiện các nhiệm vụ và cầm nắm đồ vật.
+- Làm việc với các tổ chức tài chính có sử dụng _AI_ để đầu tư và theo dõi các loại tài sản.
+- Hỗ trợ trong y học, giúp chẩn đoán bệnh, kê đơn thuốc...
+- Hệ thống gợi ý khi mua sắm online, gợi ý tìm kiếm như google.
+
+### Robot
+
+![robot](/static/images/2021/robot.jpg)
+
+Robot hoặc Rôbốt, Rô-bô , Người máy (tiếng Anh: Robot) là một loại máy có thể thực hiện những công việc một cách tự động bằng sự điều khiển của máy tính hoặc các vi mạch điện tử được lập trình. Robot là một tác nhân cơ khí, nhân tạo, ảo, thường là một hệ thống cơ khí-điện tử. [^wiki_robot]
+
+Từ ngữ "robot" thường được hiểu với hai nghĩa: robot cơ khí và phần mềm tự hoạt động. Do sự đa dạng mức độ tự động của hệ thống cơ-điện tử mà ranh giới phân chia robot với phần còn lại không được rõ ràng, thể hiện ở quan niệm về định nghĩa robot. Về lĩnh vực Robot, Mỹ và Nhật Bản là những nước đi đầu thế giới về lĩnh vực này.
+
+Kỹ sư robot thiết kế và bảo trì robot, phát triển những các thức mới để sử dụng chúng và nghiên cứu nhằm mở rộng giới hạn khả năng của robot. Biết cách viết mã cho robot theo từng lĩnh vực nghề nghiệp cụ thể là điều rất quan trọng.
+
+**Một số lĩnh vực sử dụng robot:**
+
+1. Nông nghiệp: robot dùng để thu hoạch mùa màng, robot dùng để tưới cây, phun thuốc...
+2. Xe hơi: robot lắp gáp xe hơi, kiểm tra xem bộ phận có đạt chuẩn không và hàn các bộ phận lại.
+3. Xây dựng: robot cắt, chất đống, đóng gói, xếp vật liệu.
+4. Giải trí: robot được dùng làm đồ chơi, thậm chí là thú cưng.
+5. Chăm sóc sức khỏe: robot chăm sóc bệnh nhân, phát thuốc và phụ mổ.
+6. Thực thi pháp luật và quân sự: robot tuần tra các khu vực nguy hiểm, vô hiệu hóa bom mìn, làm nhiệm vụ do thám, tham gia giải cứu con tin và đưa người bị thương ra khói các hiện trường nguy hiểm.
+7. Sản xuất: robot đảm nhận những công việc lặp đi lặp lại, như đóng gói, sơn và lắp ráp.
+8. Kho hàng: robot thực hiện hầu hết việc sắp xếp hàng hóa nhằm không để công nhân bị thương.
+9. Thám hiểm không gian: robot làm việc trong không gian, trên quỹ đạo các hành tinh và thậm chí là trên sao Hỏa.
+
 ## An ninh mạng
+
+![cybersecurity](/static/images/2021/cyber_sercurity.jpg)
+
+An ninh mạng (cybersecurity), an ninh máy tính (computer security), bảo mật công nghệ thông tin (IT security) là việc bảo vệ hệ thống mạng máy tính khỏi các hành vi trộm cắp hoặc làm tổn hại đến phần cứng, phần mềm và các dữ liệu, cũng như các nguyên nhân dẫn đến sự gián đoạn, chuyển lệch hướng của các dịch vụ hiện đang được được cung cấp.[^wiki_security]
+
+An ninh mạng là thực tiễn của việc bảo vệ các hệ thống điện tử, mạng lưới, máy tính, thiết bị di động, chương trình và dữ liệu khỏi những cuộc tấn công kỹ thuật số độc hại có chủ đích. Tội phạm mạng có thể triển khai một loạt các cuộc tấn công chống lại các nạn nhân hoặc doanh nghiệp đơn lẻ; có thể kể đến như truy cập, làm thay đổi hoặc xóa bỏ dữ liệu nhạy cảm; tống tiền; can thiệp vào các quy trình kinh doanh.
+
+An ninh mạng hoạt động thông qua một cơ sở hạ tầng chặt chẽ, được chia thành ba phần chính:
+
+- **Bảo mật công nghệ thông tin**: Bảo vệ dữ liệu ở nơi chúng được lưu trữ và cả khi các dữ liệu này di chuyển trên các mạng lưới thông tin. Trong khi an ninh mạng chỉ bảo vệ dữ liệu số, bảo mật công nghệ thông tin nắm trong tay trọng trách bảo vệ cả dữ liệu kỹ thuật số lẫn dữ liệu vật lý khỏi những kẻ xâm nhập trái phép.
+- **An ninh mạng**: Là một tập hợp con của bảo mật công nghệ thông tin. An ninh mạng thực hiện nhiệm vụ đảm bảo dữ liệu kỹ thuật số trên các mạng lưới, máy tính và thiết bị cá nhân nằm ngoài sự truy cập, tấn công và phá hủy bất hợp pháp.
+- **An ninh máy tính**: Là một tập hợp con của an ninh mạng. Loại bảo mật này sử dụng phần cứng và phần mềm để bảo vệ bất kỳ dữ liệu nào được gửi từ máy tính cá nhân hoặc các thiết bị khác đến hệ thống mạng lưới thông tin. An ninh máy tính thực hiện chức năng bảo vệ cơ sở hạ tầng công nghệ thông tin và chống lại các dữ liệu bị chặn, bị thay đổi hoặc đánh cắp bởi tội phạm mạng.
+
+Nhân sự làm việc trong mảng an ninh mạng có thể được chia thành 3 dạng sau:
+
+- **Hacker mũ trắng** (White-hat hacker) – cũng còn gọi là "ethical hacker" (hacker có nguyên tắc/đạo đức) hay penetration tester (người xâm nhập thử ngiệm vào hệ thống). Hacker mũ trắng là những chuyên gia công nghệ làm nhiệm vụ xâm nhập thử nghiệm vào hệ thống công nghệ thông tin để tìm ra lỗ hổng, từ đó yêu cầu người chủ hệ thống phải vá lỗi hệ thống để phòng ngừa các xâm nhập khác sau này với ý đồ xấu (thường là của các hacker mũ đen).
+- **Hacker mũ đen** (Black-hat hacker): là các chuyên gia công nghệ xâm nhập vào hệ thống với mục đích xấu như đánh cắp thông tin, phá hủy hệ thống, làm lây nhiễm các phần mềm độc hại cũng như các hành vị phá hoại mạng máy tính vi phạm pháp luật khác.
+- **Hacker mũ xám** (Grey-hat hacker): là các chuyên gia công nghệ có thể vừa làm công nghệ của cả hacker mũ trắng và mũ xám.
 
 # Vì sao ngành IT hot?
 
 ## 1. Nhu cầu tuyển dụng nhân lực cao
+
+![Nhân lực IT](/static/images/2021/it-vieclam.png)
 
 Thống kê từ TopDev[^topdev] cho thấy nhu cầu nhân lực CNTT tăng nhưng thị trường lao động lĩnh vực này tại Việt Nam luôn trong tình trạng thiếu hụt về cả số lượng và chất lượng. Năm 2021, số lượng nhân lực CNTT cần là 500.000 người và thiếu hụt 190.000 người.
 
@@ -236,17 +319,35 @@ Phân tích dữ liệu (Big Data), trí tuệ nhân tạo (AI), an toàn thông
 
 ## 2. Mức lương hấp dẫn
 
-![Mức lương IT](/static/images/2021/luong_it.png "Mức lương lập trình viên theo năm kinh nghiệm")
+![Mức lương IT](/static/images/2021/luong_it.png)
 
 Dải lương phổ biến của ngành CNTT là từ 8,4 triệu đồng đến 27,4 triệu đồng. Tùy theo chính sách ở các doanh nghiệp khác nhau, con số này có thể thay đổi. Với những sinh viên mới tốt nghiệp chuyên ngành CNTT, lương cơ bản nằm trong khoảng 7 - 10 triệu đồng/tháng. Những người 1 - 2 năm kinh nghiệm sẽ nhận lương mỗi tháng khoảng 10 - 15 triệu đồng. Con số này có thể lên hơn 20 triệu đồng nếu có tối thiểu 3 năm kinh nghiệm và kỹ năng chuyên sâu, đa dạng.
 
 Một thống kê của TopDev về thị trường IT Việt Nam tính đến quý II/2021 cho thấy kỹ sư trí tuệ nhân tạo (AI) và học máy (machine learning) có mức lương trung bình tháng cao nhất, khoảng 70 triệu đồng. Mức này cao gấp đôi lương kỹ sư dữ liệu lớn (Big Data) và kỹ sư Backend hay lập trình viên (trung bình 30 triệu đồng mỗi tháng). 6 trong số 10 vị trí IT có lương tháng cao nhất thuộc về các cấp quản lý và kiến trúc sư công nghệ. Vị trí có lương trung bình tháng cao nhất hiện nay là CTO, CIO, khoảng 5.776 USD (khoảng 132 triệu đồng).
 
+## 3. Thăng tiến nhanh
+
+![Con đường sự nghiệp](/static/images/2021/career-paths.jpg)
+
+Ngành công nghệ thường được triển hai theo dự án. Vì vậy, sau mỗi dự án được hoàn thành, người quản lý có thể đánh giá được năng lực và xem xét khả năng thăng tiến của nhân viên. Do đó, nhân viên trong ngành IT có thể thăng tiến rất nhanh chỉ sau 6 tháng đến một năm nếu chịu khó học hỏi, tiếp thu những kiến thức, công nghệ mới.
+
+# Đôi lời của tác giả
+
+Mình hiện tại đang học đại học năm 3. Có thể nói ngành của mình học về công nghệ thông tin chậm hơn so với các ngành khác. Nhưng qua thời gian khảo sát và học hỏi thì mình thấy ngành IT này không phụ thuộc lắm vào những kiến thức ở trường đại học, mà đa số những kiến thức mình có được đều qua việc tự học trên mạng. Phần lớn các bạn sinh viên học IT mà mình quen biết đều rất phụ thuộc vào phần kiến thức được dạy trên trường - những kiến thức đã cũ, có những môn học còn đem tài liệu 10 năm về trước ra dạy. Các bạn ấy đều đi học với tâm thế là dạy đến đâu, học đến đó, chỉ cần qua môn, tốt nghiệp là sẽ đi làm được thì sớm muộn gì cũng vỡ mộng. Có thể là do lúc thi đại học,
+do không biết chọn trường gì, ngành nào mà chọn bừa những ngành hot nhất, hoặc do nghe những người đi trước nói ngành IT nhàn, ra làm lương nghìn đô 💵... Đúng là lương nghìn đô thật nhưng chỉ những người thật sự có kĩ năng, chuyên môn, tâm huyết với ngành của mình mới có thể đặt được mức lương đó một cách dễ dàng.
+
+Vì những nguyên do đó, mình viết ra series này để những bạn sắp bước chân vào môi trường đại học hoặc các bạn sinh viên vẫn chưa biết con đường mình chọn có đúng không, có cái nhìn rộng hơn về ngành IT. Từ đó có thể đưa ra những kế hoạch phù hợp hơn cho mình.
+
+# Tái bút
+
+Xin chào, cảm ơn bạn đã đọc đến cuối bài viết 😁. Đây là lần đầu tiên mình viết một series dài như thế này, có thể sẽ có những chỗ không vừa ý với bạn đọc đây. Những kiến thức trong bài đều là sự hiểu biết của mình và một số nguồn kham khảo khác, khó có thể nào mà không mắc sai sót được. Nếu bạn đọc phát hiện ra chỗ nào có thông tin sai hoặc không vừa ý thì cho mình biết vào phần comment nhé ヾ(≧▽≦\*)o.
+
 [^topdev]: [Topdev](https://topdev.vn/), trang tuyển dụng IT
 [^nghiquyet_49cp]: [Nghị quyết số 49/CP](https://thuvienphapluat.vn/van-ban/Cong-nghe-thong-tin/Nghi-quyet-49-CP-phat-trien-cong-nghe-thong-tin-o-nuoc-ta-trong-nhung-nam-90-38659.aspx) về phát triển công nghệ thông tin ở nước ta trong những năm 90 do chính phủ ban hành
+[^nghidinh_2]: [Nghị định 72/2013/NĐ-CP](https://thuvienphapluat.vn/van-ban/Cong-nghe-thong-tin/Nghi-dinh-72-2013-ND-CP-quan-ly-cung-cap-su-dung-dich-vu-Internet-va-thong-tin-tren-mang-201110.aspx) về quản lý, cung cấp, sử dụng dịch vụ internet và thông tin trên mạng
 [^wiki_it]: [Wikipedia - Công nghệ thông tin](https://vi.wikipedia.org/wiki/C%C3%B4ng_ngh%E1%BB%87_th%C3%B4ng_tin)
 [^wiki_iot]: [Wikipedia - Internet kết nối Vạn Vật](https://vi.wikipedia.org/wiki/Internet_V%E1%BA%A1n_V%E1%BA%ADt)
 [^3a_game]: [Wikipedia - AAA video game](<https://vi.wikipedia.org/wiki/AAA_(c%C3%B4ng_nghi%E1%BB%87p_tr%C3%B2_ch%C6%A1i_%C4%91i%E1%BB%87n_t%E1%BB%AD)>)
 [^wiki_game_engine]: [Wikipedia - Game engine](https://vi.wikipedia.org/wiki/Game_engine)
-
-# Con đường sự nghiệp
+[^wiki_robot]: [Wikipedia - Robot](https://vi.wikipedia.org/wiki/Robot)
+[^wiki_security]: [Wikipedia - An ninh mạng](https://vi.wikipedia.org/wiki/An_ninh_m%E1%BA%A1ng)
