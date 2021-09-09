@@ -4,7 +4,7 @@ import moment from "moment";
 import { PageSEO } from "@/components/SEO";
 import siteMetadata from "@/data/siteMetadata";
 import Modal from "react-modal";
-
+import Link from "next/link";
 import * as SpotifyApi from "@/lib/spotify-api";
 
 export default function spotify({
@@ -22,9 +22,23 @@ export default function spotify({
       }}
     >
       <PageSEO
-        title={`My Spotify - ${siteMetadata.author}`}
+        title={`Thinh's Spotify - ${siteMetadata.author}`}
         description={siteMetadata.description}
       />
+      <div className="mb-5">
+        <Link href="/spotify/compare">
+          <a className="flex items-center justify-between gap-4 px-10 py-2 text-white rounded-lg bg-spotify">
+            Compare your taste with me
+            <svg className="w-8 h-8" viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fillRule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </a>
+        </Link>
+      </div>
       <div className="relative flex flex-col items-center w-full gap-5 md:items-start md:flex-row">
         <div className="w-full md:sticky md:top-5 md:w-60 ">
           <UserProfile profile={profile} />
@@ -892,7 +906,7 @@ export async function getStaticProps() {
   const top_tracks = { long_term, short_term, medium_term };
 
   //get by 4 months
-  const artistsList = medium_term.items.map((e) => e.artists.map((e) => e.id)).flat();
+  const artistsList = short_term.items.map((e) => e.artists.map((e) => e.id)).flat();
 
   const top_artists_by_tracks = [];
   for (let i = 0; i < artistsList.length; i += 50) {
@@ -940,7 +954,6 @@ export async function getStaticProps() {
       top_artists,
       top_tracks,
       last_refresh_date,
-      top_artists_by_tracks,
       stats_analysis,
       top_genres,
     },
