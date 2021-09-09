@@ -1,10 +1,10 @@
 ---
 title: C++ tips & tricks
-date: '2020-11-05'
-tags: ['CPP', 'IT', 'Competitive programming', 'programming']
+date: "2020-11-05"
+tags: ["CPP", "IT", "Competitive programming", "programming"]
 draft: false
 summary: Tổng hợp các thủ thuật C++
-images: ['/static/images/2020/cppBackground.jpg']
+images: ["static/images/2020/cppBackground.jpg"]
 layout: PostLayout
 ---
 

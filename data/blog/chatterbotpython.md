@@ -4,7 +4,7 @@ date: "2021-06-01"
 tags: ["IT", "Python", "Artificial Intelligence", "programming"]
 draft: false
 summary: Tạo một chú bot chat thông minh tự động học các tin nhắn.
-images: ["/static/images/2021/chatterbot.png"]
+images: ["static/images/2021/chatterbot.png"]
 layout: PostLayout
 ---
 
