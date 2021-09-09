@@ -220,22 +220,26 @@ function CommonArtists({ artists_common, thinh_profile }) {
       <p className="mb-2 text-right">Rank: Yours / Thinh's</p>
       <div className="flex flex-wrap items-center gap-5 justify-evenly">
         {artists_common[time_range].slice(0, showMore ? 50 : 12).map((e, i) => (
-          <a target="_blank" href={e.external_urls.spotify} key={i} rel="noreferrer">
-            <div className="hover:scale-110 duration-300  ease-in-out flex items-center w-full gap-3 p-3 bg-gray-100 shadow rounded-lg dark:bg-gray-800 md:w-[20rem]">
-              <img
-                className="object-cover w-20 h-20 rounded-lg"
-                src={
-                  e?.images[0]?.url ||
-                  `https://ui-avatars.com/api/?background=1db954&color=fff&name=${e.name}`
-                }
-                alt=""
-              />
-              <div className="truncate">
-                <p className="font-semibold ">{e.name}</p>
-                <p>
-                  {e.rank.me} / {e.rank.thinh}
-                </p>
-              </div>
+          <a
+            target="_blank"
+            href={e.external_urls.spotify}
+            key={i}
+            rel="noreferrer"
+            className="hover:scale-110 duration-300  ease-in-out flex items-center w-full gap-3 p-3 bg-gray-100 shadow rounded-lg dark:bg-gray-800 md:w-[20rem]"
+          >
+            <img
+              className="object-cover w-20 h-20 rounded-lg"
+              src={
+                e?.images[0]?.url ||
+                `https://ui-avatars.com/api/?background=1db954&color=fff&name=${e.name}`
+              }
+              alt=""
+            />
+            <div className="truncate">
+              <p className="font-semibold ">{e.name}</p>
+              <p>
+                {e.rank.me} / {e.rank.thinh}
+              </p>
             </div>
           </a>
         ))}
@@ -290,23 +294,27 @@ function CommonTracks({ tracks_common, thinh_profile }) {
       <p className="mb-2 text-right">Rank: Yours / Thinh's</p>
       <div className="flex flex-wrap items-center gap-5 justify-evenly">
         {tracks_common[time_range].slice(0, showMore ? 50 : 12).map((e, i) => (
-          <a target="_blank" href={e.external_urls.spotify} key={i} rel="noreferrer">
-            <div className="hover:scale-110 duration-300 ease-in-out flex items-center w-full gap-3 p-3 bg-gray-100 shadow rounded-lg dark:bg-gray-800 md:w-[20rem]">
-              <img
-                className="object-cover w-20 h-20 rounded-lg"
-                src={
-                  e.album.images[0].url ||
-                  `https://ui-avatars.com/api/?background=1db954&color=fff&name=${e.name}`
-                }
-                alt=""
-              />
-              <div className="truncate">
-                <p className="font-semibold ">{e.name}</p>
-                <p>{e.artists.map((e, i) => `${i != 0 ? ", " : ""}${e.name}`)}</p>
-                <p>
-                  {e.rank.me} / {e.rank.thinh}
-                </p>
-              </div>
+          <a
+            className="hover:scale-110 duration-300 ease-in-out flex items-center w-full gap-3 p-3 bg-gray-100 shadow rounded-lg dark:bg-gray-800 md:w-[20rem]"
+            target="_blank"
+            href={e.external_urls.spotify}
+            key={i}
+            rel="noreferrer"
+          >
+            <img
+              className="object-cover w-20 h-20 rounded-lg"
+              src={
+                e.album.images[0].url ||
+                `https://ui-avatars.com/api/?background=1db954&color=fff&name=${e.name}`
+              }
+              alt=""
+            />
+            <div className="truncate">
+              <p className="font-semibold ">{e.name}</p>
+              <p>{e.artists.map((e, i) => `${i != 0 ? ", " : ""}${e.name}`)}</p>
+              <p>
+                {e.rank.me} / {e.rank.thinh}
+              </p>
             </div>
           </a>
         ))}
