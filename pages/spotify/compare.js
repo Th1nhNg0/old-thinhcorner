@@ -36,7 +36,7 @@ export default function Compare({
   thinh_top_genres,
 }) {
   const { asPath } = useRouter();
-  const redirect_url = `https://accounts.spotify.com/authorize?client_id=552b6da4c16e4120825c73fe414582bf&redirect_uri=http://localhost:3000/spotify/compare&scope=user-read-private,user-read-recently-played,user-top-read&response_type=token`;
+  const [redirect_url, setredirect_url] = useState();
   const [access_token, setAccess_token] = useState();
   const [tracks_common, settracks_common] = useState();
   const [artists_common, setartists_common] = useState();
@@ -54,6 +54,10 @@ export default function Compare({
     localStorage.setItem("access_token", obj.access_token);
   }, [asPath]);
   useEffect(() => {
+    if (typeof window != undefined)
+      setredirect_url(
+        `https://accounts.spotify.com/authorize?client_id=552b6da4c16e4120825c73fe414582bf&redirect_uri=${window.location.href}&scope=user-read-private,user-read-recently-played,user-top-read&response_type=token`
+      );
     setAccess_token(localStorage.getItem("access_token"));
   }, []);
   useEffect(() => {
@@ -106,7 +110,7 @@ export default function Compare({
             Logout
           </button>
         )}
-        {!access_token && (
+        {!access_token && redirect_url && (
           <a
             href={redirect_url}
             className="flex items-center justify-center gap-3 px-10 py-4 text-white rounded-md bg-spotify"
