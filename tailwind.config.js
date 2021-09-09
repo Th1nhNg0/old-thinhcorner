@@ -63,6 +63,10 @@ module.exports = {
             p: {
               textAlign: "justify",
             },
+            li: {
+              textAlign: "justify",
+            },
+
             h1: {
               fontWeight: "700",
               letterSpacing: theme("letterSpacing.tight"),

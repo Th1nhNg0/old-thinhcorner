@@ -161,7 +161,64 @@ Kỹ năng mà các công ty mong muốn:
 - Hiểu biết về hệ điều hành Linux.
 - Có khả năng làm việc nhóm.
 
-## Video game và đồ họa
+## Video game
+
+### Phát triển videogame
+
+Video game chia làm 2 loại. Thứ nhất là loại game lớn, phức tạp (AAA)[^3a_game] thường được chơi trên các máy console hoặc pc. Những game này được một nhóm tạo ra trong khoảng thời gian từ 18 đén 28 tháng. Loại còn lại nhỏ hơn, ít phức tạp hơn và có thể chơi trên các thiết bị di động. Game di động có thể mất từ 3 đến 6 tháng để sản xuất. Dù là game lớn hay nhỏ thì hầu hết đều có quá trình phát triển như nhau.
+
+**Tiền sản xuất**
+
+Đây là giai đoạn game chào đời. Các ý tưởng được sàng lọc cho tới khi chỉ còn một ý tưởng duy nhất được chọn. Với sự hỗ trợ của các họa sĩ và lập trình viên, nhân viên thiết kế phác thảo cốt truyện của game và lên ý tưởng cho các yếu tố đọc nhất vô nhị hoặc thú vị.
+
+Suốt giai đoạn tiền sản xuất, game được chia làm nhiều phần để nhiều nhóm thực hiện như tình tiết, cấu trúc phần mềm và nhân vật. Công việc của mỗi nhóm được tổng hợp thành một vản thiết kế dùng để tạo ra nguyên mẫu game. Trong quá trình tạo nguyên mẫu, một số thiết kế sẽ được xem lại. Các nguyên mẫu cũng được dùng để "chào hàng" với các nhà sản xuất và tìm kiếm thêm nguồn đầu tư. Sau khi nguyên mẫu hoàn tất, giai đoạn sản xuất bắt đầu.
+
+**Sản xuất**
+
+Trong giai đoạn này, gane được phát triển và hoàn thiện dần. Đây là khoảng thời gian đồi hỏi sự hợp tác chặt chẽ. Các nhóm thiết kế, họa sĩ và lập trình viên sử dụng nguyên mẫu và bản thiết kế để làm hướng dẫn cho ra bản game cuối cùng.
+
+Nhà thiết kế quyết định tiến triển của game, như mỗi cấp có những gì hay các nhân vật được làm gì và không được làm gì. Họa sĩ cho ra các bản vẽ thể hiện các thành phần khác nhau trong game như nhân vật chính, phong cảnh, bản đồ, xe cộ, vũ khí hay công cụ và quái vật - mấy tên xấu xa 😈. Lập trình viên xây dựng bộ khung phần mềm cho game, bao gồm cách tương tác với nhau giữa các thành phần game cũng như thể hiện các yếu tố trực quan.
+
+Trong giai đoạn sản xuất, game trải qua nhiều khâu xem xét, cứ mỗi khâu lại được cải thiện về thiết kế, độ hoàn thiện và chất lượng so với bản trước đó. Giai đoạn sản xuất kết thúc khi nhạc và hiệu ứng âm thanh được chèn vào. Mốc phát triển này thường được ăn mừng và gọi là "Hoàn tất nội dung".
+
+**Hậu sản xuất**
+
+Đây là giai đoạn game được chơi thử nghiệm. Những người thử game sẽ "soi" lỗi, ghi lại và chuyển cho lập trình viên để chỉnh sửa. Họ cũng phát hiện những điểm mâu thuẫn trong game hoặc lỗi về nội dung, nhân vật, cốt truyện... Riêng bộ phận kiểm soát chất lượng lường trước những hành động bất ngờ của người chơi mà đội ngữ sản xuất không để ý đến. Chỉnh sửa hết những vấn đề này có thể mất rất nhiều thời gian, đặc biệt là đối với các game lớn và phức tạp. Khi lỗi được chỉnh sửa hết cũng là lúc game được ra mắt. Sau khi phát hành, các game thủ thường báo lỗi mà họ gặp phải. Những lỗi này sẽ được sửa thông qua bản vá hoặc cập nhật. Nếu game được yêu thích, nhiều khả năng nó sẽ được mở rộng và nhóm sản xuất sẽ có thêm việc đẻ làm.
+
+### Các đầu việc trong phát triển video game
+
+Những người phát triển game biết thiết kế game, viết code và làm đồ họa. Tùy thuộc vào quy mô của game và của công ty mà người thiết kế đẩm trách một hoặc tất cả vai trò kể trên. Với những game lớn do các công ty lớn ra lò, phần thiết kế sẽ do một nhóm nhiều người phụ trách. Mục tiêu chính của người thiết kế là tạo ra phiên bản video game tốt nhất có thể.
+
+Người thiết kế game thường là những người mộng mơ, có trí tưởng tượng phong phú. Thường làm việc cá nhân hoặc theo nhóm, người thiết kế game nảy ra các ý tưởng về cốt truyện, nhân vật và cách chơi. Sau khi ý tưởng được tập hợp, cả nhóm họp lại để chọn ra ý tưởng tốt nhất. Trong quá trình sản xuất, người thiết kế làm việc với các lập trình viên và họa sĩ để đảm bảo các yếu tố thiết kế của họ được chuyển tải xuyên suốt trong game. Người thiết kế theo sát công việc của lập trình viên bằng cách xem nguyên mẫu của game. Nếu thấy cần chỉnh sửa gì đó, người thiết kế cũng tham gia.
+
+**Một số vị trí dành cho người thiết kế game:**
+
+- **Thiết kế trưởng**: chịu trách nhiệm tập hợp và sắp xếp ý tưởng cho bản thiết kế. Quản lý khối lượng công việc và thời gian biểu của từng thành viên trong nhóm. Ghi lại tiến độ, giải quyết khúc mắc và đảm bảo việc sản xuất game đúng kế hoạch.
+- **Thiết kế nội dung**: tạo ra những nút thắt, kịch tính cho cốt truyện cũng như cho ra đời các nhân vật thú vị, độc đáo. Chịu trách nhiệm về tính nhất quán trong thế giới game.
+- **Thiết kế cơ học**: tập trung vào các luật chơi và cơ chế hoạt động trong game. Quyết định cách các nhân vật tương tác với nhau và tương tác với môi trường. Các nhân vật lấy vật phẩm, phát triển kỹ năng và thăng cấp như thế nào đều nằm trong tay bộ phần thiết kế này.
+- **Thiết kế cấp độ**: tạo ra môi trường mà các nhân vật tương tác. Chọn các đối tượng và nhân vật có khả năng thu hút người chơi game. Ví dụ, game kinh dị thường có gam màu tối, nhiều nơi ẩn nấp. Game cho trẻ em sẽ có màu sắc tươi sáng, có nhiều cây cối, cầu vồng,... Các nhà thiết kế cấp độ cũng xác định nơi đặt các đối tượng và đối thủ ở mỗi cấp.
+- **Viết lời thoại**: Tạo ra lời thoại, hình thành tính cách cho từng nhân vật. Trong các game nhập vai, người viết thoại đóng vai trò quan trọng trong việc tạo ra tương tác chân thật giữa các nhân vật. Game giải đố hay mê cung thường sẽ không cần vị trí này.
+
+**Lập trình viên**
+
+Lập trình viên là người đưa những bản vẽ từ người thiết kế thành hiện thực bằng những dòng code. Lập trình viên có thể sử dụng nhiều ngôn ngữ khác nhau dựa vào yêu cầu của video game đó. Ví dụ: game trên điện thoại sẽ viết bằng ngôn ngữ khác so với game trên máy tính.
+
+**Lập trình viên làm việc ở các vị trí sau:**
+
+- **Lập trình viên trưởng**: Phân công công việc và bảo đảm kế hoạch. Là các lập trình viên giỏi nhưng dành nhiều thời gian để giám sát các lập trình viên khác.
+- **Lập trình viên công cụ game**: Thiết kế các đoạn mã nền cho game, có thể bao gồm phát triển đồ họa và thiết kế game engine[^wiki_game_engine]. Thưởng sử dụng ngôn ngữ lập trình cấp thấp để chương trình chạy nhanh và hiệu quả hơn. Vị trí này đòi hỏi kỹ năng, kỹ thuật lập trình cao.
+- **Lập trình viên AI**: Lập trình bộ não cho các nhân vật trong game. Cách các nhân vật tương tác với nhau, tương tác với môi trường sao cho chân thật nhất.
+- **Lập trình viên đồ họa**: Tạo ra các công cụ cho phép họa sĩ "vẽ" trên màn hình. Sử dụng toán học để viết ra các thuật toán cho đồ hoạ 2-D và 3-D. Vị trí này thường làm việc chung với các họa sĩ.
+- **Lập trình viên mạng**: Giúp game thủ có thể chơi trực tuyến. Công việc của lập trình viên mạng thường tập trung vào bảo mật internet và phòng chống gian lận trong game.
+- **Lập trình viên vật lý**: Viết mã xác định cách vận động của các đối tượng trong game. Tuân theo các định luật vật lý do nhà thiết kế game tạo ra. Ví dụ: một nhân vật trong thế giới game nhảy cao được bao nhiêu? Xe trượng trên đường đóng băng bao xa?...
+
+**Họa sĩ**
+
+Họa sĩ là người thiết kế hình hài cho game, từ môi trường, nhân vật đến mọi đối tượng trong game. Họa sĩ thiết kế cả ảnh bìa và tài liệu hướng dẫn chơi game. Họa sĩ có thể vẽ chì, vẽ trên máy tính, phác thảo hoặc nhiều cách khác nhau để phác họa ý tưởng cho game. Tạo ra các mô hình, định hình chuyển động của các nhân vật và đối tượng.
+
+**Nhân viên âm thanh**
+
+Nhân viên âm thanh có nhiệm vụ phát triển, ghi âm và xử lý tất cả âm thanh trong game, bao gồm âm nhạc, đối thoại và các tiếng động như nước chảy, chim kêu hay một tòa tháp đổ sập xuống đất. Những người phụ trách âm thanh bao gồm nhà thiết kế âm thanh, kỹ sư âm thanh, lập trình viên âm thanh cũng như nhạc sĩ.
 
 ## Lập trình web
 
@@ -186,8 +243,10 @@ Dải lương phổ biến của ngành CNTT là từ 8,4 triệu đồng đến
 Một thống kê của TopDev về thị trường IT Việt Nam tính đến quý II/2021 cho thấy kỹ sư trí tuệ nhân tạo (AI) và học máy (machine learning) có mức lương trung bình tháng cao nhất, khoảng 70 triệu đồng. Mức này cao gấp đôi lương kỹ sư dữ liệu lớn (Big Data) và kỹ sư Backend hay lập trình viên (trung bình 30 triệu đồng mỗi tháng). 6 trong số 10 vị trí IT có lương tháng cao nhất thuộc về các cấp quản lý và kiến trúc sư công nghệ. Vị trí có lương trung bình tháng cao nhất hiện nay là CTO, CIO, khoảng 5.776 USD (khoảng 132 triệu đồng).
 
 [^topdev]: [Topdev](https://topdev.vn/), trang tuyển dụng IT
-[^wiki_it]: [Wikipedia](https://vi.wikipedia.org/wiki/C%C3%B4ng_ngh%E1%BB%87_th%C3%B4ng_tin) - Công nghệ thông tin
 [^nghiquyet_49cp]: [Nghị quyết số 49/CP](https://thuvienphapluat.vn/van-ban/Cong-nghe-thong-tin/Nghi-quyet-49-CP-phat-trien-cong-nghe-thong-tin-o-nuoc-ta-trong-nhung-nam-90-38659.aspx) về phát triển công nghệ thông tin ở nước ta trong những năm 90 do chính phủ ban hành
-[^wiki_iot]: [Wikipedia](https://vi.wikipedia.org/wiki/Internet_V%E1%BA%A1n_V%E1%BA%ADt) - Internet kết nối Vạn Vật
+[^wiki_it]: [Wikipedia - Công nghệ thông tin](https://vi.wikipedia.org/wiki/C%C3%B4ng_ngh%E1%BB%87_th%C3%B4ng_tin)
+[^wiki_iot]: [Wikipedia - Internet kết nối Vạn Vật](https://vi.wikipedia.org/wiki/Internet_V%E1%BA%A1n_V%E1%BA%ADt)
+[^3a_game]: [Wikipedia - AAA video game](<https://vi.wikipedia.org/wiki/AAA_(c%C3%B4ng_nghi%E1%BB%87p_tr%C3%B2_ch%C6%A1i_%C4%91i%E1%BB%87n_t%E1%BB%AD)>)
+[^wiki_game_engine]: [Wikipedia - Game engine](https://vi.wikipedia.org/wiki/Game_engine)
 
 # Con đường sự nghiệp
