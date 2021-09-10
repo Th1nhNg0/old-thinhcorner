@@ -108,7 +108,7 @@ export default function Compare({
       />
       <div className="w-full">
         {access_token && (
-          <button className="float-right" onClick={logout}>
+          <button className="text-right" onClick={logout}>
             Logout
           </button>
         )}
