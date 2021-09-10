@@ -175,7 +175,7 @@ Kỹ năng mà các công ty mong muốn:
 
 ### Phát triển videogame
 
-Video game chia làm 2 loại. Thứ nhất là loại game lớn, phức tạp (AAA)[^3a_game] thường được chơi trên các máy console hoặc pc. Những game này được một nhóm tạo ra trong khoảng thời gian từ 18 đén 28 tháng. Loại còn lại nhỏ hơn, ít phức tạp hơn và có thể chơi trên các thiết bị di động. Game di động có thể mất từ 3 đến 6 tháng để sản xuất. Dù là game lớn hay nhỏ thì hầu hết đều có quá trình phát triển như nhau.
+Video game chia làm 2 loại. Thứ nhất là loại game lớn, phức tạp (AAA)[^3a_game] thường được chơi trên các máy console hoặc pc. Những game này được một nhóm tạo ra trong khoảng thời gian từ 18 đến 28 tháng. Loại còn lại nhỏ hơn, ít phức tạp hơn và có thể chơi trên các thiết bị di động. Game di động có thể mất từ 3 đến 6 tháng để sản xuất. Dù là game lớn hay nhỏ thì hầu hết đều có quá trình phát triển như nhau.
 
 **Tiền sản xuất**
 
