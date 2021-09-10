@@ -1,6 +1,7 @@
 ---
 title: "Giải ngố IT - Kỳ 1: Làm IT là làm gì? Lập trình viên là ai? Tại sao ai cũng muốn trở thành lập trình viên?"
 date: "2021-09-09"
+lastmod: "2021-09-10"
 tags: ["IT", "giải ngố it"]
 draft: false
 summary: "Ngành IT (information technology) hiện nay được coi là ngành hot nhất trong các ngành. Người người học IT, nhà nhà học IT. Vậy ngành này có cái gì mà nhiều người thích đến vậy? Cùng mình tìm hiểu nhé 😙..."
