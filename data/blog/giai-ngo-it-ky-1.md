@@ -305,7 +305,7 @@ Nhân sự làm việc trong mảng an ninh mạng có thể được chia thàn
 
 - **Hacker mũ trắng** (White-hat hacker) – cũng còn gọi là "ethical hacker" (hacker có nguyên tắc/đạo đức) hay penetration tester (người xâm nhập thử ngiệm vào hệ thống). Hacker mũ trắng là những chuyên gia công nghệ làm nhiệm vụ xâm nhập thử nghiệm vào hệ thống công nghệ thông tin để tìm ra lỗ hổng, từ đó yêu cầu người chủ hệ thống phải vá lỗi hệ thống để phòng ngừa các xâm nhập khác sau này với ý đồ xấu (thường là của các hacker mũ đen).
 - **Hacker mũ đen** (Black-hat hacker): là các chuyên gia công nghệ xâm nhập vào hệ thống với mục đích xấu như đánh cắp thông tin, phá hủy hệ thống, làm lây nhiễm các phần mềm độc hại cũng như các hành vị phá hoại mạng máy tính vi phạm pháp luật khác.
-- **Hacker mũ xám** (Grey-hat hacker): là các chuyên gia công nghệ có thể vừa làm công nghệ của cả hacker mũ trắng và mũ xám.
+- **Hacker mũ xám** (Grey-hat hacker): là các chuyên gia công nghệ có thể vừa làm công nghệ của cả hacker mũ trắng và mũ đen.
 
 # Vì sao ngành IT hot?
 
