@@ -4,7 +4,6 @@ import siteMetadata from "@/data/siteMetadata";
 import { useRouter } from "next/router";
 import axios from "axios";
 import * as SpotifyApi from "@/lib/spotify-api";
-import Link from "next/link";
 
 function getProfile(token) {
   return axios.get("https://api.spotify.com/v1/me", {
@@ -58,7 +57,7 @@ export default function Compare({
   useEffect(() => {
     if (typeof window != undefined)
       setredirect_url(
-        `https://accounts.spotify.com/authorize?client_id=552b6da4c16e4120825c73fe414582bf&redirect_uri=${window.location.href}&scope=user-read-private,user-read-recently-played,user-top-read&response_type=token`
+        `https://accounts.spotify.com/authorize?client_id=651388d70a8149658dc770cf641208e7&redirect_uri=${window.location.href}&scope=user-read-private,user-read-recently-played,user-top-read&response_type=token`
       );
     setAccess_token(localStorage.getItem("access_token"));
   }, []);
