@@ -30,3 +30,56 @@
 html {
   scroll-behavior: smooth;
 }
+
+@keyframes musicPulse {
+  0% {
+    height: 24px;
+  }
+  50% {
+    height: 12px;
+  }
+  100% {
+    height: 24px;
+  }
+}
+@keyframes reverseMusicPulse {
+  0% {
+    height: 12px;
+  }
+  50% {
+    height: 24px;
+  }
+  100% {
+    height: 12px;
+  }
+}
+
+.equalizer {
+  display: flex;
+  height: 24px;
+  gap: 4px;
+  width: max-content;
+  justify-items: center;
+  align-items: center;
+}
+
+.equalizer span {
+  width: 4px;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.equalizer .left {
+  height: 24px;
+  animation: musicPulse 1.5s infinite ease-in-out;
+}
+
+.equalizer .middle {
+  height: 12px;
+  animation: reverseMusicPulse 1.5s infinite ease-in-out;
+}
+
+.equalizer .right {
+  height: 24px;
+  animation: musicPulse 1.5s infinite ease-in-out;
+}
