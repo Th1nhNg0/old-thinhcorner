@@ -213,14 +213,14 @@ function CurrentPlaying() {
       <div>
         <p className="mb-2 text-xl font-bold">Currently listening to</p>
         <div className="relative overflow-hidden rounded-lg bg-spotify">
-          <div className="absolute top-5 right-5 ">
+          <div className="absolute z-10 top-10 right-10 md:top-5 md:right-5">
             <div className="equalizer">
               <span className="left"></span>
               <span className="middle"></span>
               <span className="right"></span>
             </div>
           </div>
-          <div className="flex flex-col flex-1 w-full gap-3 p-5 text-white md:flex-row">
+          <div className="relative flex flex-col flex-1 w-full gap-3 p-5 text-white md:flex-row">
             <div className="relative" aria-hidden="true">
               <a target="_blank" href={currentTrack.item.external_urls.spotify} rel="noreferrer">
                 <img
