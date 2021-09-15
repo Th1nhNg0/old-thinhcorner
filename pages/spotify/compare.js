@@ -4,6 +4,7 @@ import siteMetadata from "@/data/siteMetadata";
 import { useRouter } from "next/router";
 import axios from "axios";
 import * as SpotifyApi from "@/lib/spotify-api";
+import { useSpring, animated, config } from "react-spring";
 
 function getProfile(token) {
   return axios.get("https://api.spotify.com/v1/me", {
@@ -38,7 +39,9 @@ function getArtists(list, token) {
       .catch((e) => reject(e));
   });
 }
-
+function scale(number, inMin, inMax, outMin, outMax) {
+  return ((number - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+}
 export default function Compare({
   thinh_profile,
   thinh_top_artists,
@@ -48,7 +51,7 @@ export default function Compare({
   const router = useRouter();
   const [redirect_url, setredirect_url] = useState();
   const [access_token, setAccess_token] = useState();
-  const [topgenres, settopgenres] = useState();
+  const [genres_common, setgenres_common] = useState();
   const [tracks_common, settracks_common] = useState();
   const [artists_common, setartists_common] = useState();
   const [profile, setprofile] = useState();
@@ -120,7 +123,19 @@ export default function Compare({
               percent: (e.count / total) * 100,
             }));
             top_genres.sort((a, b) => b.count - a.count);
-            settopgenres(top_genres);
+
+            let genres = [];
+            for (let i = 0; i < top_genres.length; i++)
+              for (let j = 0; j < thinh_top_genres.length; j++) {
+                if (top_genres[i].name == thinh_top_genres[j].name)
+                  genres.push({
+                    name: top_genres[i].name,
+                    count: { me: top_genres[i].count, thinh: thinh_top_genres[j].count },
+                    percent: { me: top_genres[i].percent, thinh: thinh_top_genres[j].percent },
+                  });
+              }
+            genres.sort((a, b) => b.percent.me - a.percent.me + b.percent.thinh - a.percent.thinh);
+            setgenres_common(genres);
           });
           getTop("artists", access_token).then((data) => {
             setartists_common({
@@ -129,11 +144,11 @@ export default function Compare({
             });
           });
         })
-        .catch(() => {
+        .catch((e) => {
           setAccess_token(false);
           window.localStorage.removeItem("access_token");
         });
-  }, [access_token, thinh_top_artists, thinh_top_tracks]);
+  }, [access_token]);
   function logout() {
     setAccess_token(false);
     window.localStorage.removeItem("access_token");
@@ -146,9 +161,10 @@ export default function Compare({
       />
       <div className="w-full">
         {access_token && (
-          <button className="text-right" onClick={logout}>
-            Logout
-          </button>
+          <div className="flex justify-between mb-5">
+            <p className="text-xl font-bold">Spotify Compare</p>
+            <button onClick={logout}>Logout</button>
+          </div>
         )}
         {!access_token && redirect_url && (
           <a
@@ -215,8 +231,12 @@ export default function Compare({
             <Percent
               tracks_common={tracks_common}
               artists_common={artists_common}
-              topgenres={topgenres}
-              thinh_top_genres={thinh_top_genres}
+              genres_common={genres_common}
+            />
+            <CommonGenres
+              genres_common={genres_common}
+              profile={profile}
+              thinh_profile={thinh_profile}
             />
             <CommonArtists thinh_profile={thinh_profile} artists_common={artists_common} />
             <CommonTracks thinh_profile={thinh_profile} tracks_common={tracks_common} />
@@ -226,47 +246,99 @@ export default function Compare({
     </div>
   );
 }
-function Percent({ tracks_common, artists_common, topgenres, thinh_top_genres }) {
+function Percent({ tracks_common, artists_common, genres_common }) {
   const [tracksPercent, settracksPercent] = useState(0);
   const [artistsPercent, setartistsPercent] = useState(0);
   const [genresPercent, setgenresPercent] = useState(0);
-  function scale(number, inMin, inMax, outMin, outMax) {
-    return ((number - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
-  }
+  const { number } = useSpring({
+    from: { number: 0 },
+    number: tracksPercent + artistsPercent + genresPercent,
+    config: config.molasses,
+    delay: 500,
+  });
+
   useEffect(() => {
     if (tracks_common) {
-      settracksPercent(scale((tracks_common.short_term.length / 50) * 100, 0, 100, 0, 25));
+      settracksPercent(scale((tracks_common.long_term.length / 50) * 100, 0, 100, 0, 25));
     }
     if (artists_common) {
       setartistsPercent(scale((artists_common.long_term.length / 50) * 100, 0, 100, 0, 25));
     }
   }, [tracks_common, artists_common]);
   useEffect(() => {
-    if (topgenres && thinh_top_genres) {
-      let genres = [];
-      for (let i = 0; i < topgenres.length; i++)
-        for (let j = 0; j < thinh_top_genres.length; j++) {
-          if (topgenres[i].name == thinh_top_genres[j].name)
-            genres.push({
-              name: topgenres[i].name,
-              count: Math.min(topgenres[i].count, thinh_top_genres[j].count),
-              percent: { me: topgenres[i].percent, thinh: thinh_top_genres[j].percent },
-            });
-        }
-      genres.sort((a, b) => b.percent.me - a.percent.me + b.percent.thinh - a.percent.thinh);
+    if (genres_common) {
       const total_count = Math.max(
-        topgenres.reduce((previous, current) => previous + current.count, 0),
-        thinh_top_genres.reduce((previous, current) => previous + current.count, 0)
+        genres_common.reduce((previous, current) => previous + current.count.me, 0),
+        genres_common.reduce((previous, current) => previous + current.count.thinh, 0)
       );
-      const count = genres.reduce((previous, current) => previous + current.count, 0);
+      const count = genres_common.reduce(
+        (previous, current) => previous + Math.min(current.count.me, current.count.thinh),
+        0
+      );
       setgenresPercent(scale((count / total_count) * 100, 0, 100, 0, 50));
     }
-  }, [topgenres, thinh_top_genres]);
+  }, [genres_common]);
   return (
-    <div>
-      <p>Common track percent: {tracksPercent}%</p>
-      <p>Common artists percent: {artistsPercent}%</p>
-      <p>Common genres percent: {genresPercent}%</p>
+    <div className="pb-10 text-5xl font-bold text-center tabular-nums md:text-9xl">
+      <animated.div className="inline">{number.to((n) => n.toFixed(2))}</animated.div>%
+    </div>
+  );
+}
+
+function CommonGenres({ genres_common, thinh_profile, profile }) {
+  const [showMore, setshowMore] = useState(false);
+  if (!genres_common) return null;
+  return (
+    <div className="my-10">
+      <div className="flex flex-col justify-between gap-2 mb-3 md:gap-5 md:flex-row">
+        <p className="text-2xl font-bold">Common genres</p>
+      </div>
+      <p className="mt-10 text-center mb-14">
+        Your top genres vs {thinh_profile.display_name} of all time.
+      </p>
+      <div className="p-5 bg-gray-100 rounded-md shadow dark:bg-gray-800 ">
+        <div className="flex justify-between font-bold md:text-xl">
+          <span className="text-blue-600">{profile.display_name}</span>
+          <span className="text-red-600">{thinh_profile.display_name}</span>
+        </div>
+        <div className="divide-y-2 dark:divide-gray-700 ">
+          {genres_common.slice(0, showMore ? 100 : 5).map((e) => (
+            <div className="w-full py-4" key={e.name}>
+              <div className="flex justify-between gap-5 font-semibold md:text-lg">
+                <span className="w-16">
+                  {Math.floor(scale(e.percent.me, 0, e.percent.me + e.percent.thinh, 0, 100))}%
+                </span>
+                <span className="text-center capitalize">{e.name}</span>
+                <span className="w-16 text-right">
+                  {Math.floor(scale(e.percent.thinh, 0, e.percent.me + e.percent.thinh, 0, 100))}%
+                </span>
+              </div>
+              <div className="w-full h-5 my-2 bg-red-600">
+                <div
+                  className="h-full bg-blue-600"
+                  style={{
+                    width: scale(e.percent.me, 0, e.percent.me + e.percent.thinh, 0, 100) + "%",
+                  }}
+                ></div>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-blue-600">{e.percent.me.toFixed(2)}% of all time</span>
+                <span className="text-red-600">{e.percent.thinh.toFixed(2)}% of all time</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        {genres_common.length > 5 && (
+          <div className="w-full">
+            <button
+              className="block mx-auto text-lg underline text-spotify"
+              onClick={() => setshowMore(!showMore)}
+            >
+              {!showMore ? "Show more ▼" : "Show less ▲"}
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
