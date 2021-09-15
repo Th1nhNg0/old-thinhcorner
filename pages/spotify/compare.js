@@ -28,6 +28,17 @@ function getTop(type, token) {
   ]);
 }
 
+function getArtists(list, token) {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`https://api.spotify.com/v1/artists?ids=${encodeURI(list)}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((data) => resolve(data.data.artists))
+      .catch((e) => reject(e));
+  });
+}
+
 export default function Compare({
   thinh_profile,
   thinh_top_artists,
@@ -35,14 +46,15 @@ export default function Compare({
   thinh_top_genres,
 }) {
   const router = useRouter();
-  const { asPath } = router;
   const [redirect_url, setredirect_url] = useState();
   const [access_token, setAccess_token] = useState();
+  const [topgenres, settopgenres] = useState();
   const [tracks_common, settracks_common] = useState();
   const [artists_common, setartists_common] = useState();
   const [profile, setprofile] = useState();
+
   useEffect(() => {
-    let query = asPath.split("#")[1];
+    let query = router.asPath.split("#")[1];
     if (!query) return;
     let obj = JSON.parse(
       '{"' + query.replace(/&/g, '","').replace(/=/g, '":"') + '"}',
@@ -51,15 +63,16 @@ export default function Compare({
       }
     );
     setAccess_token(obj.access_token);
-    localStorage.setItem("access_token", obj.access_token);
+    window.localStorage.setItem("access_token", obj.access_token);
     router.replace("/spotify/compare");
-  }, [asPath]);
+  }, [router]);
   useEffect(() => {
-    if (typeof window != undefined)
+    if (typeof window != undefined) {
       setredirect_url(
         `https://accounts.spotify.com/authorize?client_id=651388d70a8149658dc770cf641208e7&redirect_uri=${window.location.href}&scope=user-read-private,user-read-recently-played,user-top-read&response_type=token`
       );
-    setAccess_token(localStorage.getItem("access_token"));
+      setAccess_token(window.localStorage.getItem("access_token"));
+    }
   }, []);
   useEffect(() => {
     function getCommon(type, data, thinh_data) {
@@ -70,6 +83,7 @@ export default function Compare({
           if (thinh.items[i].id == data.items[j].id)
             tracks.push({ ...thinh.items[i], rank: { me: j + 1, thinh: i + 1 } });
         }
+      tracks.sort((a, b) => a.rank.me - b.rank.me + a.rank.thinh - b.rank.thinh);
       return tracks;
     }
     if (access_token)
@@ -77,11 +91,36 @@ export default function Compare({
         .then((data) => data.data)
         .then((data) => {
           setprofile(data);
-          getTop("tracks", access_token).then((data) => {
+          getTop("tracks", access_token).then(async (data) => {
             settracks_common({
               short_term: getCommon("short_term", data[0].data, thinh_top_tracks),
               long_term: getCommon("long_term", data[1].data, thinh_top_tracks),
             });
+            const artistsList = data[1].data.items.map((e) => e.artists.map((e) => e.id)).flat();
+            const top_artists_by_tracks = [];
+            for (let i = 0; i < artistsList.length; i += 50) {
+              let temp = await getArtists(artistsList.slice(i, i + 50), access_token);
+              top_artists_by_tracks.push(...temp);
+            }
+            const obj = {};
+            for (const e of top_artists_by_tracks) {
+              for (const g of e.genres) {
+                if (!obj[g]) obj[g] = 1;
+                else obj[g] += 1;
+              }
+            }
+            let top_genres = [];
+            let total = 0;
+            for (let [name, count] of Object.entries(obj)) {
+              top_genres.push({ name, count });
+              total += count;
+            }
+            top_genres = top_genres.map((e) => ({
+              ...e,
+              percent: (e.count / total) * 100,
+            }));
+            top_genres.sort((a, b) => b.count - a.count);
+            settopgenres(top_genres);
           });
           getTop("artists", access_token).then((data) => {
             setartists_common({
@@ -92,12 +131,12 @@ export default function Compare({
         })
         .catch(() => {
           setAccess_token(false);
-          localStorage.removeItem("access_token");
+          window.localStorage.removeItem("access_token");
         });
-  }, [access_token]);
+  }, [access_token, thinh_top_artists, thinh_top_tracks]);
   function logout() {
     setAccess_token(false);
-    localStorage.removeItem("access_token");
+    window.localStorage.removeItem("access_token");
   }
   return (
     <div>
@@ -173,6 +212,12 @@ export default function Compare({
                 </a>
               </div>
             )}
+            <Percent
+              tracks_common={tracks_common}
+              artists_common={artists_common}
+              topgenres={topgenres}
+              thinh_top_genres={thinh_top_genres}
+            />
             <CommonArtists thinh_profile={thinh_profile} artists_common={artists_common} />
             <CommonTracks thinh_profile={thinh_profile} tracks_common={tracks_common} />
           </div>
@@ -181,7 +226,50 @@ export default function Compare({
     </div>
   );
 }
-
+function Percent({ tracks_common, artists_common, topgenres, thinh_top_genres }) {
+  const [tracksPercent, settracksPercent] = useState(0);
+  const [artistsPercent, setartistsPercent] = useState(0);
+  const [genresPercent, setgenresPercent] = useState(0);
+  function scale(number, inMin, inMax, outMin, outMax) {
+    return ((number - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+  }
+  useEffect(() => {
+    if (tracks_common) {
+      settracksPercent(scale((tracks_common.short_term.length / 50) * 100, 0, 100, 0, 25));
+    }
+    if (artists_common) {
+      setartistsPercent(scale((artists_common.long_term.length / 50) * 100, 0, 100, 0, 25));
+    }
+  }, [tracks_common, artists_common]);
+  useEffect(() => {
+    if (topgenres && thinh_top_genres) {
+      let genres = [];
+      for (let i = 0; i < topgenres.length; i++)
+        for (let j = 0; j < thinh_top_genres.length; j++) {
+          if (topgenres[i].name == thinh_top_genres[j].name)
+            genres.push({
+              name: topgenres[i].name,
+              count: Math.min(topgenres[i].count, thinh_top_genres[j].count),
+              percent: { me: topgenres[i].percent, thinh: thinh_top_genres[j].percent },
+            });
+        }
+      genres.sort((a, b) => b.percent.me - a.percent.me + b.percent.thinh - a.percent.thinh);
+      const total_count = Math.max(
+        topgenres.reduce((previous, current) => previous + current.count, 0),
+        thinh_top_genres.reduce((previous, current) => previous + current.count, 0)
+      );
+      const count = genres.reduce((previous, current) => previous + current.count, 0);
+      setgenresPercent(scale((count / total_count) * 100, 0, 100, 0, 50));
+    }
+  }, [topgenres, thinh_top_genres]);
+  return (
+    <div>
+      <p>Common track percent: {tracksPercent}%</p>
+      <p>Common artists percent: {artistsPercent}%</p>
+      <p>Common genres percent: {genresPercent}%</p>
+    </div>
+  );
+}
 function CommonArtists({ artists_common, thinh_profile }) {
   const [time_range, settime_range] = useState("long_term");
   const [showMore, setshowMore] = useState(false);
