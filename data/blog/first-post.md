@@ -1,7 +1,7 @@
 ---
-title: 'Bài viết đầu tiên'
-date: '2020-04-11'
-tags: ['linh tinh']
+title: "Bài viết đầu tiên"
+date: "2020-04-11"
+tags: ["chatchit"]
 draft: false
 images: []
 layout: PostLayout
