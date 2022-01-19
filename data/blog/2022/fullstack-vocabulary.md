@@ -1,6 +1,6 @@
 ---
 title: Tổng hợp các thuật ngữ chuyên ngành mà bất cứ fullstack developer nào cũng nên biết.
-date: "2022-01-04"
+date: "2022-01-19"
 tags: ["IT", "PROGRAMMING"]
 draft: false
 summary:
