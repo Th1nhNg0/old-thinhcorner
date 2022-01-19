@@ -13,7 +13,7 @@ Jamstack? Docker? DOM? Serverless?
 
 Chúng là cái gì thế???
 
-Nếu bạn là người mới bước chân vào con đường lập trình fullstack thì ắt hản bạn sẽ đôi lần bối rối khi nghe người khác nhắc đến các thuật ngữ này khi nói chuyện. Vì vậy, bài viết này mình sẽ tổng hợp một số từ và cụm từ thông dụng có liên quan tới lập trình fullstack. Và tất nhiên ở đây chỉ tóm tắt và giải thích nghĩa của những từ đó thôi. Để hiểu sâu hơn bạn phải tự mình tìm kiếm.
+Nếu bạn là người mới bước chân vào con đường lập trình fullstack thì ắt hản bạn sẽ đôi lần bối rối khi nghe người khác nhắc đến các thuật ngữ này. Vì vậy, bài viết này mình sẽ tổng hợp một số từ và cụm từ thông dụng có liên quan tới lập trình fullstack. Và tất nhiên ở đây chỉ tóm tắt và giải thích nghĩa của những từ đó thôi. Để hiểu sâu hơn bạn phải tự mình tìm kiếm.
 
 1.  **Frontend**
 
