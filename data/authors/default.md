@@ -1,7 +1,7 @@
 ---
 name: Ngô Phú Thịnh
 avatar: /static/images/avatar.png
-occupation: Student at HCMUS
+occupation: Learning Mathematical and Computer science at HCMUS
 
 email: "ngophuthinh2001@gmail.com"
 github: "https://github.com/th1nhng0"
@@ -15,7 +15,6 @@ steam: "https://steamcommunity.com/id/th1nhng0/"
 ## Đôi lời giới thiệu
 
 - Mình tên là **Ngô Phú Thịnh**. Mình đến từ **Cà Mau**, nơi cuối bản đồ Việt Nam :>
-- Sinh viên năm 3 khoa **_toán tin_** trường _Đại học Khoa học Tự Nhiên ĐHQG TP.HCM_
 - Mình thích lập trình, toán và guitar
 
 ## Mục đích mình tạo ra blog này
