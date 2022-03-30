@@ -10,19 +10,19 @@ const siteMetadata = {
   image: "/static/images/avatar.png",
   socialBanner: "/static/images/socialbg.png",
 
-  email: "ngophuthinh2001@gmail.com",
+  email: "thinhngow@gmail.com",
   github: "https://github.com/th1nhng0",
   // twitter: 'https://twitter.com/Twitter',
   facebook: "https://facebook.com/th1nhng0",
   // youtube: 'https://youtube.com',
-  // linkedin: 'https://www.linkedin.com',
+  linkedin: "http://linkedin.com/in/thinhngow",
   spotify: "https://open.spotify.com/user/21acs5sngq2xkehugtvqkwmuy",
-  steam: "https://steamcommunity.com/id/th1nhng0/",
+  // steam: "https://steamcommunity.com/id/th1nhng0/",
 
   locale: "en-US",
   analytics: {
     // supports plausible, simpleAnalytics or googleAnalytics
-    plausibleDataDomain: "http://th1nhng0.vercel.app/", // e.g. tailwind-nextjs-starter-blog.vercel.app
+    plausibleDataDomain: "https://thinhcorner.com", // e.g. tailwind-nextjs-starter-blog.vercel.app
     simpleAnalytics: false, // true or false
     googleAnalyticsId: "G-P4B7XCWCYP", // e.g. UA-000000-2 or G-XXXXXXX
   },

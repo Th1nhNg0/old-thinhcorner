@@ -1,14 +1,13 @@
 ---
 name: Ngô Phú Thịnh
 avatar: /static/images/avatar.png
-occupation: Learning Mathematical and Computer science at HCMUS
+occupation: A developer with passion
 
-email: "ngophuthinh2001@gmail.com"
+email: "thinhngow@gmail.com"
 github: "https://github.com/th1nhng0"
 facebook: "https://facebook.com/th1nhng0"
-linkedin: "https://www.linkedin.com/in/th%E1%BB%8Bnh-ng%C3%B4-67bbaa192/"
+linkedin: "https://www.linkedin.com/in/thinhngow/"
 spotify: "https://open.spotify.com/user/21acs5sngq2xkehugtvqkwmuy"
-steam: "https://steamcommunity.com/id/th1nhng0/"
 # company: Stanford University
 ---
 
