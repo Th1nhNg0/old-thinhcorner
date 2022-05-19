@@ -1,5 +1,5 @@
 ---
-title: "Giải ngố IT - Kỳ 1: Làm IT là làm gì? Lập trình viên là ai? Tại sao ai cũng muốn trở thành lập trình viên?"
+title: "[Giải ngố IT] Làm IT là làm gì? Lập trình viên là ai? Tại sao ai cũng muốn trở thành lập trình viên?"
 date: "2021-09-09"
 lastmod: "2021-09-10"
 tags: ["IT", "giải ngố it"]
