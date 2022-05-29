@@ -3,9 +3,10 @@ import React from "react";
 import Image from "next/image";
 import ThemeSwitch from "./ThemeSwitch";
 import Logo from "./logo";
-
+import classNames from "classnames";
 import headerNavLinks from "../data/headerNavLinks";
 import siteMetadata from "../data/siteMetadata";
+import { useRouter } from "next/router";
 
 export default function LayoutWrapper({
   children,
@@ -13,7 +14,7 @@ export default function LayoutWrapper({
   children: React.ReactNode;
 }) {
   return (
-    <div className="max-w-3xl min-h-screen px-4 mx-auto sm:px-6 xl:max-w-5xl xl:px-0">
+    <div className="max-w-2xl min-h-screen px-5 mx-auto">
       <Header />
       <main className="mb-auto">{children}</main>
       <Footer />
@@ -22,6 +23,7 @@ export default function LayoutWrapper({
 }
 
 function Header() {
+  const router = useRouter();
   return (
     <header className="flex items-center justify-between py-10">
       <div>
@@ -36,7 +38,15 @@ function Header() {
         <div className="hidden space-x-1 md:block">
           {headerNavLinks.map((link) => (
             <Link key={link.title} href={link.href}>
-              <a className="p-1 font-medium duration-200 ease-in-out rounded-md md:p-4 text-text hover:bg-opacity-80 hover:bg-overlay">
+              <a
+                className={classNames(
+                  "p-1 duration-200 ease-in-out rounded-md  md:p-4 hover:bg-opacity-80 hover:bg-overlay",
+                  {
+                    "text-subtle font-medium": link.href != router.pathname,
+                    "text-text  font-bold": link.href == router.pathname,
+                  }
+                )}
+              >
                 {link.title}
               </a>
             </Link>
@@ -51,8 +61,8 @@ function Header() {
 
 function Footer() {
   return (
-    <footer>
-      <div className="flex justify-between py-6 text-sm border-t-[1px] border-t-muted">
+    <footer className="mt-10">
+      <div className="flex flex-col-reverse gap-3 md:flex-row  justify-between py-5 text-sm border-t-[1px] border-t-muted">
         <div>
           © {new Date().getFullYear()} {siteMetadata.author} •{" "}
           {siteMetadata.description}
