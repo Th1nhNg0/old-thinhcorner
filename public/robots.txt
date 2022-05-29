@@ -1,5 +1,0 @@
-Sitemap: https://thinhcorner.com/sitemap.xml
-
-User-agent: *
-Allow: /
-Disallow: /api/*
