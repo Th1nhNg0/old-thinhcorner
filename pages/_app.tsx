@@ -3,6 +3,8 @@ import type { AppProps } from "next/app";
 import LayoutWrapper from "../components/LayoutWrapper";
 import { ThemeProvider } from "next-themes";
 import "../styles/globals.css";
+import "../styles/prism.css";
+import "katex/dist/katex.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

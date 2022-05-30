@@ -33,7 +33,46 @@ module.exports = {
   theme: {
     extend: {
       colors: themeColors,
+      typography: ({ theme }) => ({
+        DEFAULT: {
+          css: {
+            "--tw-prose-body": theme("colors.text"),
+            "--tw-prose-headings": theme("colors.rose"),
+            "--tw-prose-links": theme("colors.iris"),
+            "--tw-prose-bold": theme("colors.rose"),
+            "--tw-prose-counters": theme("colors.rose"),
+            "--tw-prose-bullets": theme("colors.rose"),
+            "--tw-prose-hr": theme("colors.gold"),
+            "--tw-prose-quotes": theme("colors.foam"),
+            "--tw-prose-quote-borders": theme("colors.pine"),
+            "--tw-prose-captions": theme("colors.subtle"),
+            "--tw-prose-code": theme("colors.gold"),
+            "--tw-prose-th-borders": theme("colors.muted"),
+            "--tw-prose-td-borders": theme("colors.muted"),
+            img: {
+              margin: "auto",
+              borderRadius: theme("borderRadius.lg"),
+            },
+            code: {
+              color: theme("colors.pine"),
+              background: theme("colors.overlay"),
+              padding: "0.25rem",
+              borderRadius: "0.25rem",
+              fontWeight: "600",
+            },
+            "code::before": {
+              content: "",
+            },
+            "code::after": {
+              content: "",
+            },
+          },
+        },
+      }),
     },
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: [
+    require("@tailwindcss/line-clamp"),
+    require("@tailwindcss/typography"),
+  ],
 };
