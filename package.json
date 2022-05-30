@@ -10,11 +10,14 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.6.3",
+    "@tailwindcss/line-clamp": "^0.4.0",
     "classnames": "^2.3.1",
+    "moment": "^2.29.3",
     "next": "12.1.6",
     "next-themes": "^0.2.0",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "slugify": "^1.6.5"
   },
   "devDependencies": {
     "@types/node": "17.0.35",

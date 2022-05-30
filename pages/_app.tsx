@@ -1,7 +1,7 @@
+import { useEffect } from "react";
 import type { AppProps } from "next/app";
 import LayoutWrapper from "../components/LayoutWrapper";
 import { ThemeProvider } from "next-themes";
-
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
