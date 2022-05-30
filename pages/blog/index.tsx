@@ -1,8 +1,10 @@
 import moment from "moment";
 import Link from "next/link";
 import slugify from "slugify";
+import { allBlogs, Blog } from "contentlayer/generated";
+import { pick } from "contentlayer/utils";
 
-export default function blog() {
+export default function blog({ posts }: { posts: Blog[] }) {
   return (
     <div>
       <div className="border-b-[1px] pb-8 mb-8 border-muted">
@@ -41,43 +43,37 @@ export default function blog() {
       </div>
 
       <ul>
-        {[0, 1, 2, 3, 4].map((e) => {
-          const { slug, date, title, summary, tags, views } = {
-            slug: "blog-slug",
-            date: "2020-01-01",
-            title: "Blog title",
-            summary: "Blog summary",
-            tags: ["tag1", "tag2", "vãi thật"],
-            views: 1234321132,
-          };
+        {posts.map((post) => {
           return (
-            <li key={slug} className="py-4">
+            <li key={post.slug} className="py-4">
               <article className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline">
                 <dl>
                   <dt className="sr-only">Published on</dt>
                   <dd className="font-medium leading-6 text-subtle">
-                    <time dateTime={date}>{moment(date).format("LL")}</time>
+                    <time dateTime={post.date}>
+                      {moment(post.date).format("LL")}
+                    </time>
                   </dd>
                   <div>
                     <p className="font-medium leading-6 text-muted ">
-                      {new Intl.NumberFormat().format(views)} views
+                      {new Intl.NumberFormat().format(12341)} views
                     </p>
                   </div>
                 </dl>
                 <div className="space-y-3 xl:col-span-3">
                   <div>
                     <h3 className="text-2xl font-bold leading-8 tracking-tight">
-                      <Link href={`/blog/${slug}`} className="text-text">
-                        {title}
+                      <Link href={`/blog/${post.slug}`} className="text-text">
+                        {post.title}
                       </Link>
                     </h3>
                     <div className="flex flex-wrap">
-                      {tags.map((tag) => (
+                      {/* {tags.map((tag) => (
                         <Tag key={tag} text={tag} />
-                      ))}
+                      ))} */}
                     </div>
                   </div>
-                  <div className="prose text-subtle">{summary}</div>
+                  <div className="prose text-subtle">{post.summary}</div>
                 </div>
               </article>
             </li>
@@ -96,3 +92,10 @@ const Tag = ({ text }: { text: string }) => {
     </Link>
   );
 };
+
+export async function getStaticProps() {
+  const posts = allBlogs
+    .map((blog) => pick(blog, ["slug", "title", "summary", "date"]))
+    .sort((a, b) => moment(b.date).diff(moment(a.date)));
+  return { props: { posts } };
+}

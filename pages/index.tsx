@@ -49,11 +49,11 @@ function NewestPost() {
                     Component Libraries
                   </h4>
                 </div>
-                <div className="flex justify-between">
-                  <div>{moment().subtract(6, "days").format("L")}</div>
-                  <div className="ml-2 align-baseline capsize">
-                    {new Intl.NumberFormat().format(123451)} views views
+                <div>
+                  <div className="text-subtle">
+                    {new Intl.NumberFormat().format(123451)} views
                   </div>
+                  <div>{moment().subtract(6, "days").format("LL")}</div>
                 </div>
               </div>
             </a>

@@ -13,7 +13,7 @@ export default function LayoutWrapper({
   children: React.ReactNode;
 }) {
   return (
-    <div className="max-w-4xl min-h-screen px-5 mx-auto">
+    <div className="max-w-3xl min-h-screen px-5 mx-auto">
       <Header />
       <main className="mb-auto">{children}</main>
       <Footer />
