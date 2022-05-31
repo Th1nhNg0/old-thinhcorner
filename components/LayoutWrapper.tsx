@@ -104,8 +104,8 @@ const MobileNav = () => {
         </svg>
       </button>
       <div
-        className={`fixed w-full h-full top-24 right-0 bg-overlay z-10 transform ease-in-out duration-300 ${
-          navShow ? "opacity-95" : "opacity-0"
+        className={`fixed   w-full h-full top-24 right-0 bg-overlay z-10 transform ease-in-out duration-300 ${
+          navShow ? "opacity-95 visible" : "opacity-0 invisible"
         }`}
       >
         <button
@@ -123,7 +123,7 @@ const MobileNav = () => {
                 navShow ? "translate-x-0" : "-translate-x-full"
               )}
               style={{
-                transitionDelay: `${i * 100}ms`,
+                transitionDelay: `${(i + 1) * 100}ms`,
               }}
             >
               <Link href={link.href}>

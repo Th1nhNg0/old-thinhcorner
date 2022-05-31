@@ -107,3 +107,15 @@ body {
     transform: rotate(0deg);
   }
 }
+
+body::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(var(--color-iris));
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--color-iris));
+}

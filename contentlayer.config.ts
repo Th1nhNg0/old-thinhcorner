@@ -12,22 +12,19 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrism from "rehype-prism-plus";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
+import remarkImgToJsx from "./lib/remark-img-to-jsx";
 
 const computedFields: ComputedFields = {
   readingTime: { type: "json", resolve: (doc) => readingTime(doc.body.raw) },
-  wordCount: {
-    type: "number",
-    resolve: (doc) => doc.body.raw.split(/\s+/gu).length,
-  },
   slug: {
     type: "string",
     resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx$/, ""),
   },
 };
 
-const Blog = defineDocumentType(() => ({
-  name: "Blog",
-  filePathPattern: "blog/**/*.mdx",
+const Post = defineDocumentType(() => ({
+  name: "Post",
+  filePathPattern: "post/**/*.mdx",
   contentType: "mdx",
   fields: {
     title: { type: "string", required: true },
@@ -52,9 +49,9 @@ const Snippet = defineDocumentType(() => ({
 
 const contentLayerConfig = makeSource({
   contentDirPath: "data",
-  documentTypes: [Blog, Snippet],
+  documentTypes: [Post, Snippet],
   mdx: {
-    remarkPlugins: [remarkGfm, remarkMath],
+    remarkPlugins: [remarkGfm, remarkMath, remarkImgToJsx],
     rehypePlugins: [
       rehypeSlug,
       rehypeCodeTitles,

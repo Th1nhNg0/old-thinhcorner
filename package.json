@@ -13,6 +13,8 @@
     "@tailwindcss/line-clamp": "^0.4.0",
     "classnames": "^2.3.1",
     "contentlayer": "^0.2.5",
+    "framer-motion": "^6.3.6",
+    "image-size": "^1.0.1",
     "moment": "^2.29.3",
     "next": "12.1.6",
     "next-contentlayer": "^0.2.5",
@@ -27,7 +29,8 @@
     "rehype-slug": "^5.0.1",
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
-    "slugify": "^1.6.5"
+    "slugify": "^1.6.5",
+    "unist-util-visit": "^4.1.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.2",

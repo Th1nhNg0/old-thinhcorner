@@ -1,10 +1,10 @@
 import moment from "moment";
 import Link from "next/link";
 import slugify from "slugify";
-import { allBlogs, Blog } from "contentlayer/generated";
+import { allPosts, Post } from "contentlayer/generated";
 import { pick } from "contentlayer/utils";
 
-export default function blog({ posts }: { posts: Blog[] }) {
+export default function blog({ posts }: { posts: Post[] }) {
   return (
     <div>
       <div className="border-b-[1px] pb-8 mb-8 border-muted">
@@ -94,7 +94,7 @@ const Tag = ({ text }: { text: string }) => {
 };
 
 export async function getStaticProps() {
-  const posts = allBlogs
+  const posts = allPosts
     .map((blog) => pick(blog, ["slug", "title", "summary", "date"]))
     .sort((a, b) => moment(b.date).diff(moment(a.date)));
   return { props: { posts } };
