@@ -3,7 +3,7 @@ import moment from "moment";
 import classNames from "classnames";
 import { allPosts, allSnippets, Post, Snippet } from "contentlayer/generated";
 import { pick } from "contentlayer/utils";
-import snippet from "./snippet";
+import ViewCounter from "src/components/ViewCounter";
 
 export default function Home({
   posts,
@@ -15,7 +15,7 @@ export default function Home({
   return (
     <div className="space-y-10">
       <div className="border-b-[1px] pb-5 border-muted">
-        <h1 className="text-3xl font-bold tracking-tight md:text-4xl text-text sm:leading-10 md:leading-14">
+        <h1 className="text-3xl font-bold tracking-wide md:text-4xl text-text sm:leading-10 md:leading-14">
           Xin chào, mình là{" "}
           <Link href="/about">
             <a className="hover-underline-animation text-rose">Thịnh</a>
@@ -34,7 +34,7 @@ export default function Home({
 function NewestPost({ posts }: { posts: Post[] }) {
   return (
     <div>
-      <h3 className="mb-6 text-2xl font-bold tracking-tight">Bài viết mới</h3>
+      <h3 className="mb-6 text-2xl font-bold">Bài viết mới</h3>
       <div className="flex flex-col gap-5 md:flex-row">
         {posts.map((post, i) => (
           <Link key={post.slug} href={`/blog/${post.slug}`}>
@@ -50,17 +50,15 @@ function NewestPost({ posts }: { posts: Post[] }) {
             >
               <div className="flex flex-col justify-between h-full p-4 rounded-lg bg-surface ">
                 <div className="flex flex-col justify-between md:flex-row">
-                  <h4 className="w-full mb-6 text-lg font-medium tracking-tight text-text md:text-lg sm:mb-10 ">
+                  <h4 className="w-full mb-6 text-lg font-medium text-text md:text-lg sm:mb-10 ">
                     {post.title}
                   </h4>
                 </div>
                 <div>
                   <div className="text-subtle">
-                    {new Intl.NumberFormat().format(123451)} views
+                    <ViewCounter slug={post.slug} />
                   </div>
-                  <div>
-                    {moment(post.date).subtract(6, "days").format("LL")}
-                  </div>
+                  <div>{moment(post.date).format("LL")}</div>
                 </div>
               </div>
             </a>
@@ -91,23 +89,21 @@ function NewestPost({ posts }: { posts: Post[] }) {
 function FeaturedSnippet({ snippets }: { snippets: Snippet[] }) {
   return (
     <div>
-      <h3 className="mb-6 text-2xl font-bold tracking-tight">
-        Snippet nổi bật
-      </h3>
+      <h3 className="mb-6 text-2xl font-bold">Snippet nổi bật</h3>
       <div className="grid gap-5 md:grid-cols-2">
         {snippets.map((snippet) => (
           <Link href="/snippet" key={snippet.slug}>
             <a className="relative w-full p-4 transition duration-500 transform border rounded cursor-pointer bg-surface border-hightlight-high group hover:scale-105">
-              <div className="absolute bottom-0 left-0 w-full h-0.5 duration-300 origin-left transform scale-x-0 bg-rose group-hover:scale-x-100"></div>
-              <div className="absolute bottom-0 left-0 w-0.5 h-full duration-300 origin-bottom transform scale-y-0 bg-rose group-hover:scale-y-100"></div>
-              <div className="absolute top-0 left-0 w-full h-0.5 duration-300 origin-right transform scale-x-0 bg-rose group-hover:scale-x-100"></div>
-              <div className="absolute bottom-0 right-0 w-0.5 h-full duration-300 origin-top transform scale-y-0 bg-rose group-hover:scale-y-100"></div>
+              <div className="absolute bottom-0 left-0 w-full h-0.5 duration-300 origin-left transform scale-x-0 bg-foam group-hover:scale-x-100"></div>
+              <div className="absolute bottom-0 left-0 w-0.5 h-full duration-300 origin-bottom transform scale-y-0 bg-foam group-hover:scale-y-100"></div>
+              <div className="absolute top-0 left-0 w-full h-0.5 duration-300 origin-right transform scale-x-0 bg-foam group-hover:scale-x-100"></div>
+              <div className="absolute bottom-0 right-0 w-0.5 h-full duration-300 origin-top transform scale-y-0 bg-foam group-hover:scale-y-100"></div>
               <img
-                src="https://leerob.io/_next/image?url=%2Flogos%2Fbuttondown.png&w=32&q=75"
+                src={snippet.logo}
                 alt=""
-                className="rounded-full"
+                className="object-contain rounded-full w-14"
               />
-              <h4 className="mt-2 text-lg font-bold text-left text-text">
+              <h4 className="mt-2 text-lg font-medium text-left text-text">
                 {snippet.title}
               </h4>
               <p className="mt-1 text-subtle">{snippet.description}</p>

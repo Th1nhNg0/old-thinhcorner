@@ -1,8 +1,6 @@
 import Link from "next/link";
-import React, { useState, useRef, Fragment, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
-import classNames from "classnames";
 
 const CustomLink = (props: any) => {
   const href = props.href;
@@ -30,69 +28,9 @@ const CustomImage = ({
   height: number;
   alt: string;
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [renderWidth, setrenderWidth] = useState(0);
-  const [renderHeight, setrenderHeight] = useState(0);
-  const ref = useRef<HTMLImageElement>(null);
-  useEffect(() => {
-    if (ref.current) {
-      setrenderWidth(ref.current.clientWidth);
-      setrenderHeight(ref.current.clientHeight);
-    }
-  }, [ref]);
-
-  useEffect(() => {
-    if (!isOpen) {
-      document.body.style.overflow = "auto";
-    } else {
-      // Prevent scrolling
-      document.body.style.overflow = "hidden";
-    }
-  }, [isOpen]);
-
   return (
-    <div
-      style={{
-        width: isOpen ? renderWidth : "auto",
-        height: isOpen ? renderHeight : "auto",
-      }}
-    >
-      {!isOpen ? (
-        <motion.div ref={ref} layoutId={src} className="flex justify-center">
-          <Image
-            className="cursor-zoom-in"
-            onClick={() => setIsOpen(true)}
-            src={src}
-            width={width}
-            height={height}
-            alt={alt}
-          />
-        </motion.div>
-      ) : (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center"
-          onClick={() => setIsOpen(false)}
-        >
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed w-full h-full bg-overlay bg-opacity-70 "
-          />
-          <motion.div
-            className="flex justify-center max-w-screen-lg p-10"
-            layoutId={src}
-          >
-            <Image
-              className="cursor-zoom-out"
-              src={src}
-              width={width}
-              height={height}
-              alt={alt}
-            />
-          </motion.div>
-        </div>
-      )}
+    <div className="flex items-center justify-center">
+      <Image src={src} width={width} height={height} alt={alt} />
     </div>
   );
 };

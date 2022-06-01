@@ -12,7 +12,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrism from "rehype-prism-plus";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
-import remarkImgToJsx from "./lib/remark-img-to-jsx";
+import remarkImgToJsx from "./src/lib/remark-img-to-jsx";
 
 const computedFields: ComputedFields = {
   readingTime: { type: "json", resolve: (doc) => readingTime(doc.body.raw) },
@@ -31,6 +31,15 @@ const Post = defineDocumentType(() => ({
     date: { type: "string", required: true },
     summary: { type: "string", required: true },
     image: { type: "string", required: false },
+    tags: {
+      type: "list",
+      of: {
+        type: "string",
+      },
+      default: ["linh tinh"],
+      description: "Tags for the post",
+      required: false,
+    },
   },
   computedFields,
 }));

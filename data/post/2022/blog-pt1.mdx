@@ -1,0 +1,79 @@
+---
+title: "Let rebuild my blog. Part 1: Planning"
+date: "2022-06-01"
+summary: "Build a blog from scratch"
+---
+
+Tại sao lại _đập đi xây mới_? Vấn đề chính nằm ở source code cũ. Mình clone nó từ template : [link]. Source này ban đầu thì rất ok, nhưng qua một thời gian sử dụng mình gặp một số vấn đề sau:
+
+- Sử dụng quá nhiều lib. Các lib core bị outdated thì ko update dc vì depencies quá nhiều.
+
+- Mỗi lần viết bài mới thì phải push code lên git. Vì blog lưu thẳng trong source.
+
+- Chỉ có 2 theme, light và dark. Không custom thêm được :'(
+
+- Comment system là [giscus](https://giscus.app/), cài đặt chỉ vài click là xong. Nhưng có mặt hạn chế là chỉ user có tài khoản github mới comment được.
+
+- Vì source gốc là open source +tác giả cỏ vẻ lười review code nên source như đám rừng, muốn thêm tính năng gì cũng mất cả ngày trời =.=.
+
+Vậy nên, ngại gì mà không thử :3.
+
+## Một trang blog cá nhân thì nên có những gì?
+
+Đây là những tính năng mà bất kỳ trang blog nào cũng có:
+
+- Bài viết
+
+- Tags
+
+- Share bài viết
+
+- About ( thông tin tác giả )
+
+- Contact
+
+Tuy nhiên, đối với blog của mình. Mình nghĩ ra được vài feature có vẻ khá hay như:
+
+- Trạng thái Spotify
+
+- Showcase project
+
+- Today I learn ( nhật ký thứ mình học được )
+
+- Bài viết tương tác được. VD: chèn code vào bài viết
+
+Và quan trọng là phải giải quyết được những vấn đề đã nêu ở đầu blog :3.
+
+## Giao diện nên trông như thế nào?
+
+Mình chả biết gì về designer nên có vẻ đi trôm giao diện là giải pháp hợp lí nhất :)). Nguồn kham khảo mà mình chọn đó là dribble và behance. Nhưng chủ yếu mình giữ lại giao diện ở blog cũ vì nó khá minimalist.
+
+Tiếp theo là chọn màu phù hợp, [Rosé Pine](https://rosepinetheme.com/) bảng màu mình nhặt được trong 1 group chat IT. Bảng màu này tạo một cảm giác dễ chịu.
+
+Cuối cùng là chọn font:
+
+- Josefin Sans dùng trong tiêu đề của bài viết
+
+- Arial dùng trong nội dung của bài viết, font chứ này quá huyền thoại rồi :))
+
+- Consolas font chữ trong các đoạn code. Font mình xài trong editor
+
+## Chọn công nghệ gì?
+
+- Markdown là ngôn ngữ tuyệt vời để viết blog. Vì nó thật sự đơn giản và nhanh.
+
+- MDX cho phép ta viết js code trong file markdown
+
+- Next.js là bộ khung chủ đạo của website. Nhớ lúc mình nói mỗi lần viết bài phải _push code lên git_ không ? Với tính năng _Incremental Static Regeneration - ISR_ của next.js thì ta có thể tách biệt 2 phần nội dung và source code ra riêng.
+
+- Tailwind.css dân trong ngành hay gọi vui là "đuôi gió". Từ khi biết đến nó, trải nghiệm style html của mình đã lên một tầm cao mới :)). Ngoài ra mình cũng sử dụng vài tool nằm trong hệ sinh thái của tailwind.css như: headless ui, heroicons, heropatterns...
+
+- highlight.js dùng để highlight code trong bài viết
+
+## Bắt tay vào làm
+
+Những thành phần cần tuyển chọn đã gom đủ, giờ chỉ cần lắp ráp lại.
+
+Hy vọng qua chuỗi bài này có thể giúp ích cho những bạn muốn thử thách làm một cái blog như minh.
+
+Chờ nhé 😎.

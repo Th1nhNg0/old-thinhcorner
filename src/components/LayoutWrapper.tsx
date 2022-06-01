@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import ThemeSwitch from "./ThemeSwitch";
 import Logo from "./logo";
 import classNames from "classnames";
-import headerNavLinks from "../data/headerNavLinks";
-import siteMetadata from "../data/siteMetadata";
+import headerNavLinks from "../../data/headerNavLinks";
+import siteMetadata from "../../data/siteMetadata";
 import { useRouter } from "next/router";
 
 export default function LayoutWrapper({
