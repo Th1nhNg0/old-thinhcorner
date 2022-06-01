@@ -1,6 +1,8 @@
 import { Post } from "contentlayer/generated";
+import { motion, useViewportScroll } from "framer-motion";
 import moment from "moment";
-import Link from "next/link";
+import React, { useEffect, useRef, useState } from "react";
+import ScrollTopAndComment from "src/components/ScrollTopAndComment";
 import Tag from "src/components/Tag";
 import ViewCounter from "src/components/ViewCounter";
 
@@ -11,8 +13,40 @@ export default function PostLayout({
   children: React.ReactNode;
   post: Post;
 }) {
+  const [percent, setpercent] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollY } = useViewportScroll();
+
+  useEffect(() => {
+    const unsub = scrollY.onChange((value) => {
+      if (ref.current != null) {
+        const height = ref.current.clientHeight;
+        setpercent(Math.min(value / height, 1));
+      }
+    });
+    return () => {
+      unsub();
+    };
+  }, [scrollY]);
+
   return (
     <div>
+      <div className="fixed top-0 left-0 w-full">
+        <motion.div
+          animate={{ opacity: percent > 0 ? 1 : 0 }}
+          className="h-1 bg-hightlight-high"
+        >
+          <motion.div
+            className="h-1 bg-iris"
+            style={{
+              scaleX: percent,
+              originX: 0,
+              originY: 0,
+            }}
+          />
+        </motion.div>
+      </div>
+      <ScrollTopAndComment />
       <article>
         <h1 className="mb-4 text-3xl font-bold text-rose md:text-5xl ">
           {post.title}
@@ -34,7 +68,9 @@ export default function PostLayout({
             ))}
           </div>
         </div>
-        <div className="mt-8 prose max-w-none">{children}</div>
+        <div className="mt-8 prose max-w-none" ref={ref}>
+          {children}
+        </div>
       </article>
     </div>
   );
