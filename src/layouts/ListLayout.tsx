@@ -58,7 +58,7 @@ export default function ListLayout({
       </div>
       <motion.ul layout transition={{ duration: 0.5 }}>
         {filteredPosts.map((post) => (
-          <motion.li layout key={post.slug} className="py-4">
+          <motion.li layout="position" key={post.slug} className="py-4">
             <article className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline">
               <dl>
                 <dt className="sr-only">Published on</dt>
