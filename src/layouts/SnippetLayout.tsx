@@ -1,4 +1,4 @@
-import { Post } from "contentlayer/generated";
+import { Snippet } from "contentlayer/generated";
 import { motion, useViewportScroll } from "framer-motion";
 import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
@@ -6,12 +6,12 @@ import ScrollTopAndComment from "src/components/ScrollTopAndComment";
 import Tag from "src/components/Tag";
 import ViewCounter from "src/components/ViewCounter";
 
-export default function PostLayout({
+export default function SnippetLayout({
   children,
-  post,
+  snippet,
 }: {
   children: React.ReactNode;
-  post: Post;
+  snippet: Snippet;
 }) {
   const [percent, setpercent] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -48,25 +48,18 @@ export default function PostLayout({
       </div>
       <ScrollTopAndComment />
       <article>
-        <h1 className="mb-4 text-3xl font-bold text-rose md:text-5xl ">
-          {post.title}
-        </h1>
+        <div className="flex items-center gap-3 mb-4 ">
+          <img
+            src={snippet.logo}
+            alt=""
+            className="object-contain rounded-full w-14"
+          />
+          <h1 className="text-3xl font-bold text-rose md:text-5xl ">
+            {snippet.title}
+          </h1>
+        </div>
         <div className=" border-b-[1px] pb-4 border-muted ">
-          <div className="flex flex-col items-start justify-between w-full mt-2 md:flex-row md:items-center">
-            <div className="flex items-center">
-              <p className="text-subtle">{moment(post.date).format("LL")}</p>
-            </div>
-            <p className="mt-2 text-sm text-subtle min-w-32 md:mt-0">
-              {post.readingTime.text}
-              {` • `}
-              <ViewCounter slug={post.slug} update />
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3 mt-4">
-            {post.tags?.map((tag) => (
-              <Tag key={tag} text={tag} />
-            ))}
-          </div>
+          <p className="text-lg text-text">{snippet.description}</p>
         </div>
         <div className="mt-8 prose max-w-none" ref={ref}>
           {children}

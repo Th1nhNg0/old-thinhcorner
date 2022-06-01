@@ -50,14 +50,17 @@ module.exports = {
             "--tw-prose-captions": theme("colors.subtle"),
             "--tw-prose-th-borders": theme("colors.muted"),
             "--tw-prose-td-borders": theme("colors.muted"),
+            h1: {
+              marginTop: "1.3em",
+            },
             img: {
               margin: "auto",
               borderRadius: theme("borderRadius.lg"),
             },
             code: {
               color: theme("colors.pine"),
-              background: theme("colors.surface"),
-              padding: "0.25rem",
+              background: "rgb(38 35 58)",
+              padding: "0.25rem 0.4rem",
               borderRadius: "0.25rem",
               fontWeight: "600",
             },

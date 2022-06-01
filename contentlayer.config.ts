@@ -50,6 +50,7 @@ const Snippet = defineDocumentType(() => ({
   contentType: "mdx",
   fields: {
     title: { type: "string", required: true },
+    date: { type: "string", required: true },
     description: { type: "string", required: true },
     logo: { type: "string", required: true },
   },

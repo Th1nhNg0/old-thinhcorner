@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { allPosts, allSnippets, Post, Snippet } from "contentlayer/generated";
 import { pick } from "contentlayer/utils";
 import ViewCounter from "src/components/ViewCounter";
+import SnippetCard from "src/components/SnippetCard";
 
 export default function Home({
   posts,
@@ -92,23 +93,7 @@ function FeaturedSnippet({ snippets }: { snippets: Snippet[] }) {
       <h3 className="mb-6 text-2xl font-bold">Snippet nổi bật</h3>
       <div className="grid gap-5 md:grid-cols-2">
         {snippets.map((snippet) => (
-          <Link href="/snippet" key={snippet.slug}>
-            <a className="relative w-full p-4 transition duration-500 transform border rounded cursor-pointer bg-surface border-hightlight-high group hover:scale-105">
-              <div className="absolute bottom-0 left-0 w-full h-0.5 duration-300 origin-left transform scale-x-0 bg-rose group-hover:scale-x-100"></div>
-              <div className="absolute bottom-0 left-0 w-0.5 h-full duration-300 origin-bottom transform scale-y-0 bg-rose group-hover:scale-y-100"></div>
-              <div className="absolute top-0 left-0 w-full h-0.5 duration-300 origin-right transform scale-x-0 bg-rose group-hover:scale-x-100"></div>
-              <div className="absolute bottom-0 right-0 w-0.5 h-full duration-300 origin-top transform scale-y-0 bg-rose group-hover:scale-y-100"></div>
-              <img
-                src={snippet.logo}
-                alt=""
-                className="object-contain rounded-full w-14"
-              />
-              <h4 className="mt-2 text-lg font-medium text-left text-text">
-                {snippet.title}
-              </h4>
-              <p className="mt-1 text-subtle">{snippet.description}</p>
-            </a>
-          </Link>
+          <SnippetCard key={snippet._id} {...snippet} />
         ))}
       </div>
       <Link href="/blog">
