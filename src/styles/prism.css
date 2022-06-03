@@ -8,8 +8,6 @@
 code[class*="language-"],
 pre[class*="language-"] {
   color: #e0def4;
-  font-family: "Cartograph CF", ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, "Liberation Mono", "Courier New", monospace;
   text-align: left;
   white-space: pre;
   word-spacing: normal;

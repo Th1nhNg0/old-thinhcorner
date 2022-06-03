@@ -38,16 +38,14 @@ export default function SnippetLayout({
         >
           <motion.div
             className="h-1 bg-iris"
-            style={{
-              scaleX: percent,
-              originX: 0,
-              originY: 0,
-            }}
+            animate={{ scaleX: percent }}
+            style={{ originX: 0, originY: 0 }}
           />
         </motion.div>
       </div>
       <ScrollTopAndComment />
       <article>
+        <p className="text-subtle">{moment(snippet.date).format("LL")}</p>
         <div className="flex items-center gap-3 mb-4 ">
           <img
             src={snippet.logo}

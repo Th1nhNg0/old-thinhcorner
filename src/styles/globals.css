@@ -17,6 +17,11 @@
     font-family: "Barlow Condensed", sans-serif;
     letter-spacing: 0.05em;
   }
+  code,
+  pre {
+    font-family: Consolas, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+  }
 }
 
 /* we define color scheme here */
