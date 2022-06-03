@@ -1,10 +1,12 @@
-import { useEffect } from "react";
-import type { AppProps } from "next/app";
-import LayoutWrapper from "../components/LayoutWrapper";
-import { ThemeProvider } from "next-themes";
-import "../styles/globals.css";
-import "../styles/prism.css";
+import siteMetadata from "data/siteMetadata";
 import "katex/dist/katex.css";
+import { DefaultSeo, SocialProfileJsonLd } from "next-seo";
+import { ThemeProvider } from "next-themes";
+import type { AppProps } from "next/app";
+import seo from "src/seo.config";
+import "src/styles/globals.css";
+import "src/styles/prism.css";
+import LayoutWrapper from "../components/LayoutWrapper";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -14,7 +16,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       themes={["theme-first", "theme-second"]}
     >
       <LayoutWrapper>
+        <DefaultSeo {...seo} />
         <Component {...pageProps} />
+        <SocialProfileJsonLd
+          type="Person"
+          name={siteMetadata.author}
+          url={siteMetadata.siteUrl}
+          sameAs={[siteMetadata.facebook, siteMetadata.linkedin]}
+        />
       </LayoutWrapper>
     </ThemeProvider>
   );

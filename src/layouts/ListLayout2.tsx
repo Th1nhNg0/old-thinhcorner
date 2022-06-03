@@ -1,11 +1,8 @@
-import { Post, Snippet } from "contentlayer/generated";
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import moment from "moment";
-import ViewCounter from "src/components/ViewCounter";
-import Link from "next/link";
-import Tag from "src/components/Tag";
+
+import { Snippet } from "contentlayer/generated";
 import SnippetCard from "src/components/SnippetCard";
+import { motion } from "framer-motion";
 
 export default function ListLayout({ snippets }: { snippets: Snippet[] }) {
   const [search, setsearch] = useState("");
@@ -57,7 +54,7 @@ export default function ListLayout({ snippets }: { snippets: Snippet[] }) {
         transition={{ duration: 0.5 }}
       >
         {filteredPosts.map((snippet) => (
-          <SnippetCard key={snippet._id} {...snippet} />
+          <SnippetCard key={snippet.slug} {...snippet} />
         ))}
       </motion.div>
     </div>

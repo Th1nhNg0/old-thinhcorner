@@ -1,6 +1,12 @@
 const siteMetadata = {
   title: "Thịnh's Corner",
   author: "Thịnh Ngô",
+  SEO_author: {
+    first_name: "Thịnh",
+    last_name: "Ngô",
+    username: "Th1nhNg0",
+    gender: "male",
+  },
   headerTitle: "Thịnh's Corner",
   description: "Góc nhỏ của Thịnh",
   language: "en-us",

@@ -1,11 +1,11 @@
-import Link from "next/link";
-import React, { useState } from "react";
-import ThemeSwitch from "./ThemeSwitch";
-import Logo from "./logo";
 import classNames from "classnames";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 import headerNavLinks from "../../data/headerNavLinks";
 import siteMetadata from "../../data/siteMetadata";
-import { useRouter } from "next/router";
+import Logo from "./logo";
+import ThemeSwitch from "./ThemeSwitch";
 
 export default function LayoutWrapper({
   children,
@@ -151,6 +151,10 @@ function Footer() {
           {siteMetadata.description}
         </div>
         <div>
+          <a target="_blank" href="/feed.xml" rel="noreferrer">
+            RSS
+          </a>{" "}
+          •{" "}
           <a target="_blank" href={siteMetadata.github} rel="noreferrer">
             Github
           </a>{" "}

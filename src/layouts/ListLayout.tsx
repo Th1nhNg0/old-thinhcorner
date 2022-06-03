@@ -1,10 +1,10 @@
 import { Post } from "contentlayer/generated";
-import React, { useState } from "react";
 import { motion } from "framer-motion";
 import moment from "moment";
-import ViewCounter from "src/components/ViewCounter";
 import Link from "next/link";
+import React, { useState } from "react";
 import Tag from "src/components/Tag";
+import ViewCounter from "src/components/ViewCounter";
 
 export default function ListLayout({
   posts,

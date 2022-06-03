@@ -93,7 +93,7 @@ function FeaturedSnippet({ snippets }: { snippets: Snippet[] }) {
       <h3 className="mb-6 text-2xl font-bold">Snippet nổi bật</h3>
       <div className="grid gap-5 md:grid-cols-2">
         {snippets.map((snippet) => (
-          <SnippetCard key={snippet._id} {...snippet} />
+          <SnippetCard key={snippet.slug} {...snippet} />
         ))}
       </div>
       <Link href="/blog">
@@ -119,6 +119,7 @@ function FeaturedSnippet({ snippets }: { snippets: Snippet[] }) {
 
 export async function getStaticProps() {
   const posts = allPosts
+    .filter((post) => post.draft !== true)
     .map((post) => pick(post, ["slug", "title", "summary", "date"]))
     .sort((a, b) => moment(b.date).diff(moment(a.date)))
     .slice(0, 3);

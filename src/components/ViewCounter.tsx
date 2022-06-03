@@ -1,8 +1,7 @@
 import { useEffect } from "react";
-import useSWR from "swr";
-
 import fetcher from "src/lib/fetcher";
 import { Views } from "src/lib/types";
+import useSWR from "swr";
 
 export default function ViewCounter({
   slug,
