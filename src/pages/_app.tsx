@@ -3,6 +3,7 @@ import "katex/dist/katex.css";
 import { DefaultSeo, SocialProfileJsonLd } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
+import Analytics from "src/components/analytics";
 import seo from "src/seo.config";
 import "src/styles/globals.css";
 import "src/styles/prism.css";
@@ -18,6 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <LayoutWrapper>
         <DefaultSeo {...seo} />
         <Component {...pageProps} />
+        <Analytics />
         <SocialProfileJsonLd
           type="Person"
           name={siteMetadata.author}

@@ -9,7 +9,6 @@ const siteMetadata = {
   },
   headerTitle: "Thịnh's Corner",
   description: "Góc nhỏ của Thịnh",
-  language: "en-us",
   siteUrl: "https://thinhcorner.com",
   siteRepo: "https://github.com/Th1nhNg0/th1nhng0.vercel.app",
   siteLogo: "/static/images/logo.png",
