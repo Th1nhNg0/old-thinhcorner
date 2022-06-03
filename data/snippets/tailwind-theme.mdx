@@ -1,0 +1,105 @@
+---
+title: "Tailwindcss multitheme"
+description: "Tạo theme switcher cho tailwindcss một cách đơn giản"
+logo: "/static/images/snippets/Tailwind_CSS_Logo.svg"
+date: "2022-06-01"
+---
+
+Định nghĩa nhiều theme khác nhau bằng CSS variable:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Định nghĩa 2 theme: */
+.theme-first {
+  /*25 23 36 nghĩa là rgb(25,23,36) */
+  --color-base: 25 23 36;
+  --color-surface: 31 29 46;
+  --color-text: 38 35 58;
+}
+
+.theme-second {
+  --color-base: 250 244 237;
+  --color-surface: 255 250 243;
+  --color-text: 242 233 222;
+}
+
+/* Sử dụng color theme trong class: */
+.my-box {
+  width: 100px;
+  height: 100px;
+  background: rgb(var(--color-base));
+}
+```
+
+Để sử dụng theme, đơn giản ta chỉ cần gắn tên class của theme đó vào thẻ body. Ví dụ:
+
+```html
+<body class="theme-first">
+  <div class="my-box"></div>
+</body>
+```
+
+Setup tailwindcss. Trong file `tailwind.config.js`:
+
+```js
+// Cần hàm này để có thể sử dụng class opacity-[value]
+function withOpacityValue(variable) {
+  return ({ opacityValue }) => {
+    if (opacityValue === undefined) {
+      return `rgb(var(${variable}))`;
+    }
+    return `rgb(var(${variable}) / ${opacityValue})`;
+  };
+}
+
+// Có bao nhiêu css varible trong theme thì ta định nghĩa bấy nhiêu đó:
+let themeColors = {
+  base: withOpacityValue("--color-base"),
+  surface: withOpacityValue("--color-surface"),
+  text: withOpacityValue("--color-text"),
+  //...
+};
+
+module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: themeColors,
+    },
+  },
+  plugins: [],
+};
+```
+
+Sử dụng:
+
+```html
+<button className="bg-base text-text p-3">Hello World</button>
+```
+
+import { useState } from "react";
+import classnames from "classnames";
+export function MyBtn() {
+  const [theme, setTheme] = useState("theme-second");
+  return (
+    <div className="w-full h-56 gap-5 bg-overlay flex-col flex justify-center items-center">
+      <div className="space-x-5">
+        <span onClick={()=>setTheme('theme-first')} className={classnames("cursor-pointer transform",theme=='theme-first'&&'text-2xl')}>theme-first</span>
+        <span onClick={()=>setTheme('theme-second')} className={classnames("cursor-pointer transform",theme=='theme-second'&&'text-2xl')}>theme-second</span>
+      </div>
+      <button
+        className={classnames(theme, "bg-base text-text p-3")}
+      >
+        Hello World
+      </button>
+    </div>
+
+);
+}
+
+<MyBtn />

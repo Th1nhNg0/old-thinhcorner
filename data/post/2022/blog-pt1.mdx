@@ -1,0 +1,76 @@
+---
+title: "Let rebuild my blog. Part 1: Planning"
+date: "2022-06-01"
+summary: "Build a blog from scratch"
+---
+
+Tại sao lại _đập đi xây mới_?
+
+Vấn đề chính nằm ở source code. Mình clone nó từ template : [tailwind-nextjs-starter-blog](https://github.com/timlrx/tailwind-nextjs-starter-blog). Source này ban đầu thì rất ok, nhưng qua một thời gian sử dụng mình gặp một số vấn đề sau:
+
+- Sử dụng quá nhiều lib. Các lib core bị outdated thì ko update dc vì dependencies quá nhiều
+- Phần code để build bài viết từ mdx quá phức tạp
+- Chỉ có 2 theme, light và dark.
+- Tối ưu SEO chưa tốt
+
+Build from scratch rất vui!
+
+- Vui vì có vấn đề cần giải quyết
+- Vui vì học được kiến thức mới
+- Vui vì có cơ hội thử nghiệm nghịch phá
+- Vui nhất là dùng giờ công ty nhưng làm việc riêng của mình :)))
+
+Vậy nên ngại gì mà không thử. Cùng lên kế hoạch cho petproject này của mình nhé :D.
+
+## Một trang blog thì nên có những gì?
+
+Những tính năng cơ bản mà bất kì blog nào cũng cần có:
+
+- Bài viết
+- Tags (phân loại bài viết)
+- About (thông tin tác giả)
+
+Tuy nhiên, đối với blog của mình. Vì được tự do sáng tạo mà không bị giới hạn nên mình nghĩ ra được vài tính năng khá thú vị như:
+
+- Trạng thái Spotify
+- Số lượt xem bài viết
+- Code snippet
+- Today I learn (lưu lại những gì mình học hàng ngày)
+- Bài viết tương tác được. VD: chèn code vào bài viết
+- ...
+
+Và quan trọng là phải giải quyết được những vấn đề mà cái blog cũ mình gặp phải.
+
+## Giao diện nên trông như thế nào?
+
+Mình chả biết gì về designer nên có vẻ đi trộm giao diện là giải pháp hợp lí nhất :)). Nguồn kham khảo mà mình chọn đó là dribble và behance. Nhưng chủ yếu mình giữ lại giao diện ở blog cũ vì nó khá minimalist.
+
+Tiếp theo là chọn màu phù hợp, [Rosé Pine](https://rosepinetheme.com/) bảng màu mình nhặt được trong 1 group chat IT. Bảng màu này tạo một cảm giác dễ chịu cho người dùng.
+
+![Rosé Pine](/static/images/2022/rosepine.png)
+
+Cuối cùng là chọn font:
+
+- **Barlow** dùng cho tiêu đề
+- **Barlow Condensed** dùng cho nội dung
+- **Consolas** font chữ trong các đoạn code. Font mình xài trong editor
+
+## Chọn công nghệ gì?
+
+Các công nghệ không thể không có:
+
+- [Typescript](https://www.typescriptlang.org/) trải nghiệm với javascript thật sự rất chán. Nhưng với typescript thì 🎆🎆
+- [Markdown](https://www.markdownguide.org/) ngôn ngữ tuyệt vời để viết
+- [MDX](https://mdxjs.com/) cho phép ta viết jsx trong file markdown
+- [Next.js](https://nextjs.org/) là bộ khung chủ đạo của website
+- [Tailwindcss](https://tailwindcss.com/). Ngoài ra mình cũng sử dụng vài tool nằm trong hệ sinh thái của tailwindcss như: headless ui, heroicons, heropatterns...
+- [Framer motion](https://www.framer.com/motion/) thư viện để tạo ra các animation
+- [Planetscale](https://planetscale.com/) setup mysql database chỉ bằng vài click. Và ORM [prisma](https://www.prisma.io/)
+
+## Bắt tay vào làm
+
+Kế hoạch có vẻ hợp lý. Giờ chỉ việc bắt tay vào làm thôi.
+
+Hy vọng qua chuỗi bài này có thể giúp ích cho những bạn muốn thử thách làm một cái blog như minh.
+
+Chờ nhé 😎.
