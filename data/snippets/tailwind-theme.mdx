@@ -87,12 +87,13 @@ import classnames from "classnames";
 export function MyBtn() {
   const [theme, setTheme] = useState("theme-second");
   return (
-    <div className="w-full h-56 gap-5 bg-overlay flex-col flex justify-center items-center">
+    <div className="w-full h-56 gap-5 theme-first bg-overlay flex-col flex justify-center items-center">
       <div className="space-x-5">
-        <span onClick={()=>setTheme('theme-first')} className={classnames("cursor-pointer transform",theme=='theme-first'&&'text-2xl')}>theme-first</span>
-        <span onClick={()=>setTheme('theme-second')} className={classnames("cursor-pointer transform",theme=='theme-second'&&'text-2xl')}>theme-second</span>
+        <span onClick={()=>setTheme('theme-first')} className={classnames("cursor-pointer transition-all duration-300 transform",theme=='theme-first'?'text-2xl text-text':'text-subtle')}>theme-first</span>
+        <span onClick={()=>setTheme('theme-second')} className={classnames("cursor-pointer transition-all duration-300 transform",theme=='theme-second'?'text-2xl text-text':'text-subtle')}>theme-second</span>
       </div>
       <button
+      onClick={()=>setTheme(theme=='theme-first'?'theme-second':'theme-first')}
         className={classnames(theme, "bg-base text-text p-3")}
       >
         Hello World
