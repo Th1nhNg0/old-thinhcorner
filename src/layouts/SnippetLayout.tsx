@@ -1,5 +1,5 @@
 import { Snippet } from "contentlayer/generated";
-import { motion, useViewportScroll } from "framer-motion";
+import { m, useViewportScroll } from "framer-motion";
 import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
 import ScrollTopAndComment from "src/components/ScrollTopAndComment";
@@ -32,16 +32,16 @@ export default function SnippetLayout({
   return (
     <div>
       <div className="fixed top-0 left-0 z-50 w-full">
-        <motion.div
+        <m.div
           animate={{ opacity: percent > 0 ? 1 : 0 }}
           className="h-1 bg-hightlight-high"
         >
-          <motion.div
+          <m.div
             className="h-1 bg-iris"
             animate={{ scaleX: percent }}
             style={{ originX: 0, originY: 0 }}
           />
-        </motion.div>
+        </m.div>
       </div>
       <ScrollTopAndComment />
       <article>

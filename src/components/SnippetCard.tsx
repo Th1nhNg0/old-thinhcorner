@@ -1,4 +1,5 @@
 import { Snippet } from "contentlayer/generated";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function SnippetCard(snippet: Snippet) {
@@ -9,10 +10,12 @@ export default function SnippetCard(snippet: Snippet) {
         <div className="absolute bottom-0 left-0 w-0.5 h-full duration-300 origin-bottom transform scale-y-0 bg-rose group-hover:scale-y-100"></div>
         <div className="absolute top-0 left-0 w-full h-0.5 duration-300 origin-right transform scale-x-0 bg-rose group-hover:scale-x-100"></div>
         <div className="absolute bottom-0 right-0 w-0.5 h-full duration-300 origin-top transform scale-y-0 bg-rose group-hover:scale-y-100"></div>
-        <img
+        <Image
           src={snippet.logo}
+          width={56}
+          height={56}
           alt=""
-          className="object-contain rounded-full w-14"
+          className="object-contain rounded-full"
         />
         <h4 className="mt-2 text-lg font-medium text-left text-text">
           {snippet.title}
