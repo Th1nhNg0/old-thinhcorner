@@ -9,6 +9,7 @@ import {
 } from "contentlayer/generated";
 import siteMetadata from "data/siteMetadata";
 import { allTags, Tag } from "src/lib/tags";
+import moment from "moment";
 
 function generateSiteMap(
   host_url: string | undefined,
@@ -24,19 +25,28 @@ function generateSiteMap(
     tags: Tag[];
   }
 ) {
+  const date = moment().format("YYYY-MM-DD");
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
       <loc>${host_url}</loc>
+      <lastmod>${date}</lastmod>
+      <changefreq>daily</changefreq>
     </url>
     <url>
       <loc>${host_url}/blog</loc>
+      <lastmod>${date}</lastmod>
+      <changefreq>daily</changefreq>
     </url>
     <url>
       <loc>${host_url}/tag</loc>
+      <lastmod>${date}</lastmod>
+      <changefreq>daily</changefreq>
     </url>
-    <url>
-      <loc>${host_url}/snippet</loc>
+      <url>
+        <loc>${host_url}/snippet</loc>
+        <lastmod>${date}</lastmod>
+        <changefreq>daily</changefreq>
     </url>
      
 
@@ -45,6 +55,8 @@ function generateSiteMap(
            return `
       <url>
           <loc>${`${host_url}/${slug}`}</loc>
+          <lastmod>${date}</lastmod>
+          <changefreq>daily</changefreq>
       </url>
     `;
          })
@@ -61,23 +73,27 @@ function generateSiteMap(
            })
            .join("")}
 
-       ${snippets
-         .map(({ slug, date }) => {
-           return `
-        <url>
-            <loc>${`${host_url}/snippet/${slug}`}</loc>
-            <lastmod>${date}</lastmod>
-        </url>
-      `;
-         })
-         .join("")}
+        ${snippets
+          .map(({ slug, date }) => {
+            return `
+          <url>
+              <loc>${`${host_url}/snippet/${slug}`}</loc>
+              <lastmod>${date}</lastmod>
+              <changefreq>daily</changefreq>
+          </url>
+        `;
+          })
+          .join("")}
          ${tags
            .map(({ name }) => {
              return `
-        <url>
-            <loc>${`${host_url}/tag/${name}`}</loc>
-        </url>
-      `;
+            <url>
+                <loc>${`${host_url}/tag/${encodeURI(name)}`}</loc>
+                <lastmod>${date}</lastmod>
+                <changefreq>daily</changefreq>
+                <priority>0.9</priority>
+            </url>
+               `;
            })
            .join("")}
         
