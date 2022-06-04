@@ -1,4 +1,3 @@
-import { m } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export default function ScrollTopAndComment() {
@@ -22,7 +21,7 @@ export default function ScrollTopAndComment() {
   };
   if (!show) return null;
   return (
-    <m.div className="fixed z-50 flex-col hidden gap-3 transition-all duration-300 transform md:flex right-8 bottom-8">
+    <div className="fixed z-50 flex-col hidden gap-3 transition-all duration-300 transform md:flex right-8 bottom-8">
       <button
         aria-label="Scroll To Comment"
         type="button"
@@ -51,6 +50,6 @@ export default function ScrollTopAndComment() {
           />
         </svg>
       </button>
-    </m.div>
+    </div>
   );
 }

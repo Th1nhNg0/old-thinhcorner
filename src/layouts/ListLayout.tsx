@@ -1,5 +1,5 @@
 import { Post } from "contentlayer/generated";
-import { m } from "framer-motion";
+import { motion } from "framer-motion";
 import moment from "moment";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -56,9 +56,9 @@ export default function ListLayout({
           </div>
         </div>
       </div>
-      <m.ul layout transition={{ duration: 0.5 }}>
+      <motion.ul layout transition={{ duration: 0.5 }}>
         {filteredPosts.map((post) => (
-          <m.li layout="position" key={post.slug} className="py-4">
+          <motion.li layout="position" key={post.slug} className="py-4">
             <article className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline">
               <dl>
                 <dt className="sr-only">Published on</dt>
@@ -87,9 +87,9 @@ export default function ListLayout({
                 <div className="prose text-subtle">{post.summary}</div>
               </div>
             </article>
-          </m.li>
+          </motion.li>
         ))}
-      </m.ul>
+      </motion.ul>
     </div>
   );
 }

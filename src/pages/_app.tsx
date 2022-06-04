@@ -1,5 +1,4 @@
 import siteMetadata from "data/siteMetadata";
-import { domMax, LazyMotion } from "framer-motion";
 import "katex/dist/katex.css";
 import { DefaultSeo, SocialProfileJsonLd } from "next-seo";
 import { ThemeProvider } from "next-themes";
@@ -12,25 +11,23 @@ import LayoutWrapper from "../components/LayoutWrapper";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <LazyMotion features={domMax}>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="theme-first"
-        themes={["theme-first", "theme-second"]}
-      >
-        <LayoutWrapper>
-          <DefaultSeo {...seo} />
-          <Component {...pageProps} />
-          <Analytics />
-          <SocialProfileJsonLd
-            type="Person"
-            name={siteMetadata.author}
-            url={siteMetadata.siteUrl}
-            sameAs={[siteMetadata.facebook, siteMetadata.linkedin]}
-          />
-        </LayoutWrapper>
-      </ThemeProvider>
-    </LazyMotion>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="theme-first"
+      themes={["theme-first", "theme-second"]}
+    >
+      <LayoutWrapper>
+        <DefaultSeo {...seo} />
+        <Component {...pageProps} />
+        <Analytics />
+        <SocialProfileJsonLd
+          type="Person"
+          name={siteMetadata.author}
+          url={siteMetadata.siteUrl}
+          sameAs={[siteMetadata.facebook, siteMetadata.linkedin]}
+        />
+      </LayoutWrapper>
+    </ThemeProvider>
   );
 }
 

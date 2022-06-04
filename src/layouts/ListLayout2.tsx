@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-
 import { Snippet } from "contentlayer/generated";
+import { motion } from "framer-motion";
+import React, { useState } from "react";
 import SnippetCard from "src/components/SnippetCard";
-import { m } from "framer-motion";
 
 export default function ListLayout({ snippets }: { snippets: Snippet[] }) {
   const [search, setsearch] = useState("");
@@ -48,7 +47,7 @@ export default function ListLayout({ snippets }: { snippets: Snippet[] }) {
           </div>
         </div>
       </div>
-      <m.div
+      <motion.div
         className="grid gap-5 md:grid-cols-2"
         layout
         transition={{ duration: 0.5 }}
@@ -56,7 +55,7 @@ export default function ListLayout({ snippets }: { snippets: Snippet[] }) {
         {filteredPosts.map((snippet) => (
           <SnippetCard key={snippet.slug} {...snippet} />
         ))}
-      </m.div>
+      </motion.div>
     </div>
   );
 }
