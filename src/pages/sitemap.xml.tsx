@@ -57,6 +57,8 @@ function generateSiteMap(
           <loc>${`${host_url}/${slug}`}</loc>
           <lastmod>${date}</lastmod>
           <changefreq>daily</changefreq>
+          <priority>0.9</priority>
+
       </url>
     `;
          })
