@@ -32,22 +32,26 @@ function generateSiteMap(
       <loc>${host_url}</loc>
       <lastmod>${date}</lastmod>
       <changefreq>daily</changefreq>
-    </url>
+      <priority>0.9</priority>
+      </url>
     <url>
       <loc>${host_url}/blog</loc>
       <lastmod>${date}</lastmod>
       <changefreq>daily</changefreq>
-    </url>
+      <priority>0.9</priority>
+      </url>
     <url>
       <loc>${host_url}/tag</loc>
       <lastmod>${date}</lastmod>
       <changefreq>daily</changefreq>
-    </url>
+      <priority>0.9</priority>
+      </url>
       <url>
         <loc>${host_url}/snippet</loc>
         <lastmod>${date}</lastmod>
         <changefreq>daily</changefreq>
-    </url>
+        <priority>0.9</priority>
+        </url>
      
 
        ${pages
