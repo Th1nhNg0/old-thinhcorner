@@ -1,25 +1,22 @@
 ---
 title: "Let rebuild my blog. Part 2: Let's code"
-date: "2022-06-02"
+date: "2022-08-02"
 summary: "Build a blog from scratch"
-draft: true
 ---
-
-# So, let rebuild my blog. Part 2: Let's code
 
 Dựa theo kế hoạch đã đề ra trong bài viết trước. Trong bài viết này, hãy cùng mình build blog step by step nhé :).
 
-Cách setup khá đơn giản, nextjs + tailwindcss 2 package core của project này. Cách setup đã có trong document rồi nên mình sẽ không đề cập ở đây.
+Vì code khá nhiều nên mình không thể giải thích hết được. Nên mình sẽ chỉ nói về những package và những đoạn code mà mình thấy là cần thiết. Các bạn có thể xem chi tiết tại đây: [Th1nhNg0/th1nhng0.vercel.app](https://github.com/Th1nhNg0/th1nhng0.vercel.app)
 
-## Build Global Layout
+# Build Global Layout
 
-### Chi tiết
+## Chi tiết
 
 Layout của web có 3 phần:
 
 - Header: chứ tên website, navigation, theme switcher
 
-- Main: nội dung của các page khác nhau
+- Main: nội dung của page
 
 - Footer: Info tác giả, copyright
 
@@ -27,7 +24,7 @@ Layout của web có 3 phần:
 
 - Sử dụng background **Circuit Board** từ [Hero Patterns](https://heropatterns.com/)
   {/* <img src="file:///D:/linhtinh/writing/images/2022-05-29-16-21-53-image.png" title="" alt="" width="277"> */}
-- Có thể chọn nhiều theme khác nhau thay vì dark mode và light mode ở web cũ.
+- Sử dụng nhiều theme khác nhau thay vì dark mode và light mode ở web cũ.
   Cách mình setup khá đơn giản, đó là ứng dụng CSS Variables:
 
   ```css
@@ -120,20 +117,225 @@ Layout của web có 3 phần:
   };
   ```
 
-### Kết quả:
+## Kết quả:
 
-![Animation.gif](D:\linhtinh\writing\images\dbce1b04c4add58504b9788fee9e3f8415a62ab9.gif)
+![Rosé Pine](/static/images/2022/dbce1b04c4add58504b9788fee9e3f8415a62ab9.gif)
 
 Khá cool đúng không :3
 
-## Giao diện cho từng Page
+> Chi tiết các page các bạn có thể xem bằng cách dạo quanh blog này.
 
-### Trang chủ:
+# Setup Contentlayer
 
-### Tags
+[Contentlayer](https://www.contentlayer.dev/) package giúp mình parse file mdx sang next.js một cách đơn giản. Các bạn có thể xem [document](https://www.contentlayer.dev/docs) để biết thêm chi tiết.
 
-### Projects
+Mình để tất cả data của website vào một folder data, có cấu trúc như sau:
 
-### About
+```
+data:
+  - post:
+    - 2022:
+      - post_a.mdx
+      - post_b.mdx
+    - 2021
+    - 2020
+  - snippet:
+    - snippet_a.mdx
+    - snippet_b.mdx
+  - pages:
+    - about.mdx
+    - uses.mdx
+```
 
-### Blogs (phần khó nhất)
+Trong đó:
+
+- Folder post chứa các bài viết, có thể nested folder.
+- Folder snippet chứa các snippet code. Các đoạn code ngắn hữu ích.
+- Folder pages chứa các page.
+
+Contentlayer sẽ tự động parse file mdx vào next.js. Sau đó ta có thể sử dụng một cách đơn giản, ví dụ file `blog.tsx`:
+
+```tsx
+import { allPosts, Post } from "contentlayer/generated";
+import { pick } from "contentlayer/utils";
+import ListLayout from "src/layouts/ListLayout";
+
+export default function BlogPage({ posts }: { posts: Post[] }) {
+  return <ListLayout posts={posts} name="Blog" />;
+}
+
+export async function getStaticProps() {
+  // dùng hàm pick để loại bỏ các field không mong muốn, cải thiện thời gian load
+  const posts = allPosts
+    .filter((post) => post.draft !== true)
+    .map((blog) => pick(blog, ["slug", "title", "summary", "date", "tags"]))
+    .sort((a, b) => moment(b.date).diff(moment(a.date)));
+
+  return { props: { posts } };
+}
+```
+
+Contentlayer cũng hỗ trợ 1 hook để chuyển từ mdx sang html là `useMDXComponent`. Ta cũng có thể custom các tag nữa. VD file `/blog/[slug].tsx`:
+
+```tsx
+import { allPosts, Post } from "contentlayer/generated";
+import { useMDXComponent } from "next-contentlayer/hooks";
+import PostLayout from "src/layouts/PostLayout";
+import components from "../../components/MDXComponents";
+
+export default function BlogDetailPage({ post }: { post: Post }) {
+  const Component = useMDXComponent(post.body.code);
+  return (
+    <PostLayout post={post}>
+      <Component
+        components={{
+          ...components,
+        }}
+      />
+    </PostLayout>
+  );
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: allPosts.map((p) => ({ params: { slug: p.slug } })),
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }: { params: { slug: string } }) {
+  const post = allPosts.find((post) => post.slug === params.slug);
+  return { props: { post } };
+}
+```
+
+File `components/MDXComponents.tsx`:
+
+```tsx
+import Link from "next/link";
+
+const CustomLink = (props: any) => {
+  const href = props.href;
+  const isInternalLink = href && (href.startsWith("/") || href.startsWith("#"));
+
+  if (isInternalLink) {
+    return (
+      <Link href={href}>
+        <a {...props}>{props.children}</a>
+      </Link>
+    );
+  }
+
+  return <a target="_blank" rel="noopener noreferrer" {...props} />;
+};
+
+const MDXComponents = {
+  a: CustomLink,
+};
+
+export default MDXComponents;
+```
+
+# Setup prisma, và planetscale để đếm số lượng view
+
+Sau khi setup prisma vào project theo hướng dẫn [ở đây](https://www.prisma.io/nextjs). Và lấy `DATABASE_URL` dùng để connect tới database từ [planetscale](https://planetscale.com/) .Ta edit file `prisma/schema.prisma` lại như sau:
+
+```
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model views {
+  slug  String @id @db.VarChar(128)
+  count BigInt @default(1)
+}
+```
+
+Tạo api để lấy và update số lượng view. Ví dụ file `api/views/[slug].ts`:
+
+```ts
+import type { NextApiRequest, NextApiResponse } from "next";
+import prisma from "../../../lib/prisma";
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  try {
+    const slug = req.query.slug.toString();
+
+    if (req.method === "POST") {
+      const newOrUpdatedViews = await prisma.views.upsert({
+        where: { slug },
+        create: {
+          slug,
+        },
+        update: {
+          count: {
+            increment: 1,
+          },
+        },
+      });
+
+      return res.status(200).json({
+        total: newOrUpdatedViews.count.toString(),
+      });
+    }
+
+    if (req.method === "GET") {
+      const views = await prisma.views.findUnique({
+        where: {
+          slug,
+        },
+      });
+
+      return res.status(200).json({ total: views?.count.toString() });
+    }
+  } catch (e: any) {
+    return res.status(500).json({ message: e.message });
+  }
+}
+```
+
+Sau đó gọi API từ client bằng axios hoặc fetch. Để tiết kiệm thời gian, mình viết một component sử dụng [swr](https://swr.vercel.app/), `ViewCounter.tsx`:
+
+```tsx
+import { useEffect } from "react";
+import fetcher from "src/lib/fetcher";
+import { Views } from "src/lib/types";
+import useSWR from "swr";
+
+export default function ViewCounter({
+  slug,
+  update = false,
+}: {
+  slug: string;
+  update?: boolean;
+}) {
+  const { data } = useSWR<Views>(`/api/views/${slug}`, fetcher);
+  const views = new Number(data?.total);
+
+  useEffect(() => {
+    // nếu update = true thì update lại số lượng view
+    if (update)
+      fetch(`/api/views/${slug}`, {
+        method: "POST",
+      });
+  }, [slug, update]);
+
+  return <span>{`${views > 0 ? views.toLocaleString() : "–––"} views`}</span>;
+}
+```
+
+# Kết luận
+
+Như vậy, ta đã tạo được 1 trang blog cơ bản. Tuy có sử dụng hơi nhiều package, nhưng nhờ chúng mà việc code trở nên trơn tru và dễ dàng hơn rất nhiều.
+
+Hy vọng là bài viết này đã 1 phần nào đó giúp bạn có thể tạo ra 1 trang blog tương tự như mình :d.
