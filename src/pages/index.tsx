@@ -5,6 +5,10 @@ import { allPosts, allSnippets, Post, Snippet } from "contentlayer/generated";
 import { pick } from "contentlayer/utils";
 import ViewCounter from "src/components/ViewCounter";
 import SnippetCard from "src/components/SnippetCard";
+import useSWR from "swr";
+import fetcher from "src/lib/fetcher";
+import { motion, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
 
 export default function Home({
   posts,
@@ -28,6 +32,82 @@ export default function Home({
       </div>
       <NewestPost posts={posts} />
       <FeaturedSnippet snippets={snippets} />
+      <TopTrackSpotify />
+    </div>
+  );
+}
+
+type Song = {
+  songUrl: string;
+  artist: string;
+  title: string;
+  imageUrl: string;
+  previewUrl: string;
+};
+
+type TopTracks = {
+  tracks: Song[];
+};
+
+function Track({ track, index }: { track: Song; index: number }) {
+  const [isHover, setisHover] = useState(false);
+  const audio = useRef<HTMLAudioElement>(new Audio(track.previewUrl));
+
+  function onHoverStart() {
+    if (audio.current && audio.current.paused) audio.current.play();
+    setisHover(true);
+  }
+  function onHoverEnd() {
+    if (audio.current && !audio.current.paused) audio.current.pause();
+    setisHover(false);
+  }
+  return (
+    <motion.div
+      onHoverStart={onHoverStart}
+      onHoverEnd={onHoverEnd}
+      className="flex items-center gap-4"
+    >
+      <div className="relative w-10 overflow-hidden font-mono text-4xl text-center rounded-full">
+        <motion.div>{index + 1}</motion.div>
+        <AnimatePresence exitBeforeEnter>
+          {isHover && (
+            <motion.img
+              className="absolute top-0 left-0 w-full h-full"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0 }}
+              src={track.imageUrl}
+            />
+          )}
+        </AnimatePresence>
+      </div>
+      <div className="flex-1">
+        <Link href={track.songUrl}>
+          <a target="_blank" className="text-lg font-bold">
+            {track.title}
+          </a>
+        </Link>
+        <p className="text-subtle">{track.artist}</p>
+      </div>
+    </motion.div>
+  );
+}
+
+function TopTrackSpotify() {
+  const { data } = useSWR<TopTracks>("/api/spotify/top-track", fetcher);
+  return (
+    <div>
+      <div className="mb-6 ">
+        <h3 className="text-2xl font-bold">Top spotify track</h3>
+        <p className="text-subtle">
+          Những bản nhạc đang lặp đi lặp lại trong đầu mình
+        </p>
+      </div>
+      <div className="space-y-3">
+        {data?.tracks.map((track, index) => (
+          <Track key={track.title} track={track} index={index} />
+        ))}
+      </div>
     </div>
   );
 }
