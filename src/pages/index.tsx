@@ -51,9 +51,12 @@ type TopTracks = {
 
 function Track({ track, index }: { track: Song; index: number }) {
   const [isHover, setisHover] = useState(false);
-  const audio = useRef<HTMLAudioElement>(new Audio(track.previewUrl));
+  const audio = useRef<HTMLAudioElement>();
 
   function onHoverStart() {
+    if (!audio.current) {
+      audio.current = new Audio(track.previewUrl);
+    }
     if (audio.current && audio.current.paused) audio.current.play();
     setisHover(true);
   }
