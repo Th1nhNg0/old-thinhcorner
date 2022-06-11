@@ -49,7 +49,7 @@ export default function ListLayout({ snippets }: { snippets: Snippet[] }) {
       </div>
       <motion.div
         className="grid gap-5 md:grid-cols-2"
-        layout
+        layout="position"
         transition={{ duration: 0.5 }}
       >
         {filteredPosts.map((snippet) => (

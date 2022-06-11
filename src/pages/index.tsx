@@ -30,6 +30,7 @@ export default function Home({
           Just a guy like to programming.
         </h2>
       </div>
+
       <NewestPost posts={posts} />
       <FeaturedSnippet snippets={snippets} />
       <TopTrackSpotify />
@@ -57,7 +58,8 @@ function Track({ track, index }: { track: Song; index: number }) {
     if (!audio.current) {
       audio.current = new Audio(track.previewUrl);
     }
-    if (audio.current && audio.current.paused) audio.current.play();
+    audio.current.volume = 0.3;
+    if (audio.current.paused) audio.current.play();
     setisHover(true);
   }
   function onHoverEnd() {
@@ -65,34 +67,44 @@ function Track({ track, index }: { track: Song; index: number }) {
     setisHover(false);
   }
   return (
-    <motion.div
+    <motion.a
+      href={track.songUrl}
+      target="_blank"
       onHoverStart={onHoverStart}
       onHoverEnd={onHoverEnd}
-      className="flex items-center gap-4"
+      className="relative flex items-center gap-4 p-1"
     >
+      <AnimatePresence>
+        {isHover && (
+          <motion.div
+            initial={{ width: 0, borderRadius: 0 }}
+            animate={{ width: "100%", borderRadius: 9999 }}
+            exit={{ width: 0, borderRadius: 0 }}
+            transition={{ duration: 1 }}
+            className="absolute -left-1 h-full bg-gradient-to-r from-[#1ED760]/50"
+          />
+        )}
+      </AnimatePresence>
       <div className="relative w-10 overflow-hidden font-mono text-4xl text-center rounded-full">
         <motion.div>{index + 1}</motion.div>
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence>
           {isHover && (
             <motion.img
-              className="absolute top-0 left-0 w-full h-full"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0 }}
+              className="absolute top-0 left-0 w-full h-full rounded-full"
+              initial={{ scale: 0, rotate: 0 }}
+              animate={{ scale: 1, rotate: 360 }}
+              transition={{ duration: 1.3 }}
+              exit={{ scale: 0, rotate: 0 }}
               src={track.imageUrl}
             />
           )}
         </AnimatePresence>
       </div>
-      <div className="flex-1">
-        <Link href={track.songUrl}>
-          <a target="_blank" className="text-lg font-bold">
-            {track.title}
-          </a>
-        </Link>
+      <div className="relative flex-1">
+        <p className="text-lg font-bold">{track.title}</p>
         <p className="text-subtle">{track.artist}</p>
       </div>
-    </motion.div>
+    </motion.a>
   );
 }
 
@@ -101,8 +113,8 @@ function TopTrackSpotify() {
   return (
     <div>
       <div className="mb-6 ">
-        <h3 className="text-2xl font-bold">Top spotify track</h3>
-        <p className="text-subtle">
+        <h3 className="text-2xl font-bold">Top Spotify track</h3>
+        <p className="text-lg text-subtle">
           Những bản nhạc đang lặp đi lặp lại trong đầu mình
         </p>
       </div>

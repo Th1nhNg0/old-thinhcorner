@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -13,45 +14,73 @@ export default function LayoutWrapper({
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
+
   return (
-    <div className="max-w-3xl min-h-screen px-5 mx-auto">
+    <motion.div className="max-w-3xl min-h-screen px-5 mx-auto ">
       <Header />
-      <main className="mb-auto">{children}</main>
-      <Footer />
-    </div>
+      <AnimatePresence initial={false} exitBeforeEnter>
+        <motion.div
+          key={router.pathname}
+          initial={{
+            opacity: 0,
+            y: 50,
+          }}
+          layout
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 50 }}
+        >
+          <motion.main>{children}</motion.main>
+          <Footer />
+        </motion.div>
+      </AnimatePresence>
+    </motion.div>
   );
 }
 
 function Header() {
   const router = useRouter();
+  const [hovered, sethovered] = useState<string | null>(null);
   return (
     <header className="flex items-center justify-between py-10">
       <MobileNav />
       <div>
         <Link href="/" aria-label={siteMetadata.headerTitle}>
-          <a className="flex items-center justify-between gap-3 p-1 text-2xl font-semibold duration-200 ease-in-out rounded-md hover:bg-opacity-80 md:p-3 hover:bg-overlay ">
-            <span className="wave">
+          <a className="relative flex items-center justify-between gap-3 p-1 text-2xl font-semibold duration-200 ease-in-out rounded-md md:p-3 ">
+            <span className="relative z-10 wave">
               <Logo />
             </span>
-            <span className="hidden md:block">{siteMetadata.headerTitle}</span>
+            <span className="relative z-10 hidden md:block">
+              {siteMetadata.headerTitle}
+            </span>
           </a>
         </Link>
       </div>
       <div className="flex items-center justify-center text-base leading-5 ">
-        <div className="hidden space-x-1 md:block">
+        <div className="hidden md:block">
           {headerNavLinks.map((link) => (
             <Link key={link.title} href={link.href}>
-              <a
+              <motion.a
+                onMouseEnter={() => sethovered(link.title)}
+                onMouseLeave={() => sethovered(null)}
                 className={classNames(
-                  "p-1 duration-200 ease-in-out rounded-md  md:p-4 hover:bg-opacity-80 hover:bg-overlay",
+                  "p-1 duration-200 relative ease-in-out rounded-md md:p-4 cursor-pointer",
                   {
-                    "text-subtle font-medium": link.href != router.pathname,
-                    "text-text  font-bold": link.href == router.pathname,
+                    "text-subtle font-medium": link.href != router.asPath,
+                    "text-text  font-bold ": link.href == router.asPath,
                   }
                 )}
               >
-                {link.title}
-              </a>
+                <AnimatePresence>
+                  {hovered == link.title && (
+                    <motion.span
+                      layoutId="hover"
+                      className="absolute inset-0 z-0 w-full h-full rounded-md bg-overlay"
+                    />
+                  )}
+                </AnimatePresence>
+                <span className="relative z-10">{link.title}</span>
+              </motion.a>
             </Link>
           ))}
         </div>
@@ -145,7 +174,7 @@ const MobileNav = () => {
 
 function Footer() {
   return (
-    <footer className="mt-10">
+    <footer className="mt-10 ">
       <NowPlaying />
       <div className="flex flex-col-reverse gap-3 md:flex-row  justify-between py-5 text-sm border-t-[1px] border-t-muted">
         <div>

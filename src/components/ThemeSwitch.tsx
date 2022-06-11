@@ -99,14 +99,14 @@ export default function ThemeSwitch() {
                       className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium border border-transparent theme-first bg-surface text-text hover:bg-hightlight-med"
                       onClick={() => chooseTheme("theme-first")}
                     >
-                      theme-first
+                      Dark Rose Pine
                     </button>
                     <button
                       type="button"
                       className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium border border-transparent theme-second bg-surface text-text hover:bg-hightlight-med"
                       onClick={() => chooseTheme("theme-second")}
                     >
-                      theme-second
+                      Light Rose Pine
                     </button>
                   </div>
                 </Dialog.Panel>

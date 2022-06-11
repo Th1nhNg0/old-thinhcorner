@@ -1,7 +1,9 @@
 import { allPosts, Post } from "contentlayer/generated";
 import siteMetadata from "data/siteMetadata";
 import { useMDXComponent } from "next-contentlayer/hooks";
+import moment from "moment";
 import { NewsArticleJsonLd, NextSeo } from "next-seo";
+import { pick } from "contentlayer/utils";
 import PostLayout from "src/layouts/PostLayout";
 import components from "../../components/MDXComponents";
 
@@ -68,6 +70,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: { params: { slug: string } }) {
-  const post = allPosts.find((post) => post.slug === params.slug);
-  return { props: { post } };
+  const posts = allPosts.sort((a, b) => moment(b.date).diff(moment(a.date)));
+  const postIndex = posts.findIndex((post) => post.slug === params.slug);
+  const nextPost = pick(posts[postIndex + 1], ["slug", "title"]);
+
+  return { props: { post: posts[postIndex] } };
 }
