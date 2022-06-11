@@ -21,7 +21,7 @@ export default function LayoutWrapper({
       <Header />
       <AnimatePresence initial={false} exitBeforeEnter>
         <motion.div
-          key={router.pathname}
+          key={router.asPath}
           initial={{
             opacity: 0,
             y: 50,
