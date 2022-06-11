@@ -70,9 +70,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: { params: { slug: string } }) {
-  const posts = allPosts.sort((a, b) => moment(b.date).diff(moment(a.date)));
-  const postIndex = posts.findIndex((post) => post.slug === params.slug);
-  const nextPost = pick(posts[postIndex + 1], ["slug", "title"]);
-
-  return { props: { post: posts[postIndex] } };
+  const post = allPosts.find((post) => post.slug === params.slug);
+  return { props: { post } };
 }
