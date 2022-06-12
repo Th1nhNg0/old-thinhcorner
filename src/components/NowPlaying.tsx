@@ -23,6 +23,7 @@ function Wave() {
             background: "#1ED760",
           }}
           animate={{
+            width: 5,
             height: [5, 12, 5],
           }}
           transition={{
