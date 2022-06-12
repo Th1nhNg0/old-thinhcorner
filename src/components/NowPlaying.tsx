@@ -1,6 +1,6 @@
 import fetcher from "src/lib/fetcher";
 import useSWR from "swr";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 type NowPlayingSong = {
   album: string;
@@ -13,33 +13,35 @@ type NowPlayingSong = {
 
 function Wave() {
   return (
-    <div className="flex items-end justify-end h-3 gap-[2px]">
-      {[0, 1, 2].map((e) => (
-        <motion.span
-          key={e}
-          initial={{
-            height: 5,
-            width: 5,
-            background: "#1ED760",
-          }}
-          animate={{
-            width: 5,
-            height: [5, 12, 5],
-          }}
-          transition={{
-            type: "spring",
-            repeat: Infinity,
-            delay: e * 0.2,
-          }}
-        />
-      ))}
-    </div>
+    <AnimatePresence>
+      <div className="flex items-end justify-end h-3 gap-[2px]">
+        {[0, 1, 2].map((e) => (
+          <motion.span
+            key={e}
+            className="bg-[#1ED760]"
+            initial={{
+              height: 5,
+              width: 5,
+            }}
+            animate={{
+              width: 5,
+              height: [5, 12, 5],
+            }}
+            transition={{
+              type: "spring",
+              repeat: Infinity,
+              delay: e * 0.2,
+            }}
+          />
+        ))}
+      </div>
+    </AnimatePresence>
   );
 }
 
 export default function NowPlaying() {
   const { data } = useSWR<NowPlayingSong>("/api/spotify/now-playing", fetcher);
-
+  if (!data) return null;
   return (
     <div className="flex flex-row-reverse items-center justify-center w-full mb-4 space-x-0 sm:flex-row sm:space-x-2">
       {!data?.songUrl ? (
