@@ -213,7 +213,12 @@ function Track({
         </AnimatePresence>
       </div>
       <div className="relative flex-1">
-        <a href={track.songUrl} target="_blank" className="text-lg font-bold">
+        <a
+          rel="noopener noreferrer"
+          href={track.songUrl}
+          target="_blank"
+          className="text-lg font-bold"
+        >
           {track.title}
         </a>
         <p className="text-subtle">{track.artist}</p>
