@@ -2,7 +2,6 @@ const { withContentlayer } = require("next-contentlayer");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
-const { withSentryConfig } = require("@sentry/nextjs");
 
 const nextConfig = {
   reactStrictMode: true,
@@ -14,11 +13,5 @@ const nextConfig = {
     defaultLocale: "vi",
   },
 };
-const sentryWebpackPluginOptions = {
-  silent: true, // Suppresses all logs
-};
 
-module.exports = withSentryConfig(
-  withBundleAnalyzer(withContentlayer(nextConfig)),
-  sentryWebpackPluginOptions
-);
+module.exports = withBundleAnalyzer(withContentlayer(nextConfig));

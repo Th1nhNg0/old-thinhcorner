@@ -1,9 +1,10 @@
-import { withSentry } from "@sentry/nextjs";
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../lib/prisma";
 
-export default withSentry(handler);
-async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
     const slug = req.query.slug.toString();
 
