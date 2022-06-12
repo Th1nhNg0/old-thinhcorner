@@ -8,7 +8,9 @@ import SnippetCard from "src/components/SnippetCard";
 import useSWR from "swr";
 import fetcher from "src/lib/fetcher";
 import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { useAudio } from "react-use";
+import TopTrackSpotify from "src/components/TopTrackSpotify";
 
 export default function Home({
   posts,
@@ -34,95 +36,6 @@ export default function Home({
       <NewestPost posts={posts} />
       <FeaturedSnippet snippets={snippets} />
       <TopTrackSpotify />
-    </div>
-  );
-}
-
-type Song = {
-  songUrl: string;
-  artist: string;
-  title: string;
-  imageUrl: string;
-  previewUrl: string;
-};
-
-type TopTracks = {
-  tracks: Song[];
-};
-
-function Track({ track, index }: { track: Song; index: number }) {
-  const [isHover, setisHover] = useState(false);
-  const audio = useRef<HTMLAudioElement>();
-
-  function onHoverStart() {
-    if (!audio.current) {
-      audio.current = new Audio(track.previewUrl);
-    }
-    audio.current.volume = 0.3;
-    if (audio.current.paused) audio.current.play();
-    setisHover(true);
-  }
-  function onHoverEnd() {
-    if (audio.current && !audio.current.paused) audio.current.pause();
-    setisHover(false);
-  }
-  return (
-    <motion.a
-      href={track.songUrl}
-      target="_blank"
-      onHoverStart={onHoverStart}
-      onHoverEnd={onHoverEnd}
-      className="relative flex items-center gap-4 p-1"
-    >
-      <AnimatePresence>
-        {isHover && (
-          <motion.div
-            initial={{ width: 0, borderRadius: 0 }}
-            animate={{ width: "100%", borderRadius: 9999 }}
-            exit={{ width: 0, borderRadius: 0 }}
-            transition={{ duration: 1 }}
-            className="absolute -left-1 h-full bg-gradient-to-r from-[#1ED760]/50"
-          />
-        )}
-      </AnimatePresence>
-      <div className="relative w-10 overflow-hidden font-mono text-4xl text-center rounded-full">
-        <motion.div>{index + 1}</motion.div>
-        <AnimatePresence>
-          {isHover && (
-            <motion.img
-              className="absolute top-0 left-0 w-full h-full rounded-full"
-              initial={{ scale: 0, rotate: 0 }}
-              animate={{ scale: 1, rotate: 360 }}
-              transition={{ duration: 1.3 }}
-              exit={{ scale: 0, rotate: 0 }}
-              src={track.imageUrl}
-            />
-          )}
-        </AnimatePresence>
-      </div>
-      <div className="relative flex-1">
-        <p className="text-lg font-bold">{track.title}</p>
-        <p className="text-subtle">{track.artist}</p>
-      </div>
-    </motion.a>
-  );
-}
-
-function TopTrackSpotify() {
-  const { data } = useSWR<TopTracks>("/api/spotify/top-track", fetcher);
-  return (
-    <div>
-      <div className="mb-6 ">
-        <h3 className="text-2xl font-bold">Top Spotify track</h3>
-        <p className="text-lg text-subtle">
-          Những bản nhạc đang lặp đi lặp lại trong đầu mình
-        </p>
-      </div>
-      <div className="space-y-3">
-        {data?.tracks.map((track, index) => (
-          <Track key={track.title} track={track} index={index} />
-        ))}
-      </div>
     </div>
   );
 }
