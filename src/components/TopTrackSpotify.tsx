@@ -1,3 +1,4 @@
+// this file is a little bit messy, if you can read it, good for you xD
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useAudio } from "react-use";
