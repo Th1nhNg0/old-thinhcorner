@@ -134,7 +134,7 @@ function Track({
             animate={{ width: "100%", borderRadius: 9999 }}
             exit={{ width: 0, borderRadius: 0 }}
             transition={{ duration: 1 }}
-            className="absolute -left-1 h-full bg-gradient-to-r from-[#1ED760]/50"
+            className="absolute -left-2 h-full bg-gradient-to-r from-[#1ED760]/50"
           />
         )}
       </AnimatePresence>
@@ -212,7 +212,7 @@ function Track({
           )}
         </AnimatePresence>
       </div>
-      <div className="relative flex-1">
+      <div className="relative flex-1 truncate">
         <a
           rel="noopener noreferrer"
           href={track.songUrl}
