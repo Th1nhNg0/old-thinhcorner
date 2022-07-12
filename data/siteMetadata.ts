@@ -23,6 +23,19 @@ const siteMetadata = {
   analytics: {
     googleAnalyticsId: "G-P4B7XCWCYP",
   },
+  comment: {
+    giscusConfig: {
+      repo: "Th1nhNg0/th1nhng0.vercel.app",
+      repositoryId: "MDEwOlJlcG9zaXRvcnk0MDI2MDQ1MDE=",
+      category: "General",
+      categoryId: "DIC_kwDOF_9B1c4B-6vK",
+      mapping: "pathname",
+      reactions: "1",
+      metadata: "0",
+      inputPosition: "top",
+      lang: "en",
+    },
+  },
 };
 
 export default siteMetadata;

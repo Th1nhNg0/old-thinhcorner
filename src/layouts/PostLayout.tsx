@@ -2,6 +2,7 @@ import { Post } from "contentlayer/generated";
 import { motion, useViewportScroll } from "framer-motion";
 import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
+import Comment from "src/components/Comment";
 import ScrollTopAndComment from "src/components/ScrollTopAndComment";
 import Tag from "src/components/Tag";
 import ViewCounter from "src/components/ViewCounter";
@@ -72,6 +73,9 @@ export default function PostLayout({
           {children}
         </div>
       </article>
+      <div className="mt-10">
+        <Comment />
+      </div>
     </div>
   );
 }
