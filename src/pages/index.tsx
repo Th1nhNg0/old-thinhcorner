@@ -29,7 +29,9 @@ export default function Home({
           </Link>
           <span className="ml-4 text-xl text-subtle">
             pronounced like{" "}
-            <span className="text-rose hover-underline-animation">"Think"</span>
+            <span className="text-rose hover-underline-animation">
+              &quot;Think&quot;
+            </span>
           </span>
         </h1>
         <h2 className="mt-3 font-mono md:text-lg text-subtle">
