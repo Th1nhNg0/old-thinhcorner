@@ -1,6 +1,7 @@
 import { Snippet } from "contentlayer/generated";
 import { motion, useViewportScroll } from "framer-motion";
 import moment from "moment";
+import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import ScrollTopAndComment from "src/components/ScrollTopAndComment";
 
@@ -44,15 +45,22 @@ export default function SnippetLayout({
       <ScrollTopAndComment />
       <article>
         <p className="text-subtle">{moment(snippet.date).format("LL")}</p>
-        <div className="flex items-center gap-3 mb-4 ">
-          <img
-            src={snippet.logo}
-            alt=""
-            className="object-contain rounded-full w-14"
-          />
+        <div className="mb-4">
           <h1 className="text-3xl font-bold text-rose md:text-5xl ">
             {snippet.title}
           </h1>
+          <div className="flex flex-wrap gap-4 mt-2">
+            {snippet.logos.map((logo) => (
+              <Image
+                key={logo}
+                src={logo}
+                width={32}
+                height={32}
+                alt=""
+                className="object-contain"
+              />
+            ))}
+          </div>
         </div>
         <div className=" border-b-[1px] pb-4 border-muted ">
           <p className="text-lg text-text">{snippet.description}</p>

@@ -19,7 +19,7 @@ export default function BlogPage({ snippets }: { snippets: Snippet[] }) {
 export async function getStaticProps() {
   const snippets = allSnippets
     .map((snippet) =>
-      pick(snippet, ["slug", "title", "date", "logo", "description"])
+      pick(snippet, ["slug", "title", "date", "logos", "description"])
     )
     .sort((a, b) => moment(b.date).diff(moment(a.date)));
 

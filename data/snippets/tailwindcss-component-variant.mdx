@@ -1,0 +1,55 @@
+---
+title: " Component variant make easy with tailwindcss and typescript"
+description: "Component variant make easy with tailwindcss and typescript"
+logos:
+  [
+    "/static/images/snippets/Tailwind_CSS_Logo.svg",
+    "/static/images/snippets/Typescript_logo_2020.svg",
+  ]
+date: "2022-09-08"
+---
+
+Tired of this?
+
+![Long last name](/static/images/2022/buttonlmao.png)
+
+With the power of typescript we can make the development component variant process with tailwindcss more easily.
+
+![Good component](/static/images/2022/component_variant.gif)
+
+```tsx
+import { ReactNode } from "react";
+import classnames from "classnames";
+
+const SIZE_VARIANTS = {
+  sm: "text-sm py-2 px-4",
+  md: "text-base py-3 px-6",
+  lg: "text-lg py-4 px-8",
+};
+
+const COLOR_VARIANTS = {
+  primary: "bg-blue-500 hover:bg-blue-600 text-white",
+  dark: "bg-gray-800 hover:bg-gray-900 text-white",
+  light: "bg-gray-200 hover:bg-gray-300 text-gray-800",
+  success: "bg-green-500 hover:bg-green-600 text-white",
+};
+
+type ButtonProps = {
+  children?: ReactNode;
+  // magic happend here
+  size?: keyof typeof SIZE_VARIANTS;
+  color?: keyof typeof COLOR_VARIANTS;
+};
+
+export default function Button({
+  children,
+  size = "md",
+  color = "primary",
+}: ButtonProps) {
+  return (
+    <button className={classnames(COLOR_VARIANTS[color], SIZE_VARIANTS[size])}>
+      {children}
+    </button>
+  );
+}
+```

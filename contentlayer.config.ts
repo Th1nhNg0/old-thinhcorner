@@ -53,7 +53,7 @@ const Snippet = defineDocumentType(() => ({
     title: { type: "string", required: true },
     date: { type: "string", required: true },
     description: { type: "string", required: true },
-    logo: { type: "string", required: true },
+    logos: { type: "list", of: { type: "string" }, required: true },
   },
   computedFields,
 }));

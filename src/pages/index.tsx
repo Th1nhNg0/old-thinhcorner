@@ -131,8 +131,11 @@ export async function getStaticProps() {
     .map((post) => pick(post, ["slug", "title", "summary", "date"]))
     .sort((a, b) => moment(b.date).diff(moment(a.date)))
     .slice(0, 3);
-  const snippets = allSnippets.map((snippet) =>
-    pick(snippet, ["description", "title", "logo", "slug"])
-  );
+  const snippets = allSnippets
+    .map((snippet) =>
+      pick(snippet, ["description", "title", "logos", "slug", "date"])
+    )
+    .sort((a, b) => moment(b.date).diff(moment(a.date)))
+    .slice(0, 4);
   return { props: { posts, snippets } };
 }
