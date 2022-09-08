@@ -8,7 +8,7 @@ const siteMetadata = {
     gender: "male",
   },
   headerTitle: "Thịnh's Corner",
-  description: "Góc nhỏ của Thịnh",
+  description: "A place to put my thoughts in writing",
   siteUrl: "https://thinhcorner.com",
   siteRepo: "https://github.com/Th1nhNg0/th1nhng0.vercel.app",
   siteLogo: "/static/images/logo.png",

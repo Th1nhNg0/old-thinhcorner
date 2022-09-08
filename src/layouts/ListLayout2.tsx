@@ -18,8 +18,7 @@ export default function ListLayout({ snippets }: { snippets: Snippet[] }) {
           </h1>
 
           <p className="mb-4 text-subtle">
-            Có tất cả {snippets.length} snippets. Dùng thanh search dưới đây để
-            tìm theo tiêu đề.
+            These are {snippets.length} snippets that I have written.
           </p>
           <div className="relative w-full">
             <input

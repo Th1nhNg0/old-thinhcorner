@@ -23,16 +23,24 @@ export default function Home({
     <div className="space-y-10">
       <div className="border-b-[1px] pb-5 border-muted">
         <h1 className="text-3xl font-bold tracking-wide md:text-4xl text-text sm:leading-10 md:leading-14">
-          Xin chào, mình là{" "}
+          Hello, my name is{" "}
           <Link href="/about">
             <a className="hover-underline-animation text-rose">Thịnh</a>
           </Link>
+          <span className="ml-4 text-xl text-subtle">
+            pronounced like{" "}
+            <span className="text-rose hover-underline-animation">"Think"</span>
+          </span>
         </h1>
         <h2 className="mt-3 font-mono md:text-lg text-subtle">
           Just a guy like to programming.
         </h2>
       </div>
-
+      <p className="px-5 py-3 border-l-8 border-green-400 text-gl bg-green-600/50">
+        <b>For guests that are not Vietnamese:</b> I will add more content in
+        english soon{" "}
+        <span className="mx-auto whitespace-nowrap">☆(❁´◡`❁)☆</span>
+      </p>
       <NewestPost posts={posts} />
       <FeaturedSnippet snippets={snippets} />
       <TopTrackSpotify />
@@ -43,7 +51,7 @@ export default function Home({
 function NewestPost({ posts }: { posts: Post[] }) {
   return (
     <div>
-      <h3 className="mb-6 text-2xl font-bold">Bài viết mới</h3>
+      <h3 className="mb-6 text-2xl font-bold">New post</h3>
       <div className="flex flex-col gap-5 md:flex-row">
         {posts.map((post, i) => (
           <Link key={post.slug} href={`/blog/${post.slug}`}>
@@ -76,7 +84,7 @@ function NewestPost({ posts }: { posts: Post[] }) {
       </div>
       <Link href="/blog">
         <a className="flex items-center mt-5 transition-all hover:text-text text-subtle">
-          Đọc tất cả bài viết
+          See all posts
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5"
@@ -98,7 +106,7 @@ function NewestPost({ posts }: { posts: Post[] }) {
 function FeaturedSnippet({ snippets }: { snippets: Snippet[] }) {
   return (
     <div>
-      <h3 className="mb-6 text-2xl font-bold">Snippet nổi bật</h3>
+      <h3 className="mb-6 text-2xl font-bold">My snippet</h3>
       <div className="grid gap-5 md:grid-cols-2">
         {snippets.map((snippet) => (
           <SnippetCard key={snippet.slug} {...snippet} />
@@ -106,7 +114,7 @@ function FeaturedSnippet({ snippets }: { snippets: Snippet[] }) {
       </div>
       <Link href="/blog">
         <a className="flex items-center mt-5 transition-all hover:text-text text-subtle">
-          Xem tất cả snippet
+          View all snippets
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5"

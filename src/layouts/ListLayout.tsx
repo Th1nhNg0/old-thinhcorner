@@ -27,8 +27,7 @@ export default function ListLayout({
           </h1>
 
           <p className="mb-4 text-subtle">
-            Có tất cả {posts.length} bài viết. Dùng thanh search dưới đây để tìm
-            theo tiêu đề.
+            These are {posts.length} posts that I have written.
           </p>
           <div className="relative w-full">
             <input

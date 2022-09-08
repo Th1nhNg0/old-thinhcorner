@@ -25,8 +25,8 @@ export default function TopTrackSpotify() {
       <div className="mb-6 ">
         <h3 className="text-2xl font-bold">Top Spotify track</h3>
         <p className="text-lg text-subtle">
-          Những bản nhạc đang lặp đi lặp lại trong đầu mình. Bấm vào để nghe thử
-          nhé 🎧
+          This is my top track on Spotify, I listen to it a lot. Click to the
+          number to listen to the preview 🎧
         </p>
       </div>
       <div className="space-y-3">
