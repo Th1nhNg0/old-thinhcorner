@@ -134,8 +134,10 @@ const MobileNav = () => {
         </svg>
       </button>
       <div
-        className={`fixed   w-full h-full top-24 right-0 bg-overlay z-10 transform ease-in-out duration-300 ${
-          navShow ? "opacity-95 visible" : "opacity-0 invisible"
+        className={`fixed   w-full h-full top-24 right-0 bg-base z-10 transform ease-in-out duration-300 ${
+          navShow
+            ? "opacity-95 backdrop-blur-lg visible"
+            : "opacity-0 invisible"
         }`}
       >
         <button
