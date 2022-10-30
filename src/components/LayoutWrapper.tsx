@@ -70,6 +70,7 @@ function Header() {
                     "text-text  font-bold ": link.href == router.asPath,
                   }
                 )}
+                href={link.href}
               >
                 <AnimatePresence>
                   {hovered == link.title && (
