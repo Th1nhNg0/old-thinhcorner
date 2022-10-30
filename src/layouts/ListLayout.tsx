@@ -73,7 +73,11 @@ export default function ListLayout({
               <div className="space-y-3 xl:col-span-3">
                 <div>
                   <h3 className="text-2xl font-bold leading-8">
-                    <Link href={`/blog/${post.slug}`} className="text-text">
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="text-text"
+                      legacyBehavior
+                    >
                       {post.title}
                     </Link>
                   </h3>

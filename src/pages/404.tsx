@@ -25,16 +25,17 @@ export default function NotFound() {
         </p>
         <p className="text-lg leading-7">
           Take me{" "}
-          <Link href="/">
-            <a className="inline-flex flex-row items-center gap-2 font-bold hover-underline-animation">
-              HOME
-              <svg className="w-6 h-6" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
-                ></path>
-              </svg>
-            </a>
+          <Link
+            href="/"
+            className="inline-flex flex-row items-center gap-2 font-bold hover-underline-animation"
+          >
+            HOME
+            <svg className="w-6 h-6" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
+              ></path>
+            </svg>
           </Link>
         </p>
       </div>

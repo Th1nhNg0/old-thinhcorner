@@ -45,22 +45,24 @@ function Header() {
     <header className="flex items-center justify-between py-10">
       <MobileNav />
       <div>
-        <Link href="/" aria-label={siteMetadata.headerTitle}>
-          <a className="relative flex items-center justify-between gap-3 p-1 text-2xl font-semibold duration-200 ease-in-out rounded-md md:p-3 ">
-            <span className="relative z-10 wave">
-              <Logo />
-            </span>
-            <span className="relative z-10 hidden md:block">
-              {siteMetadata.headerTitle}
-            </span>
-          </a>
+        <Link
+          href="/"
+          aria-label={siteMetadata.headerTitle}
+          className="relative flex items-center justify-between gap-3 p-1 text-2xl font-semibold duration-200 ease-in-out rounded-md md:p-3 "
+        >
+          <span className="relative z-10 wave">
+            <Logo />
+          </span>
+          <span className="relative z-10 hidden md:block">
+            {siteMetadata.headerTitle}
+          </span>
         </Link>
       </div>
       <div className="flex items-center justify-center text-base leading-5 ">
         <div className="hidden md:block">
           {headerNavLinks.map((link) => (
-            <Link key={link.title} href={link.href}>
-              <motion.a
+            <Link key={link.title} href={link.href} legacyBehavior>
+              <motion.span
                 onMouseEnter={() => sethovered(link.title)}
                 onMouseLeave={() => sethovered(null)}
                 className={classNames(
@@ -70,7 +72,6 @@ function Header() {
                     "text-text  font-bold ": link.href == router.asPath,
                   }
                 )}
-                href={link.href}
               >
                 <AnimatePresence>
                   {hovered == link.title && (
@@ -81,7 +82,7 @@ function Header() {
                   )}
                 </AnimatePresence>
                 <span className="relative z-10">{link.title}</span>
-              </motion.a>
+              </motion.span>
             </Link>
           ))}
         </div>
@@ -159,13 +160,12 @@ const MobileNav = () => {
                 transitionDelay: `${(i + 1) * 100}ms`,
               }}
             >
-              <Link href={link.href}>
-                <a
-                  onClick={onToggleNav}
-                  className="text-2xl font-bold tracking-widest text-text"
-                >
-                  {link.title}
-                </a>
+              <Link
+                href={link.href}
+                onClick={onToggleNav}
+                className="text-2xl font-bold tracking-widest text-text"
+              >
+                {link.title}
               </Link>
             </div>
           ))}
