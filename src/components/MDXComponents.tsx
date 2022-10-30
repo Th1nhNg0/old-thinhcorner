@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useState, useRef } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 const CustomLink = (props: any) => {
   const href = props.href;

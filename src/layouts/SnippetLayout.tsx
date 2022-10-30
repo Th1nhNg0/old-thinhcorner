@@ -1,7 +1,7 @@
 import { Snippet } from "contentlayer/generated";
 import { motion, useViewportScroll } from "framer-motion";
 import moment from "moment";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import React, { useEffect, useRef, useState } from "react";
 import ScrollTopAndComment from "src/components/ScrollTopAndComment";
 
