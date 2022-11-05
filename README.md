@@ -1,23 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is my personal blog. Inspire by [tailwind-nextjs-starter-blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) and [leerob blog](https://leerob.io/)
 
-## Getting Started
-
-First, install the necessary dependencies:
-
-```bash
-npm install
-# or
-pnpm install
-```
-
-Run the development server:
-
-```bash
-npm run dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the blog by modifying file in folder `data`. The page auto-updates as you edit the file.
+![Untitled](https://user-images.githubusercontent.com/26407823/200121932-b9502dba-c18a-4008-b35a-2ce99f2509b5.png)
