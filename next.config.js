@@ -5,9 +5,6 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    scrollRestoration: true,
-  },
   i18n: {
     locales: ["vi"],
     defaultLocale: "vi",
