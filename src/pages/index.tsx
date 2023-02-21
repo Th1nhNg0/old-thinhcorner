@@ -1,24 +1,14 @@
-import Link from "next/link";
-import moment from "moment";
 import classNames from "classnames";
-import { allPosts, allSnippets, Post, Snippet } from "contentlayer/generated";
+import { allPosts, Post } from "contentlayer/generated";
 import { pick } from "contentlayer/utils";
-import ViewCounter from "src/components/ViewCounter";
-import SnippetCard from "src/components/SnippetCard";
-import useSWR from "swr";
-import fetcher from "src/lib/fetcher";
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
-import { useAudio } from "react-use";
+import moment from "moment";
+import Link from "next/link";
+import GoodRead from "src/components/Goodread";
 import TopTrackSpotify from "src/components/TopTrackSpotify";
+import ViewCounter from "src/components/ViewCounter";
+import useSWR from "swr";
 
-export default function Home({
-  posts,
-  snippets,
-}: {
-  snippets: Snippet[];
-  posts: Post[];
-}) {
+export default function Home({ posts }: { posts: Post[] }) {
   return (
     <div className="space-y-10">
       <div className="border-b-[1px] pb-5 border-muted">
@@ -44,7 +34,7 @@ export default function Home({
         <span className="mx-auto whitespace-nowrap">☆(❁´◡`❁)☆</span>
       </p>
       <NewestPost posts={posts} />
-      <FeaturedSnippet snippets={snippets} />
+      <GoodRead />
       <TopTrackSpotify />
     </div>
   );
@@ -106,48 +96,11 @@ function NewestPost({ posts }: { posts: Post[] }) {
   );
 }
 
-function FeaturedSnippet({ snippets }: { snippets: Snippet[] }) {
-  return (
-    <div>
-      <h3 className="mb-6 text-2xl font-bold">My snippet</h3>
-      <div className="grid gap-5 md:grid-cols-2">
-        {snippets.map((snippet) => (
-          <SnippetCard key={snippet.slug} {...snippet} />
-        ))}
-      </div>
-      <Link
-        href="/blog"
-        className="flex items-center mt-5 transition-all hover:text-text text-subtle"
-      >
-        View all snippets
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-5 h-5"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path
-            fillRule="evenodd"
-            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </Link>
-    </div>
-  );
-}
-
 export async function getStaticProps() {
   const posts = allPosts
     .filter((post) => post.draft !== true)
     .map((post) => pick(post, ["slug", "title", "summary", "date"]))
     .sort((a, b) => moment(b.date).diff(moment(a.date)))
     .slice(0, 3);
-  const snippets = allSnippets
-    .map((snippet) =>
-      pick(snippet, ["description", "title", "logos", "slug", "date"])
-    )
-    .sort((a, b) => moment(b.date).diff(moment(a.date)))
-    .slice(0, 4);
-  return { props: { posts, snippets } };
+  return { props: { posts } };
 }

@@ -45,19 +45,6 @@ const Post = defineDocumentType(() => ({
   computedFields,
 }));
 
-const Snippet = defineDocumentType(() => ({
-  name: "Snippet",
-  filePathPattern: "snippets/**/*.mdx",
-  contentType: "mdx",
-  fields: {
-    title: { type: "string", required: true },
-    date: { type: "string", required: true },
-    description: { type: "string", required: true },
-    logos: { type: "list", of: { type: "string" }, required: true },
-  },
-  computedFields,
-}));
-
 const Page = defineDocumentType(() => ({
   name: "Page",
   filePathPattern: "pages/*.mdx",
@@ -71,7 +58,7 @@ const Page = defineDocumentType(() => ({
 
 const contentLayerConfig = makeSource({
   contentDirPath: "data",
-  documentTypes: [Post, Snippet, Page],
+  documentTypes: [Post, Page],
   mdx: {
     remarkPlugins: [remarkGfm, remarkMath, remarkImgToJsx],
     rehypePlugins: [

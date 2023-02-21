@@ -2,9 +2,7 @@ import { GetServerSideProps } from "next";
 import {
   allPosts,
   allPages,
-  allSnippets,
   Post,
-  Snippet,
   Page,
 } from "contentlayer/generated";
 import siteMetadata from "data/siteMetadata";

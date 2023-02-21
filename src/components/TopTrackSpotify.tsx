@@ -18,8 +18,9 @@ type TopTracks = {
 };
 
 export default function TopTrackSpotify() {
-  const { data } = useSWR<TopTracks>("/api/spotify/top-track", fetcher);
+  const { data, error } = useSWR<TopTracks>("/api/spotify/top-track", fetcher);
   const [selected, setselected] = useState(-1);
+  if (!data || error) return null;
   return (
     <div>
       <div className="mb-6 ">
