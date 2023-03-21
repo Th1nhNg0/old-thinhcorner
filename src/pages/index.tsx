@@ -25,7 +25,7 @@ export default function Home({ posts }: { posts: Post[] }) {
           </span>
         </h1>
         <h2 className="mt-3 font-mono md:text-lg text-subtle">
-          Just curios about how thing work :')
+          Just curios about how thing work :&apos;)
         </h2>
       </div>
       <p className="px-5 py-3 border-l-8 border-green-400 text-gl bg-green-600/50">
