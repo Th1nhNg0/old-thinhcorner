@@ -12,8 +12,6 @@ export default async function handler(
   const read = await crawl_book(
     "https://www.goodreads.com/review/list/161740636-th-nh-ng?order=d&shelf=read&sort=date_read&utf8=%E2%9C%93"
   );
-  // cache for week
-  res.setHeader("Cache-Control", "s-maxage=604800, stale-while-revalidate");
   res.status(200).json({
     current_reads,
     read,
